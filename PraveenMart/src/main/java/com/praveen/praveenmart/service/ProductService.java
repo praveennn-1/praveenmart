@@ -1,9 +1,7 @@
 package com.praveen.praveenmart.service;
 
 import com.praveen.praveenmart.dao.ProductDAO;
-import com.praveen.praveenmart.dao.ReviewDAO;
 import com.praveen.praveenmart.dao.impl.ProductDAOImpl;
-import com.praveen.praveenmart.dao.impl.ReviewDAOImpl;
 import com.praveen.praveenmart.exception.ValidationException;
 import com.praveen.praveenmart.model.Product;
 import com.praveen.praveenmart.util.ValidationUtil;
@@ -16,15 +14,13 @@ public class ProductService {
 
     private static final Logger logger = LoggerFactory.getLogger(ProductService.class);
     private final ProductDAO productDAO;
-    private final ReviewDAO reviewDAO;
 
     public ProductService() {
-        this(new ProductDAOImpl(), new ReviewDAOImpl());
+        this(new ProductDAOImpl());
     }
 
-    public ProductService(ProductDAO productDAO, ReviewDAO reviewDAO) {
+    public ProductService(ProductDAO productDAO) {
         this.productDAO = productDAO;
-        this.reviewDAO = reviewDAO;
     }
 
     public List<Product> getAllProducts() {
@@ -60,7 +56,8 @@ public class ProductService {
         validateProduct(product);
         boolean created = productDAO.createProduct(product);
         if (created) {
-            logger.info("Product created: id={}, name={}, sellerId={}", product.getId(), product.getName(), product.getSellerId());
+            logger.info("Product created: id={}, name={}, sellerId={}", product.getId(), product.getName(),
+                    product.getSellerId());
         }
         return created;
     }
@@ -96,7 +93,8 @@ public class ProductService {
     }
 
     public int getSellerProductsCount(Long sellerId) {
-        if (sellerId == null) return 0;
+        if (sellerId == null)
+            return 0;
         return productDAO.countProductsBySeller(sellerId);
     }
 

@@ -1,17 +1,13 @@
 <%@ page pageEncoding="UTF-8" %>
 <%@ page import="com.praveen.praveenmart.model.User" %>
 <%@ page import="com.praveen.praveenmart.service.CartService" %>
-<%@ page import="com.praveen.praveenmart.service.WishlistService" %>
 <%
     User sessionUser = (User) session.getAttribute("user");
     int cartCount = 0;
-    int wishlistCount = 0;
     if (sessionUser != null) {
         try {
             CartService headerCartService = new CartService();
             cartCount = headerCartService.getCartItemCount(sessionUser.getId());
-            WishlistService headerWishlistService = new WishlistService();
-            wishlistCount = headerWishlistService.getWishlistCount(sessionUser.getId());
         } catch (Exception ignored) {}
     }
 %>
@@ -163,14 +159,6 @@
             <div class="nav-actions">
                 <% if (sessionUser != null) { %>
                     <% if (!"ADMIN".equalsIgnoreCase(sessionUser.getRole())) { %>
-                        <!-- Wishlist Button with Badge -->
-                        <a href="<%= request.getContextPath() %>/wishlist" class="nav-icon-btn" title="View Wishlist">
-                            <span class="material-symbols-outlined" style="font-size: 1.3rem;">favorite</span>
-                            <% if (wishlistCount > 0) { %>
-                                <span class="nav-badge-count" style="background-color: #e11d48;"><%= wishlistCount %></span>
-                            <% } %>
-                        </a>
-
                         <!-- Cart Button with Count Badge -->
                         <a href="<%= request.getContextPath() %>/cart" class="nav-icon-btn" id="navCartBtn" title="View Cart">
                             <span class="material-symbols-outlined" style="font-size: 1.3rem;">shopping_bag</span>

@@ -61,16 +61,15 @@ public class AuthFilter implements Filter {
 
         if (sessionUser != null && "ADMIN".equalsIgnoreCase(sessionUser.getRole())) {
             if (path.startsWith("/cart") || path.startsWith("/checkout") ||
-                    path.startsWith("/orders") || path.startsWith("/wishlist")) {
+                    path.startsWith("/orders")) {
                 res.sendRedirect(contextPath + "/admin/dashboard");
                 return;
             }
         }
 
         if (path.startsWith("/cart") || path.startsWith("/checkout") ||
-                path.startsWith("/orders") || path.startsWith("/wishlist") ||
-                path.equals("/dashboard.jsp") || path.startsWith("/api/v1/cart") ||
-                path.startsWith("/api/v1/wishlist") || path.startsWith("/api/v1/orders")) {
+                path.startsWith("/orders") || path.equals("/dashboard.jsp") ||
+                path.startsWith("/api/v1/cart") || path.startsWith("/api/v1/orders")) {
             if (sessionUser == null) {
                 boolean isAjax = "XMLHttpRequest".equalsIgnoreCase(req.getHeader("X-Requested-With"))
                         || (req.getHeader("Accept") != null && req.getHeader("Accept").contains("application/json"));
@@ -101,8 +100,6 @@ public class AuthFilter implements Filter {
                 path.startsWith("/product-details") ||
                 path.startsWith("/api/v1/health") ||
                 path.startsWith("/api/v1/products") ||
-                path.startsWith("/api/v1/chat") ||
-                path.startsWith("/api/chat") ||
                 path.startsWith("/api/v1/reviews") ||
                 path.startsWith("/css/") ||
                 path.startsWith("/js/") ||

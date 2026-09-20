@@ -9,15 +9,12 @@ import com.praveen.praveenmart.exception.ResourceNotFoundException;
 import com.praveen.praveenmart.exception.ValidationException;
 import com.praveen.praveenmart.model.CartItem;
 import com.praveen.praveenmart.model.Product;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 public class CartService {
 
-    private static final Logger logger = LoggerFactory.getLogger(CartService.class);
     private final CartDAO cartDAO;
     private final ProductDAO productDAO;
 

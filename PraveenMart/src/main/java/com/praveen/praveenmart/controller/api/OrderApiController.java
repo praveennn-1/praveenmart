@@ -2,7 +2,6 @@ package com.praveen.praveenmart.controller.api;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.praveen.praveenmart.dto.ApiResponse;
 import com.praveen.praveenmart.dto.OrderSummaryDTO;
 import com.praveen.praveenmart.exception.AppException;

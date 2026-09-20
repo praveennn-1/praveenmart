@@ -58,8 +58,8 @@ public class ProductDAOTest extends BaseDAOTest {
 
     @Test
     public void testSearchProducts() {
-        List<Product> results = productDAO.search("Linen", "all");
+        List<Product> results = productDAO.search("Cotton", "all");
         assertNotNull(results);
-        assertTrue(results.stream().anyMatch(p -> p.getName().toLowerCase().contains("linen")));
+        assertTrue(results.stream().anyMatch(p -> p.getName().toLowerCase().contains("cotton")));
     }
 }

@@ -410,7 +410,14 @@
                                         <td>
                                             <div style="display: flex; gap: 0.4rem;">
                                                 <button type="button" class="btn btn-secondary btn-pill" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;"
-                                                        onclick="openEditModal(<%= p.getId() %>, '<%= p.getName().replace("'", "\\'") %>', '<%= p.getCategory().replace("'", "\\'") %>', <%= p.getPrice() %>, <%= p.getStockQty() %>, '<%= p.getImageUrl() != null ? p.getImageUrl().replace("'", "\\'") : "" %>', '<%= p.getDescription() != null ? p.getDescription().replace("'", "\\'").replace("\n", " ") : "" %>')">
+                                                        data-id="<%= p.getId() %>"
+                                                        data-name="<%= p.getName().replace("\"", "&quot;") %>"
+                                                        data-category="<%= p.getCategory().replace("\"", "&quot;") %>"
+                                                        data-price="<%= p.getPrice() %>"
+                                                        data-stock="<%= p.getStockQty() %>"
+                                                        data-image="<%= p.getImageUrl() != null ? p.getImageUrl().replace("\"", "&quot;") : "" %>"
+                                                        data-description="<%= p.getDescription() != null ? p.getDescription().replace("\"", "&quot;").replace("\n", " ") : "" %>"
+                                                        onclick="handleEditProductClick(this)">
                                                     <span class="material-symbols-outlined" style="font-size: 1rem;">edit</span>
                                                     <span>Edit</span>
                                                 </button>
@@ -564,6 +571,17 @@
             document.getElementById('tab-orders').style.display = (tabName === 'orders') ? 'block' : 'none';
             document.querySelectorAll('.hub-tab-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
+        }
+
+        function handleEditProductClick(btn) {
+            var id = btn.getAttribute('data-id');
+            var name = btn.getAttribute('data-name');
+            var category = btn.getAttribute('data-category');
+            var price = btn.getAttribute('data-price');
+            var stock = btn.getAttribute('data-stock');
+            var imageUrl = btn.getAttribute('data-image');
+            var description = btn.getAttribute('data-description');
+            openEditModal(id, name, category, price, stock, imageUrl, description);
         }
 
         function openEditModal(id, name, category, price, stock, imageUrl, description) {

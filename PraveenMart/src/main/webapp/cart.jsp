@@ -148,8 +148,17 @@
                     <div class="cart-item-row">
 
                         <div class="cart-item-thumb">
-                            <% if (p != null && p.getImageUrl() != null && !p.getImageUrl().isBlank()) { %>
-                                <img src="<%= p.getImageUrl() %>" alt="<%= p.getName() %>">
+                            <% 
+                                String cImg = (p != null) ? p.getImageUrl() : null;
+                                if (cImg != null && !cImg.isBlank()) {
+                                    if (!cImg.startsWith("http://") && !cImg.startsWith("https://")) {
+                                        if (!cImg.startsWith("/")) {
+                                            cImg = "/" + cImg;
+                                        }
+                                        cImg = request.getContextPath() + cImg;
+                                    }
+                            %>
+                                <img src="<%= cImg %>" alt="<%= p.getName() %>">
                             <% } else { %>
                                 <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?w=600&auto=format&fit=crop&q=80" alt="Product Thumbnail">
                             <% } %>

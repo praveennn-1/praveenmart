@@ -3,7 +3,6 @@ package com.praveen.praveenmart.controller.api;
 import com.google.gson.Gson;
 import com.praveen.praveenmart.dto.ApiResponse;
 import com.praveen.praveenmart.dto.ProductResponseDTO;
-import com.praveen.praveenmart.exception.ResourceNotFoundException;
 import com.praveen.praveenmart.exception.ValidationException;
 import com.praveen.praveenmart.model.Product;
 import com.praveen.praveenmart.model.User;

@@ -1,7 +1,6 @@
 package com.praveen.praveenmart.service;
 
 import com.praveen.praveenmart.dao.ProductDAO;
-import com.praveen.praveenmart.dao.ReviewDAO;
 import com.praveen.praveenmart.exception.ValidationException;
 import com.praveen.praveenmart.model.Product;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,14 +21,11 @@ public class ProductServiceTest {
     @Mock
     private ProductDAO productDAO;
 
-    @Mock
-    private ReviewDAO reviewDAO;
-
     private ProductService productService;
 
     @BeforeEach
     public void setUp() {
-        productService = new ProductService(productDAO, reviewDAO);
+        productService = new ProductService(productDAO);
     }
 
     @Test

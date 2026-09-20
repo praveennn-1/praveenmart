@@ -2,7 +2,6 @@ package com.praveen.praveenmart.controller.api;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.praveen.praveenmart.dto.ApiResponse;
 import com.praveen.praveenmart.exception.ValidationException;
 import com.praveen.praveenmart.model.Review;

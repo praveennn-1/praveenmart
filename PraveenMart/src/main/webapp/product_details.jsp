@@ -131,6 +131,7 @@
         .card-qty-stepper .qty-input-field::-webkit-outer-spin-button,
         .card-qty-stepper .qty-input-field::-webkit-inner-spin-button {
             -webkit-appearance: none;
+            appearance: none;
             margin: 0;
         }
 
@@ -181,8 +182,17 @@
     <div class="product-overview-grid">
 
         <div class="details-image-box">
-            <% if (product.getImageUrl() != null && !product.getImageUrl().isBlank()) { %>
-                <img src="<%= product.getImageUrl() %>" alt="<%= product.getName() %>" onerror="this.src='https://images.unsplash.com/photo-1544816155-12df9643f363?w=600&auto=format&fit=crop&q=80'">
+            <% 
+                String dImg = product.getImageUrl();
+                if (dImg != null && !dImg.isBlank()) {
+                    if (!dImg.startsWith("http://") && !dImg.startsWith("https://")) {
+                        if (!dImg.startsWith("/")) {
+                            dImg = "/" + dImg;
+                        }
+                        dImg = request.getContextPath() + dImg;
+                    }
+            %>
+                <img src="<%= dImg %>" alt="<%= product.getName() %>" onerror="this.src='https://images.unsplash.com/photo-1544816155-12df9643f363?w=600&auto=format&fit=crop&q=80'">
             <% } else { %>
                 <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?w=600&auto=format&fit=crop&q=80" alt="Product Image">
             <% } %>

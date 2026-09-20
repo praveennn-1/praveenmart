@@ -9,9 +9,8 @@
 
 **PraveenMart** is an enterprise-grade multi-seller e-commerce marketplace web application. It connects independent merchants and buyers within a unified, responsive platform:
 - **Sellers** can manage product listings (create, edit, delete with category, price, stock, and imagery), track incoming purchase orders, and monitor sales metrics.
-- **Buyers** can explore catalog items, filter by category, perform keyword searches, maintain a cart and wishlist (save-for-later), place orders via mock payment strategies, and submit star reviews.
+- **Buyers** can explore catalog items, filter by category, perform keyword searches, maintain a cart, place orders via mock payment strategies, and submit star reviews.
 - **Admins** manage registered users, monitor platform-wide sales volume and revenue, and moderate product listings.
-- **AI Shopping Assistant**: An integrated AI chatbot widget that answers domain questions (shipping, returns, order tracking, seller registration) using Google Gemini with graceful fallback to canned FAQ responses.
 
 ---
 
@@ -42,11 +41,9 @@ erDiagram
     USERS ||--o{ PRODUCTS : "sells"
     USERS ||--o{ ORDERS : "places"
     USERS ||--o{ CART_ITEMS : "has"
-    USERS ||--o{ WISHLIST_ITEMS : "saves"
     USERS ||--o{ REVIEWS : "writes"
     PRODUCTS ||--o{ ORDER_ITEMS : "included_in"
     PRODUCTS ||--o{ CART_ITEMS : "added_to"
-    PRODUCTS ||--o{ WISHLIST_ITEMS : "bookmarked_in"
     PRODUCTS ||--o{ REVIEWS : "receives"
     ORDERS ||--o{ ORDER_ITEMS : "contains"
 
@@ -96,13 +93,6 @@ erDiagram
         timestamp created_at
     }
 
-    WISHLIST_ITEMS {
-        bigint id PK
-        bigint user_id FK
-        bigint product_id FK
-        timestamp created_at
-    }
-
     REVIEWS {
         bigint id PK
         bigint product_id FK
@@ -131,11 +121,9 @@ graph TD
     subgraph Buyer Actions
         UC3[Browse & Search Catalog]
         UC4[Manage Shopping Cart]
-        UC5[Save to Wishlist / Later]
         UC6[Mock Checkout & Payment]
         UC7[View Order History]
         UC8[Submit Product Review]
-        UC9[Chat with AI Assistant]
     end
 
     subgraph Seller Actions
@@ -157,11 +145,9 @@ graph TD
     Buyer --> UC2
     Buyer --> UC3
     Buyer --> UC4
-    Buyer --> UC5
     Buyer --> UC6
     Buyer --> UC7
     Buyer --> UC8
-    Buyer --> UC9
 
     Seller --> UC1
     Seller --> UC2
@@ -235,11 +221,11 @@ sequenceDiagram
 
 | Design Pattern | Implementation in PraveenMart |
 | :--- | :--- |
-| **DAO Pattern** | Data access abstraction separating JDBC persistence from business rules: `UserDAO`, `ProductDAO`, `OrderDAO`, `CartDAO`, `ReviewDAO`, `WishlistDAO`. |
+| **DAO Pattern** | Data access abstraction separating JDBC persistence from business rules: `UserDAO`, `ProductDAO`, `OrderDAO`, `CartDAO`, `ReviewDAO`. |
 | **Front Controller Pattern** | Centralized servlet routing with standard request filters (`LoggingFilter`, `EncodingFilter`, `AuthFilter`) and REST controllers. |
 | **Singleton Pattern** | HikariCP Connection Pool lifecycle managed centrally by `AppContextListener` and `DBUtil`. |
-| **Factory Pattern** | Instantiation of DAOs (`DAOFactory`), AI providers (`ChatProviderFactory`), and payment channels (`PaymentStrategyFactory`). |
-| **Strategy Pattern** | Swappable payment methods (`CreditCardPaymentStrategy`, `UPIPaymentStrategy`, `CashOnDeliveryPaymentStrategy`) and swappable chat engines (`GeminiChatProvider`, `MockChatProvider`). |
+| **Factory Pattern** | Instantiation of DAOs (`DAOFactory`) and payment channels (`PaymentStrategyFactory`). |
+| **Strategy Pattern** | Swappable payment methods (`CreditCardPaymentStrategy`, `UPIPaymentStrategy`, `CashOnDeliveryPaymentStrategy`). |
 | **Builder Pattern** | Construction of complex DTO responses: `OrderSummaryDTO.Builder`, `ProductResponseDTO.Builder`, and `UserResponseDTO.Builder`. |
 
 ---
@@ -262,15 +248,11 @@ All JSON API endpoints adhere to Section 13 standards with standard response env
 | `GET` | `/api/v1/cart` | View current user shopping cart | Yes |
 | `POST` | `/api/v1/cart` | Add item or update quantity | Yes |
 | `DELETE` | `/api/v1/cart?productId={id}`| Remove item or clear cart | Yes |
-| `GET` | `/api/v1/wishlist` | View saved wishlist items | Yes |
-| `POST` | `/api/v1/wishlist` | Add item or move saved item to cart | Yes |
-| `DELETE` | `/api/v1/wishlist?productId={id}`| Remove item from wishlist | Yes |
 | `GET` | `/api/v1/orders` | View past orders (Buyer) or incoming orders (Seller) | Yes |
 | `POST` | `/api/v1/orders` | Place order / checkout | Yes |
 | `PUT` | `/api/v1/orders/status` | Update order workflow status | Seller / Admin |
 | `GET` | `/api/v1/reviews?productId={id}`| Get reviews for product | No |
 | `POST` | `/api/v1/reviews` | Submit product review & rating (1–5) | Yes |
-| `POST` | `/api/v1/chat` | AI Shopping Assistant chat with rate limiting | No |
 
 ---
 
@@ -280,10 +262,9 @@ All JSON API endpoints adhere to Section 13 standards with standard response env
 - [x] **BCrypt Password Hashing**: `PasswordUtil` uses salted BCrypt (cost factor 12). Plaintext passwords are never stored or logged.
 - [x] **Session Fixation Defense**: `HttpSession` invalidated and regenerated upon successful login; 30-minute explicit session timeout configured in `web.xml`.
 - [x] **XSS Output Sanitization**: HTML escaping across JSP templates and JSTL `<c:out>` formatting.
-- [x] **Authentication & Role Authorization**: `AuthFilter` protects `/admin/*`, `/seller/*`, `/cart`, `/orders`, `/wishlist`, and `/api/v1/*` endpoints.
+- [x] **Authentication & Role Authorization**: `AuthFilter` protects `/admin/*`, `/seller/*`, `/cart`, `/orders`, and `/api/v1/*` endpoints.
 - [x] **Information Disclosure Defense**: Custom `web.xml` 404 and 500 error pages suppress server stack traces.
-- [x] **Exclusion of Secrets**: Database credentials and API keys kept in `.env` / `config.properties`, strictly excluded via `.gitignore`.
-- [x] **AI Chatbot Rate Limiting**: Per-session rate limit (10 messages/min) and 500-character input cap.
+- [x] **Exclusion of Secrets**: Database credentials kept in `.env` / `config.properties`, strictly excluded via `.gitignore`.
 
 ---
 

@@ -173,6 +173,7 @@
             text-decoration: none;
             display: -webkit-box;
             -webkit-line-clamp: 1;
+            line-clamp: 1;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
@@ -187,6 +188,7 @@
             margin-bottom: 1rem;
             display: -webkit-box;
             -webkit-line-clamp: 2;
+            line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
             flex: 1;
@@ -261,6 +263,7 @@
         .card-qty-stepper .qty-input-field::-webkit-outer-spin-button,
         .card-qty-stepper .qty-input-field::-webkit-inner-spin-button {
             -webkit-appearance: none;
+            appearance: none;
             margin: 0;
         }
     </style>
@@ -316,8 +319,17 @@
                 <div class="product-card">
                     <div class="product-image-box">
                         <a href="<%= request.getContextPath() %>/product-details?id=<%= p.getId() %>">
-                            <% if (p.getImageUrl() != null && !p.getImageUrl().isBlank()) { %>
-                                <img src="<%= p.getImageUrl() %>" alt="<%= p.getName() %>" onerror="this.src='https://images.unsplash.com/photo-1544816155-12df9643f363?w=600&auto=format&fit=crop&q=80'">
+                            <% 
+                                String pImg = p.getImageUrl();
+                                if (pImg != null && !pImg.isBlank()) {
+                                    if (!pImg.startsWith("http://") && !pImg.startsWith("https://")) {
+                                        if (!pImg.startsWith("/")) {
+                                            pImg = "/" + pImg;
+                                        }
+                                        pImg = request.getContextPath() + pImg;
+                                    }
+                            %>
+                                <img src="<%= pImg %>" alt="<%= p.getName() %>" onerror="this.src='https://images.unsplash.com/photo-1544816155-12df9643f363?w=600&auto=format&fit=crop&q=80'">
                             <% } else { %>
                                 <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?w=600&auto=format&fit=crop&q=80" alt="Product Placeholder">
                             <% } %>

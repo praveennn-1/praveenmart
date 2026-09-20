@@ -14,7 +14,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.stream.Collectors;
 
 public class DBUtil {
 
@@ -64,23 +63,13 @@ public class DBUtil {
                 Statement stmt = conn.createStatement()) {
 
             boolean tablesExist = false;
-            try (ResultSet rs = stmt
-                    .executeQuery("SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'USERS'")) {
+            try (ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'PUBLIC' AND TABLE_NAME = 'PRODUCTS'")) {
                 if (rs.next() && rs.getInt(1) > 0) {
                     tablesExist = true;
                 }
-            }
+            } catch (Exception ignored) {}
 
-            int productCount = 0;
-            if (tablesExist) {
-                try (ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM products")) {
-                    if (rs.next()) {
-                        productCount = rs.getInt(1);
-                    }
-                } catch (Exception ignored) {}
-            }
-
-            if (!tablesExist || productCount < 10) {
+            if (!tablesExist) {
                 logger.info("Initializing schema from schema.sql...");
                 executeSqlScript(conn, "schema.sql");
                 logger.info("Schema created successfully.");
@@ -88,16 +77,25 @@ public class DBUtil {
                 logger.info("Populating database with seed.sql...");
                 executeSqlScript(conn, "seed.sql");
                 logger.info("Seed data inserted successfully.");
-            } else if (productCount < 48) {
-                logger.info("Database has {} products. Applying migrations and adding products...", productCount);
-                executeSqlScript(conn, "db/migrations/V2__add_wishlist_table.sql");
-                executeSqlScript(conn, "db/migrations/V3__add_more_products.sql");
-                executeSqlScript(conn, "db/migrations/V4__add_more_products.sql");
-                executeSqlScript(conn, "db/migrations/V5__remove_mismatched_products.sql");
-                logger.info("Additional products and migrations applied successfully.");
             } else {
-                executeSqlScript(conn, "db/migrations/V5__remove_mismatched_products.sql");
-                logger.info("Database schema already exists with {} products.", productCount);
+                boolean hasNewSeed = false;
+                try (ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM products WHERE name = 'Wireless Bluetooth Headphones' AND image_url = '/images/wireless_headphones.jpg'")) {
+                    if (rs.next() && rs.getInt(1) > 0) {
+                        hasNewSeed = true;
+                    }
+                } catch (Exception ignored) {}
+
+                if (!hasNewSeed) {
+                    logger.info("Updating product catalog to new simplified products from seed.sql...");
+                    try { stmt.executeUpdate("DELETE FROM cart_items"); } catch (Exception ignored) {}
+                    try { stmt.executeUpdate("DELETE FROM order_items"); } catch (Exception ignored) {}
+                    try { stmt.executeUpdate("DELETE FROM reviews"); } catch (Exception ignored) {}
+                    try { stmt.executeUpdate("DELETE FROM products"); } catch (Exception ignored) {}
+                    executeSqlScript(conn, "seed.sql");
+                    logger.info("New product catalog seeded successfully.");
+                } else {
+                    logger.info("Database schema and products already up to date.");
+                }
             }
         } catch (Exception e) {
             logger.error("Error during database schema and seed initialization", e);
