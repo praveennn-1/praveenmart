@@ -79,7 +79,7 @@ public class DBUtil {
                 logger.info("Seed data inserted successfully.");
             } else {
                 boolean hasNewSeed = false;
-                try (ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM products WHERE name = 'Wireless Bluetooth Headphones' AND image_url = '/images/wireless_headphones.jpg'")) {
+                try (ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM products WHERE name = 'Classic White Cotton T-Shirt' AND image_url = '/images/white_tshirt.jpg'")) {
                     if (rs.next() && rs.getInt(1) > 0) {
                         hasNewSeed = true;
                     }

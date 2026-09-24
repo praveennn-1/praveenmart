@@ -9,48 +9,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Account Dashboard - PraveenMart</title>
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/theme.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/theme.css?v=5.6">
     <style>
         .dashboard-container {
-            max-width: 600px;
-            margin: 3.5rem auto 5rem auto;
+            max-width: 640px;
+            margin: 4.5rem auto 6rem auto;
         }
 
         .profile-card {
             background-color: var(--color-surface-card);
             border: 1px solid var(--color-outline-variant);
-            border-radius: var(--radius-xl);
-            padding: 2.5rem;
-            box-shadow: var(--shadow-soft);
+            border-radius: var(--radius-2xl);
+            padding: 3rem 2.5rem;
+            box-shadow: var(--shadow-md);
             text-align: center;
         }
 
         .avatar-circle {
-            width: 76px;
-            height: 76px;
+            width: 84px;
+            height: 84px;
             border-radius: var(--radius-pill);
-            background-color: var(--color-primary);
-            color: #FFFFFF;
-            font-family: var(--font-headline);
-            font-size: 2rem;
+            background: var(--btn-bg);
+            color: var(--btn-text);
+            font-family: var(--font-heading);
+            font-size: 2.2rem;
             font-weight: 700;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 1.25rem auto;
-            box-shadow: 0 4px 14px rgba(74, 124, 89, 0.3);
+            margin: 0 auto 1.5rem auto;
+            box-shadow: none;
         }
 
         .info-list {
             display: flex;
             flex-direction: column;
-            gap: 0.75rem;
-            margin: 2rem 0;
+            gap: 0.85rem;
+            margin: 2.2rem 0;
             text-align: left;
         }
 
         .info-item {
-            background-color: var(--color-surface-container-low);
+            background-color: rgba(255, 255, 255, 0.03);
             border: 1px solid var(--color-outline-variant);
             border-radius: var(--radius-md);
             padding: 1rem 1.25rem;
@@ -60,16 +60,16 @@
         }
 
         .info-key {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 700;
-            color: var(--color-on-surface-variant);
+            color: var(--color-on-surface-muted);
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.06em;
         }
 
         .info-val {
             font-weight: 600;
-            color: var(--color-on-surface);
+            color: #ffffff;
         }
     </style>
 </head>
@@ -85,9 +85,10 @@
                         <%= (user.getName() != null && !user.getName().isBlank()) ? user.getName().substring(0, 1).toUpperCase() : "U" %>
                     </div>
 
-                    <h1 class="font-headline" style="font-size: 1.8rem; margin-bottom: 0.35rem;">
-                        Welcome back, <%= user.getName() %>!
+                    <h1 style="font-size: 2rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.4rem;">
+                        <%= user.getName() %>
                     </h1>
+                    <p style="color: var(--text); font-size: 0.95rem;">PraveenMart Member &bull; <%= user.getRole() %></p>
 
                     <div class="info-list">
                         <div class="info-item">
@@ -98,11 +99,15 @@
                             <span class="info-key">Email</span>
                             <span class="info-val"><%= user.getEmail() %></span>
                         </div>
+                        <div class="info-item">
+                            <span class="info-key">Status</span>
+                            <span class="badge-tag badge-in-stock">Active Member</span>
+                        </div>
                     </div>
 
-                    <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                    <div style="display: flex; flex-direction: column; gap: 0.85rem;">
                         <% if ("ADMIN".equalsIgnoreCase(user.getRole()) && "admin@praveenmart.com".equalsIgnoreCase(user.getEmail())) { %>
-                            <a href="<%= request.getContextPath() %>/admin/dashboard" class="btn btn-primary btn-pill" style="width: 100%; background: #b06000;">
+                            <a href="<%= request.getContextPath() %>/admin/dashboard" class="btn btn-primary btn-pill" style="width: 100%;">
                                 <span class="material-symbols-outlined">admin_panel_settings</span>
                                 <span>Open Admin Control Center</span>
                             </a>
@@ -111,7 +116,7 @@
                         <% if ("SELLER".equalsIgnoreCase(user.getRole())) { %>
                             <a href="<%= request.getContextPath() %>/seller/dashboard" class="btn btn-secondary btn-pill" style="width: 100%;">
                                 <span class="material-symbols-outlined">inventory_2</span>
-                                <span>Open Seller Hub & Orders</span>
+                                <span>Open Seller Hub & Inventory</span>
                             </a>
                         <% } %>
 
@@ -122,8 +127,8 @@
                             </a>
 
                             <a href="<%= request.getContextPath() %>/products" class="btn btn-primary btn-pill" style="width: 100%;">
-                                <span class="material-symbols-outlined">shopping_bag</span>
-                                <span>Explore Marketplace</span>
+                                <span class="material-symbols-outlined">storefront</span>
+                                <span>Explore Products</span>
                             </a>
                         <% } %>
 
@@ -135,10 +140,10 @@
                 </div>
             <% } else { %>
                 <div class="profile-card">
-                    <span class="material-symbols-outlined" style="font-size: 3.5rem; color: var(--color-outline); margin-bottom: 1rem;">lock</span>
-                    <h2 class="font-headline" style="margin-bottom: 0.5rem;">Access Required</h2>
-                    <p style="color: var(--color-on-surface-variant); margin-bottom: 2rem;">Please sign in to view your profile dashboard.</p>
-                    <a href="<%= request.getContextPath() %>/login.jsp" class="btn btn-primary btn-pill">Sign In</a>
+                    <span class="material-symbols-outlined" style="font-size: 3.5rem; color: var(--muted); margin-bottom: 1rem;">lock</span>
+                    <h2 style="font-size: 1.8rem; text-transform: uppercase; margin-bottom: 0.5rem;">Access Required</h2>
+                    <p style="color: var(--text); margin-bottom: 2rem;">Please sign in to view your profile dashboard.</p>
+                    <a href="<%= request.getContextPath() %>/login.jsp" class="btn btn-primary btn-pill" style="padding: 0.85rem 2rem;">Sign In</a>
                 </div>
             <% } %>
         </div>

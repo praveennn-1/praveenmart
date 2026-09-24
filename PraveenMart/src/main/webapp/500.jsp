@@ -5,24 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>500 - Server Error - PraveenMart</title>
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/theme.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/theme.css?v=5.6">
     <style>
         body {
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: var(--color-background);
+            background-color: var(--bg);
             text-align: center;
             padding: 2rem;
         }
         .error-card {
-            background-color: var(--color-surface-card);
-            border: 1px solid var(--color-outline-variant);
+            background-color: var(--surface);
+            border: 1px solid var(--surface-border);
             border-radius: var(--radius-xl);
             padding: 3.5rem 2.5rem;
             max-width: 500px;
-            box-shadow: var(--shadow-soft);
+            box-shadow: none;
         }
     </style>
 </head>

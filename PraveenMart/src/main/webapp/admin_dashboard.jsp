@@ -39,7 +39,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Control Center - PraveenMart</title>
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/theme.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/theme.css?v=5.6">
     <style>
         .admin-main {
             padding: 3rem 0 5rem 0;
@@ -62,9 +62,9 @@
         }
 
         .stat-card {
-            background-color: var(--color-surface-card);
-            border: 1px solid var(--color-outline-variant);
-            border-radius: var(--radius-lg);
+            background-color: var(--surface);
+            border: 1px solid var(--surface-border);
+            border-radius: 16px;
             padding: 1.5rem;
             box-shadow: var(--shadow-soft);
         }
@@ -72,48 +72,58 @@
         .stat-label {
             font-size: 0.78rem;
             font-weight: 700;
-            color: var(--color-on-surface-variant);
+            color: var(--muted);
             text-transform: uppercase;
             letter-spacing: 0.05em;
             margin-bottom: 0.4rem;
         }
 
         .stat-val {
-            font-family: var(--font-headline);
-            font-size: 2rem;
+            font-family: var(--font-heading);
+            font-size: 2.2rem;
             font-weight: 700;
-            color: var(--color-neutral-dark);
+            color: var(--price);
         }
 
         .admin-tabs {
             display: flex;
-            gap: 1rem;
+            gap: 0.75rem;
             margin-bottom: 2rem;
-            border-bottom: 1px solid var(--color-outline-variant);
-            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--divider);
+            padding-bottom: 0.75rem;
+            flex-wrap: wrap;
         }
 
         .admin-tab-btn {
-            background: none;
-            border: none;
-            font-size: 1.05rem;
-            font-weight: 700;
-            padding: 0.6rem 1.2rem;
-            color: var(--color-on-surface-variant);
+            background: var(--pill-inactive-bg);
+            border: 1px solid var(--pill-border);
+            font-size: 0.92rem;
+            font-weight: 500;
+            padding: 0.55rem 1.35rem;
+            color: var(--nav-link);
             cursor: pointer;
-            border-radius: var(--radius-md);
-            transition: all 0.2s ease;
+            border-radius: var(--radius-pill);
+            transition: all 200ms ease;
+        }
+
+        .admin-tab-btn:hover {
+            color: #ffffff;
+            background: #20242e;
+            border-color: rgba(255, 255, 255, 0.14);
         }
 
         .admin-tab-btn.active {
-            background-color: #b06000;
-            color: #FFFFFF;
+            background: var(--pill-active-bg) !important;
+            color: var(--pill-active-text) !important;
+            border-color: #8FAFC2 !important;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25) !important;
         }
 
         .admin-card {
-            background-color: var(--color-surface-card);
-            border: 1px solid var(--color-outline-variant);
-            border-radius: var(--radius-xl);
+            background-color: var(--surface);
+            border: 1px solid var(--surface-border);
+            border-radius: 16px;
             padding: 2rem;
             box-shadow: var(--shadow-soft);
             margin-bottom: 2.5rem;
@@ -166,7 +176,7 @@
     <div class="admin-header">
         <div>
             <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.3rem;">
-                <span class="badge-tag" style="background-color: #FEF7E0; color: #B06000;">Administrator Access</span>
+                <span class="badge-tag" style="background-color: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3);">Administrator Access</span>
             </div>
             <h1 class="font-headline" style="font-size: 2.2rem; margin-bottom: 0.35rem;">Platform Administration Panel</h1>
             <p style="color: var(--color-on-surface-variant); font-size: 0.95rem;">System overview, user oversight, marketplace orders, and catalog listing moderation.</p>

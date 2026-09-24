@@ -162,6 +162,11 @@ public class CartServlet extends HttpServlet {
             }
         }
 
+        if ("true".equalsIgnoreCase(request.getParameter("buyNow"))) {
+            response.sendRedirect(request.getContextPath() + "/cart");
+            return;
+        }
+
         String referer = request.getHeader("Referer");
         if (referer != null && !referer.isBlank()) {
             response.sendRedirect(referer);

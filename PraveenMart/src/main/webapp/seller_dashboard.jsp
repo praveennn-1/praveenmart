@@ -38,7 +38,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seller Hub - PraveenMart</title>
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/theme.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/theme.css?v=5.6">
     <style>
         .seller-main {
             padding: 3rem 0 5rem 0;
@@ -62,9 +62,9 @@
         }
 
         .stat-card {
-            background-color: var(--color-surface-card);
-            border: 1px solid var(--color-outline-variant);
-            border-radius: var(--radius-lg);
+            background-color: var(--surface);
+            border: 1px solid var(--surface-border);
+            border-radius: 16px;
             padding: 1.75rem;
             box-shadow: var(--shadow-soft);
         }
@@ -72,59 +72,70 @@
         .stat-label {
             font-size: 0.8rem;
             font-weight: 700;
-            color: var(--color-on-surface-variant);
+            color: var(--muted);
             text-transform: uppercase;
             letter-spacing: 0.05em;
             margin-bottom: 0.5rem;
         }
 
         .stat-val {
-            font-family: var(--font-headline);
+            font-family: var(--font-heading);
             font-size: 2.2rem;
             font-weight: 700;
-            color: var(--color-neutral-dark);
+            color: var(--price);
         }
 
         /* Tabs */
         .hub-tabs {
             display: flex;
-            gap: 1rem;
+            gap: 0.75rem;
             margin-bottom: 2rem;
-            border-bottom: 1px solid var(--color-outline-variant);
-            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--divider);
+            padding-bottom: 0.75rem;
+            flex-wrap: wrap;
         }
 
         .hub-tab-btn {
-            background: none;
-            border: none;
-            font-size: 1.05rem;
-            font-weight: 700;
-            padding: 0.6rem 1.2rem;
-            color: var(--color-on-surface-variant);
+            background: var(--pill-inactive-bg);
+            border: 1px solid var(--pill-border);
+            font-size: 0.92rem;
+            font-weight: 500;
+            padding: 0.55rem 1.35rem;
+            color: var(--nav-link);
             cursor: pointer;
-            border-radius: var(--radius-md);
-            transition: all 0.2s ease;
+            border-radius: var(--radius-pill);
+            transition: all 200ms ease;
         }
 
-        .hub-tab-btn.active {
-            background-color: var(--color-primary);
+        .hub-tab-btn:hover {
+            background-color: #20242e;
+            border-color: rgba(255, 255, 255, 0.14);
             color: #FFFFFF;
         }
 
+        .hub-tab-btn.active {
+            background: var(--pill-active-bg) !important;
+            color: var(--pill-active-text) !important;
+            border-color: #8FAFC2 !important;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25) !important;
+        }
+
         .seller-card {
-            background-color: var(--color-surface-card);
-            border: 1px solid var(--color-outline-variant);
-            border-radius: var(--radius-xl);
+            background-color: var(--surface);
+            border: 1px solid var(--surface-border);
+            border-radius: 16px;
             padding: 2.2rem;
             margin-bottom: 3rem;
             box-shadow: var(--shadow-soft);
         }
 
         .card-heading {
-            font-family: var(--font-headline);
+            font-family: var(--font-heading);
             font-size: 1.4rem;
-            font-weight: 600;
-            color: var(--color-on-surface);
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--heading);
             margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
@@ -141,7 +152,13 @@
             grid-column: 1 / -1;
         }
 
-        .input-box {
+        .input-box,
+        input.input-box,
+        select.input-box,
+        textarea.input-box,
+        input[type="text"].input-box,
+        input[type="number"].input-box,
+        input[type="url"].input-box {
             width: 100%;
             padding: 0.85rem 1rem;
             border-radius: var(--radius-md);
@@ -152,12 +169,30 @@
             color: var(--color-on-surface);
             outline: none;
             transition: all 0.2s ease;
+            opacity: 1;
         }
 
-        .input-box:focus {
-            border-color: var(--color-primary);
-            background-color: #FFFFFF;
-            box-shadow: 0 0 0 3px rgba(74, 124, 89, 0.15);
+        .input-box:focus,
+        input.input-box:focus,
+        select.input-box:focus,
+        textarea.input-box:focus,
+        input[type="text"].input-box:focus,
+        input[type="number"].input-box:focus,
+        input[type="url"].input-box:focus {
+            border-color: rgba(255, 255, 255, 0.35);
+            background-color: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.06);
+            color: #ffffff;
+        }
+
+        select.input-box option {
+            background-color: var(--color-surface-container-low);
+            color: var(--color-on-surface);
+        }
+
+        .input-box::placeholder {
+            color: rgba(184, 190, 199, 0.38);
+            opacity: 1;
         }
 
         textarea.input-box {
@@ -234,15 +269,16 @@
         }
 
         .modal-content {
-            background-color: #FFFFFF;
+            background-color: #14161f;
             border-radius: var(--radius-xl);
             padding: 2.5rem;
             width: 100%;
             max-width: 620px;
-            box-shadow: var(--shadow-hover);
-            border: 1px solid var(--color-outline-variant);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--color-outline);
             max-height: 90vh;
             overflow-y: auto;
+            color: #ffffff;
         }
     </style>
 </head>
@@ -489,7 +525,7 @@
                                         <td>
                                             <form action="<%= request.getContextPath() %>/seller/orders/update-status" method="post" style="display: flex; gap: 0.4rem; align-items: center;">
                                                 <input type="hidden" name="orderId" value="<%= item.getOrderId() %>">
-                                                <select name="status" class="form-input-field" style="padding: 0.35rem 0.6rem; font-size: 0.85rem; border: 1px solid var(--color-outline-variant); border-radius: var(--radius-sm); background: #FFFFFF;">
+                                                <select name="status" class="form-input-field" style="padding: 0.35rem 0.6rem; font-size: 0.85rem; border: 1px solid var(--color-outline-variant); border-radius: var(--radius-sm); background: #14161f; color: #ffffff;">
                                                     <option value="CONFIRMED">Confirmed</option>
                                                     <option value="SHIPPED">Shipped</option>
                                                     <option value="DELIVERED">Delivered</option>

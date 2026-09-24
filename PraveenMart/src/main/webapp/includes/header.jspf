@@ -11,121 +11,69 @@
         } catch (Exception ignored) {}
     }
 %>
-<style>
-    .site-header .container {
-        max-width: 100% !important;
-        width: 100% !important;
-        padding-left: 1rem !important;
-        padding-right: 1.5rem !important;
-    }
-
-    .nav-left {
-        display: flex;
-        align-items: center;
-        gap: 0.85rem;
-        margin-left: 0;
-    }
-
-    .menu-dropdown-wrapper {
-        position: relative;
-        display: inline-flex;
-        align-items: center;
-    }
-
-    .menu-toggle-btn {
-        cursor: pointer;
-        background-color: var(--color-surface-container);
-        border: 1px solid var(--color-outline-variant);
-        color: var(--color-on-surface);
-        transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-        user-select: none;
-    }
-
-    .menu-toggle-btn:hover,
-    .menu-toggle-btn.active {
-        background-color: var(--color-primary);
-        border-color: var(--color-primary);
-        color: #ffffff;
-        box-shadow: 0 4px 12px rgba(176, 96, 0, 0.25);
-        transform: translateY(-1px);
-    }
-
-    .menu-dropdown-card {
-        position: absolute;
-        top: calc(100% + 0.65rem);
-        left: 0;
-        min-width: 200px;
-        background-color: var(--color-surface-container-high, #ffffff);
-        border: 1px solid var(--color-outline-variant);
-        border-radius: var(--radius-lg);
-        box-shadow: 0 14px 34px rgba(44, 30, 16, 0.14), 0 2px 8px rgba(44, 30, 16, 0.06);
-        padding: 0.4rem;
-        z-index: 1000;
-        display: none;
-        flex-direction: column;
-        gap: 0.25rem;
-        animation: menuDropdownFade 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-
-    @keyframes menuDropdownFade {
-        from {
-            opacity: 0;
-            transform: translateY(-8px) scale(0.97);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
-    }
-
-    .menu-dropdown-card.show {
-        display: flex;
-    }
-
-    .menu-dropdown-item {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        padding: 0.65rem 0.85rem;
-        color: var(--color-on-surface);
-        text-decoration: none;
-        font-size: 0.95rem;
-        font-weight: 600;
-        border-radius: var(--radius-md);
-        transition: all 0.18s ease;
-    }
-
-    .menu-dropdown-item .material-symbols-outlined {
-        font-size: 1.28rem;
-        color: var(--color-primary);
-        transition: transform 0.18s ease;
-    }
-
-    .menu-dropdown-item:hover {
-        background-color: var(--color-surface-container);
-        color: var(--color-primary);
-        transform: translateX(4px);
-    }
-
-    .menu-dropdown-item:hover .material-symbols-outlined {
-        transform: scale(1.12);
-    }
-</style>
 <header class="site-header">
     <div class="container">
         <div class="nav-bar">
-            <!-- Left Group: Three-line Menu + Brand Logo -->
+            <!-- Left Group: Brand Logo with Cloud Mark -->
             <div class="nav-left">
-                <!-- Three-Line Menu Bar (Top Left) -->
+                <!-- Brand Logo (Pure Typography Wordmark) -->
+                <a href="<%= (sessionUser != null && "ADMIN".equalsIgnoreCase(sessionUser.getRole())) ? request.getContextPath() + "/admin/dashboard" : request.getContextPath() + "/products" %>" class="brand-logo">
+                    <span>PraveenMart</span>
+                </a>
+            </div>
+
+            <!-- Center Navigation Links -->
+            <nav class="nav-center-links" aria-label="Main Navigation">
+                <a href="<%= request.getContextPath() %>/products" class="nav-link active">Home</a>
+                <a href="<%= request.getContextPath() %>/products?category=Electronics" class="nav-link">Electronics</a>
+                <a href="<%= request.getContextPath() %>/products?category=Fashion%20%26%20Style" class="nav-link">Fashion</a>
+                <a href="<%= request.getContextPath() %>/products?category=Home%20%26%20Kitchen" class="nav-link">Home & Kitchen</a>
+                <a href="<%= request.getContextPath() %>/products?category=Accessories" class="nav-link">Accessories</a>
+                <a href="<%= request.getContextPath() %>/products?category=Books" class="nav-link">Books</a>
+            </nav>
+
+            <!-- Right Actions: Cart + Pill Action + Right-Corner Menu -->
+            <div class="nav-actions">
+                <!-- Cart Button -->
+                <% if (sessionUser == null || !"ADMIN".equalsIgnoreCase(sessionUser.getRole())) { %>
+                    <a href="<%= request.getContextPath() %>/cart" class="nav-icon-btn" id="navCartBtn" title="Shopping Cart">
+                        <span class="material-symbols-outlined" style="font-size: 1.25rem;">shopping_bag</span>
+                        <span class="nav-badge-count" id="navCartBadge" <%= cartCount > 0 ? "" : "style=\"display: none;\"" %>><%= cartCount %></span>
+                    </a>
+                <% } %>
+
+                <!-- User Session / Action Pill Button -->
+                <% if (sessionUser != null) { %>
+                    <a href="<%= request.getContextPath() %>/dashboard.jsp" class="btn btn-secondary btn-pill" style="padding: 0.45rem 1rem; font-size: 0.85rem;" title="<%= sessionUser.getEmail() %>">
+                        <span class="material-symbols-outlined" style="font-size: 1.1rem; color: #ffffff;">account_circle</span>
+                        <span><%= sessionUser.getName() %></span>
+                    </a>
+                    <a href="<%= request.getContextPath() %>/logout" class="btn btn-outlined btn-pill" style="padding: 0.45rem 0.9rem; font-size: 0.82rem;">
+                        <span>Sign Out</span>
+                    </a>
+                <% } else { %>
+                    <a href="<%= request.getContextPath() %>/login.jsp" class="btn btn-primary btn-pill" style="padding: 0.5rem 1.35rem; font-size: 0.88rem;">
+                        <span>Sign in</span>
+                    </a>
+                    <a href="<%= request.getContextPath() %>/register.jsp" class="btn btn-secondary btn-pill" style="padding: 0.5rem 1.1rem; font-size: 0.88rem;">
+                        <span>Register</span>
+                    </a>
+                <% } %>
+
+                <!-- Dropdown Menu Trigger (Right Corner) -->
                 <div class="menu-dropdown-wrapper" id="menuDropdownWrapper">
-                    <button type="button" class="nav-icon-btn menu-toggle-btn" id="menuToggleBtn" aria-label="Toggle navigation menu" aria-expanded="false" title="Menu">
-                        <span class="material-symbols-outlined" id="menuToggleIcon" style="font-size: 1.4rem;">menu</span>
+                    <button type="button" class="menu-toggle-btn" id="menuToggleBtn" aria-label="Toggle navigation menu" aria-expanded="false" title="Menu">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <rect y="2.5" width="18" height="2.2" rx="1.1" fill="#FFFFFF"/>
+                            <rect y="7.9" width="18" height="2.2" rx="1.1" fill="#FFFFFF"/>
+                            <rect y="13.3" width="18" height="2.2" rx="1.1" fill="#FFFFFF"/>
+                        </svg>
                     </button>
                     <div class="menu-dropdown-card" id="menuDropdownCard" role="menu">
                         <% if (sessionUser == null || !"ADMIN".equalsIgnoreCase(sessionUser.getRole())) { %>
                             <a href="<%= request.getContextPath() %>/products" class="menu-dropdown-item" role="menuitem">
                                 <span class="material-symbols-outlined">storefront</span>
-                                <span>Shop</span>
+                                <span>Shop Collection</span>
                             </a>
                             <a href="<%= request.getContextPath() %>/orders" class="menu-dropdown-item" role="menuitem">
                                 <span class="material-symbols-outlined">receipt_long</span>
@@ -140,55 +88,18 @@
                                 </a>
                             <% } %>
                             <% if ("ADMIN".equalsIgnoreCase(sessionUser.getRole()) && "admin@praveenmart.com".equalsIgnoreCase(sessionUser.getEmail())) { %>
-                                <a href="<%= request.getContextPath() %>/admin/dashboard" class="menu-dropdown-item" role="menuitem" style="color: #b06000;">
-                                    <span class="material-symbols-outlined">admin_panel_settings</span>
+                                <a href="<%= request.getContextPath() %>/admin/dashboard" class="menu-dropdown-item" role="menuitem" style="color: #fbbf24;">
+                                    <span class="material-symbols-outlined" style="color: #fbbf24;">admin_panel_settings</span>
                                     <span>Admin Panel</span>
                                 </a>
                             <% } %>
                         <% } %>
+                        <a href="<%= request.getContextPath() %>/cart" class="menu-dropdown-item" role="menuitem">
+                            <span class="material-symbols-outlined">shopping_cart</span>
+                            <span>Shopping Cart</span>
+                        </a>
                     </div>
                 </div>
-
-                <!-- Brand Logo -->
-                <a href="<%= (sessionUser != null && "ADMIN".equalsIgnoreCase(sessionUser.getRole())) ? request.getContextPath() + "/admin/dashboard" : request.getContextPath() + "/products" %>" class="brand-logo">
-                    <span>PraveenMart</span>
-                </a>
-            </div>
-
-            <!-- User Authentication & Cart Actions -->
-            <div class="nav-actions">
-                <% if (sessionUser != null) { %>
-                    <% if (!"ADMIN".equalsIgnoreCase(sessionUser.getRole())) { %>
-                        <!-- Cart Button with Count Badge -->
-                        <a href="<%= request.getContextPath() %>/cart" class="nav-icon-btn" id="navCartBtn" title="View Cart">
-                            <span class="material-symbols-outlined" style="font-size: 1.3rem;">shopping_bag</span>
-                            <span class="nav-badge-count" id="navCartBadge" <%= cartCount > 0 ? "" : "style=\"display: none;\"" %>><%= cartCount %></span>
-                        </a>
-                    <% } %>
-
-                    <!-- User Account / Profile -->
-                    <a href="<%= request.getContextPath() %>/dashboard.jsp" class="btn btn-secondary btn-pill" style="padding: 0.45rem 1.1rem; font-size: 0.88rem;" title="<%= sessionUser.getEmail() %>">
-                        <span class="material-symbols-outlined" style="font-size: 1.15rem; color: var(--color-primary);">account_circle</span>
-                        <span><%= sessionUser.getName() %></span>
-                    </a>
-
-                    <a href="<%= request.getContextPath() %>/logout" class="btn btn-outlined btn-pill" style="padding: 0.45rem 0.9rem; font-size: 0.85rem;">
-                        <span>Sign Out</span>
-                    </a>
-                <% } else { %>
-                    <!-- Cart Button for visitors -->
-                    <a href="<%= request.getContextPath() %>/cart" class="nav-icon-btn" id="navCartBtn" title="View Cart">
-                        <span class="material-symbols-outlined" style="font-size: 1.3rem;">shopping_bag</span>
-                        <span class="nav-badge-count" id="navCartBadge" style="display: none;">0</span>
-                    </a>
-                    <a href="<%= request.getContextPath() %>/login.jsp" class="btn btn-primary btn-pill" style="padding: 0.45rem 1.2rem; font-size: 0.88rem;">
-                        <span class="material-symbols-outlined" style="font-size: 1.15rem;">login</span>
-                        <span>Sign In</span>
-                    </a>
-                    <a href="<%= request.getContextPath() %>/register.jsp" class="btn btn-secondary btn-pill" style="padding: 0.45rem 1.1rem; font-size: 0.88rem;">
-                        <span>Register</span>
-                    </a>
-                <% } %>
             </div>
         </div>
     </div>

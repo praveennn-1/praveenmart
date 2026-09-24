@@ -1,19 +1,73 @@
 <%@ page pageEncoding="UTF-8" %>
 <footer class="site-footer">
     <div class="container">
-        <div class="footer-content">
-            <div style="display: flex; align-items: center; gap: 1.5rem;">
-                <div class="font-headline" style="font-size: 2.1rem; font-weight: 800; color: #0d4722;">PraveenMart</div>
-                <div style="font-size: 0.88rem; color: var(--color-on-surface-variant);">
-                    &copy; <%= java.time.Year.now().getValue() %> PraveenMart.
+        <div class="footer-main">
+            <!-- Col 1: Brand & Bio -->
+            <div>
+                <div class="brand-logo" style="margin-bottom: 1.2rem;">
+                    <span>PraveenMart</span>
+                </div>
+                <p style="color: var(--color-on-surface-variant); font-size: 0.92rem; max-width: 360px; line-height: 1.65; margin-bottom: 1.5rem;">
+                    Your trusted modern destination for high-quality electronics, trending fashion, kitchen essentials, and daily lifestyle accessories.
+                </p>
+                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                    <span class="badge-tag" style="background: rgba(255,255,255,0.06); color: #ffffff; border: 1px solid rgba(255,255,255,0.12);">
+                        <span class="material-symbols-outlined" style="font-size: 0.85rem; color: #C8B196;">verified</span>
+                        <span>100% Genuine Products</span>
+                    </span>
                 </div>
             </div>
 
-            <div class="footer-links">
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
-                <a href="#">Shipping & Returns</a>
-                <a href="#">Contact Us</a>
+            <!-- Col 2: Categories -->
+            <div>
+                <h4 class="footer-col-title">Categories</h4>
+                <ul class="footer-links-list">
+                    <li><a href="<%= request.getContextPath() %>/products">All Products</a></li>
+                    <li><a href="<%= request.getContextPath() %>/products?category=Electronics">Electronics</a></li>
+                    <li><a href="<%= request.getContextPath() %>/products?category=Fashion%20%26%20Style">Fashion & Style</a></li>
+                    <li><a href="<%= request.getContextPath() %>/products?category=Home%20%26%20Kitchen">Home & Kitchen</a></li>
+                    <li><a href="<%= request.getContextPath() %>/products?category=Accessories">Accessories</a></li>
+                </ul>
+            </div>
+
+            <!-- Col 3: Customer Care -->
+            <div>
+                <h4 class="footer-col-title">Customer Care</h4>
+                <ul class="footer-links-list">
+                    <li><a href="<%= request.getContextPath() %>/orders">Track Orders</a></li>
+                    <li><a href="<%= request.getContextPath() %>/cart">Shopping Cart</a></li>
+                    <li><a href="<%= request.getContextPath() %>/dashboard.jsp">Account Dashboard</a></li>
+                    <li><a href="#">Shipping & Returns</a></li>
+                    <li><a href="#">Help & Support</a></li>
+                </ul>
+            </div>
+
+            <!-- Col 4: Newsletter -->
+            <div>
+                <h4 class="footer-col-title">Stay Connected</h4>
+                <p style="color: var(--color-on-surface-variant); font-size: 0.88rem; margin-bottom: 1.1rem;">
+                    Subscribe to get notified about new arrivals, flash deals, and exclusive member discounts.
+                </p>
+                <form action="#" method="post" onsubmit="event.preventDefault(); alert('Thank you for subscribing to PraveenMart updates!');" style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 180px; position: relative;">
+                        <input type="email" placeholder="Enter your email" required
+                               style="width: 100%; padding: 0.65rem 1rem; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.14); border-radius: var(--radius-pill); color: #ffffff; font-size: 0.88rem; outline: none;">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-pill" style="padding: 0.65rem 1.3rem; font-size: 0.86rem;">
+                        <span>Subscribe</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div>
+                &copy; <%= java.time.Year.now().getValue() %> PraveenMart. All rights reserved.
+            </div>
+            <div style="display: flex; gap: 1.5rem;">
+                <a href="#" style="color: var(--color-on-surface-muted); font-size: 0.85rem;">Privacy Policy</a>
+                <a href="#" style="color: var(--color-on-surface-muted); font-size: 0.85rem;">Terms of Service</a>
+                <a href="#" style="color: var(--color-on-surface-muted); font-size: 0.85rem;">Security</a>
             </div>
         </div>
     </div>
