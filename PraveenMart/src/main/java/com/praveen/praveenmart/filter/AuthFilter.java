@@ -101,6 +101,8 @@ public class AuthFilter implements Filter {
                 path.startsWith("/api/v1/health") ||
                 path.startsWith("/api/v1/products") ||
                 path.startsWith("/api/v1/reviews") ||
+                path.startsWith("/api/v1/chat") ||
+                path.startsWith("/api/chat") ||
                 path.startsWith("/css/") ||
                 path.startsWith("/js/") ||
                 path.startsWith("/images/") ||
