@@ -46,6 +46,7 @@
             color: var(--heading);
             background: var(--heading-gradient);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 2rem;
         }
@@ -222,7 +223,6 @@
         <div class="checkout-layout">
 
             <div>
-                <!-- 1. Shipping Address Section -->
                 <div class="checkout-section">
                     <div class="checkout-section-title">
                         <span class="material-symbols-outlined" style="font-size: 1.25rem;">local_shipping</span>
@@ -261,7 +261,6 @@
                     </div>
                 </div>
 
-                <!-- 2. Payment Method Section -->
                 <div class="checkout-section">
                     <div class="checkout-section-title">
                         <span class="material-symbols-outlined" style="font-size: 1.25rem;">credit_card</span>
@@ -292,7 +291,6 @@
                 </div>
             </div>
 
-            <!-- Right: Order Summary -->
             <div class="summary-card">
                 <h2 class="summary-card-title">Order Items (<%= cartItems != null ? cartItems.size() : 0 %>)</h2>
 

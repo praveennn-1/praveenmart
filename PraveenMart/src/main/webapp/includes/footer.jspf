@@ -72,3 +72,68 @@
         </div>
     </div>
 </footer>
+
+<!-- PraveenMart AI Chatbot Widget (Week 9 Deliverable) -->
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/chat-widget.css?v=1.0">
+
+<div id="pmChatWidgetRoot">
+    <!-- Floating Launcher Trigger Button -->
+    <button type="button" class="pm-chat-launcher" id="pmChatLauncher" aria-label="Open AI Shopping Assistant" title="Chat with PraveenMart AI Assistant">
+        <div class="pm-chat-launcher-icon">
+            <span class="material-symbols-outlined">auto_awesome</span>
+            <span class="pm-chat-launcher-pulse"></span>
+        </div>
+        <span class="pm-chat-launcher-label">Ask AI</span>
+    </button>
+
+    <!-- Floating Chat Window Panel -->
+    <div class="pm-chat-panel" id="pmChatPanel" role="dialog" aria-labelledby="pmChatTitle" aria-modal="false">
+        <div class="pm-chat-header">
+            <div class="pm-chat-header-info">
+                <div class="pm-chat-avatar">
+                    <span class="material-symbols-outlined">smart_toy</span>
+                </div>
+                <div>
+                    <h3 class="pm-chat-title" id="pmChatTitle">PraveenMart AI</h3>
+                    <div class="pm-chat-status">
+                        <span class="pm-status-dot"></span>
+                        <span>Shopping Assistant • Online</span>
+                    </div>
+                </div>
+            </div>
+            <div class="pm-chat-header-actions">
+                <button type="button" class="pm-chat-icon-btn" id="pmChatClearBtn" title="Reset Conversation" aria-label="Reset Conversation">
+                    <span class="material-symbols-outlined" style="font-size: 1.15rem;">refresh</span>
+                </button>
+                <button type="button" class="pm-chat-icon-btn" id="pmChatCloseBtn" title="Close Chat" aria-label="Close Chat">
+                    <span class="material-symbols-outlined" style="font-size: 1.15rem;">close</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Chat Conversation Messages -->
+        <div class="pm-chat-body" id="pmChatBody" role="log" aria-live="polite"></div>
+
+        <!-- Chat Input Form -->
+        <div class="pm-chat-footer">
+            <form id="pmChatForm" class="pm-chat-form" autocomplete="off">
+                <div class="pm-chat-input-box">
+                    <input type="text" id="pmChatInput" class="pm-chat-input" placeholder="Ask about products, orders, returns..." maxlength="500" required>
+                    <button type="submit" id="pmChatSendBtn" class="pm-chat-send-btn" title="Send Message" aria-label="Send Message">
+                        <span class="material-symbols-outlined">send</span>
+                    </button>
+                </div>
+                <div class="pm-chat-meta-bar">
+                    <span>Restricted to product & store inquiries</span>
+                    <span id="pmChatCharCount">0/500</span>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    window.contextPath = '<%= request.getContextPath() %>';
+</script>
+<script src="<%= request.getContextPath() %>/js/chat-widget.js?v=1.0"></script>
+

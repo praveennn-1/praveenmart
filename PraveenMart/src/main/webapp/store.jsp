@@ -45,6 +45,7 @@
             color: var(--heading);
             background: var(--heading-gradient);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
             max-width: 900px;
             margin: 0 auto 1.2rem;
@@ -654,7 +655,6 @@
 
 <%@ include file="/includes/header.jspf" %>
 
-<!-- HERO & SEARCH CONTROLS -->
 <section class="store-hero">
     <div class="container">
         <h1 class="store-title">
@@ -664,7 +664,6 @@
             Discover quality electronics, fashion essentials, home appliances, and lifestyle accessories designed for modern living.
         </p>
 
-        <!-- Search Bar -->
         <div class="store-search-wrapper">
             <form action="<%= request.getContextPath() %>/products" method="get" class="store-search-bar">
                 <span class="material-symbols-outlined" style="color: var(--color-on-surface-muted);">search</span>
@@ -678,7 +677,6 @@
             </form>
         </div>
 
-        <!-- Category Filter Navigation Pills -->
         <div class="category-pills-bar">
             <a href="<%= request.getContextPath() %>/products<%= !searchQuery.isEmpty() ? "?q=" + searchQuery : "" %>"
                class="category-pill <%= "all".equalsIgnoreCase(selectedCategory) ? "active" : "" %>">
@@ -713,10 +711,8 @@
     </div>
 </section>
 
-<!-- MAIN PRODUCT CATALOG GRID -->
 <main class="catalog-container">
     <div class="container">
-        <!-- Toast Alerts -->
         <% if (cartMessage != null) { %>
             <div class="alert-box alert-box-success" style="margin-bottom: 2rem;">
                 <span class="material-symbols-outlined">check_circle</span>
@@ -731,7 +727,6 @@
             </div>
         <% } %>
 
-        <!-- Catalog Meta Header -->
         <div class="catalog-meta-bar">
             <div class="catalog-meta-title">
                 <% if (!"all".equalsIgnoreCase(selectedCategory)) { %>
@@ -747,7 +742,6 @@
             </div>
         </div>
 
-        <!-- Products Grid -->
         <div class="products-grid">
             <% if (products != null && !products.isEmpty()) { %>
                 <% for (Product p : products) { 
@@ -760,7 +754,6 @@
                     BigDecimal mrpPrice = currentPrice.multiply(BigDecimal.valueOf(100 + discountPct)).divide(BigDecimal.valueOf(100), 0, java.math.RoundingMode.HALF_UP);
                 %>
                     <div class="product-card">
-                        <!-- Inset Image Box with 18px radius and navigation chevrons -->
                         <div class="product-image-box">
                             <a href="<%= request.getContextPath() %>/product-details?id=<%= p.getId() %>" style="display: block; width: 100%; height: 100%;">
                                 <% 
@@ -779,7 +772,6 @@
                                 <% } %>
                             </a>
 
-                            <!-- In Stock badge overlaid at top-right of image -->
                             <div style="position: absolute; top: 12px; right: 12px; z-index: 5;">
                                 <% if (p.getStockQty() > 10) { %>
                                     <span class="badge-tag badge-in-stock" style="padding: 0.35rem 0.75rem; font-size: 0.72rem; font-weight: 700; border-radius: var(--radius-pill); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); background: rgba(10, 14, 20, 0.92); border: 1px solid rgba(200, 177, 150, 0.45); color: #C8B196; box-shadow: none; display: inline-flex; align-items: center; gap: 5px;"><span style="width: 5px; height: 5px; border-radius: 50%; background: #C8B196; box-shadow: 0 0 6px #C8B196; flex-shrink: 0;"></span>In Stock</span>
@@ -791,9 +783,7 @@
                             </div>
                         </div>
 
-                        <!-- Content below the image, positioned exactly like the mockup -->
                         <div class="product-content">
-                            <!-- 1. Category label (left) and rating with count (right) -->
                             <div class="card-meta-row">
                                 <span class="card-category-pill"><%= p.getCategory() != null ? p.getCategory() : "General" %></span>
                                 <div class="card-rating-group">
@@ -803,12 +793,10 @@
                                 </div>
                             </div>
 
-                            <!-- 2. Product Title -->
                             <a href="<%= request.getContextPath() %>/product-details?id=<%= p.getId() %>" class="product-card-title" title="<%= p.getName() %>">
                                 <%= p.getName() %>
                             </a>
 
-                            <!-- 3. Price & Delivery details -->
                             <div class="product-card-price">
                                 ₹ <%= String.format(Locale.US, "%,.0f", currentPrice) %>
                             </div>
@@ -822,7 +810,6 @@
                                 </span>
                             </div>
 
-                            <!-- 4. Option Selector Section (Size or Quantity) -->
                             <%
                                 String cat = (p.getCategory() != null) ? p.getCategory().toLowerCase() : "";
                                 String pName = (p.getName() != null) ? p.getName().toLowerCase() : "";
@@ -857,7 +844,6 @@
                                 </div>
                             </div>
 
-                            <!-- 5. Bottom Action Row: Wide Buy Now Button + Cart Icon Button -->
                             <% if (p.getStockQty() > 0) { %>
                                 <form action="<%= request.getContextPath() %>/cart/add" method="post" class="card-action-row product-card-form"
                                       data-product-id="<%= p.getId() %>"
@@ -901,7 +887,6 @@
     </div>
 </main>
 
-<!-- Floating Toast Notification -->
 <div id="cartToast" class="cart-toast" role="status" aria-live="polite">
     <span class="material-symbols-outlined" style="color: #2ED8A3; font-size: 1.35rem;">check_circle</span>
     <span id="cartToastMsg">Product added to cart!</span>

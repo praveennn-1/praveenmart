@@ -172,6 +172,7 @@ h1, h2, h3, h4, h5, h6,
     color: var(--heading);
     background: var(--heading-gradient);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     text-transform: uppercase;
     font-weight: 700;

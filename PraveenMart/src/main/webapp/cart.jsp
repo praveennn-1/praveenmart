@@ -51,6 +51,7 @@
                                                 color: var(--heading);
                                                 background: var(--heading-gradient);
                                                 -webkit-background-clip: text;
+                                                background-clip: text;
                                                 -webkit-text-fill-color: transparent;
                                                 margin-bottom: 2rem;
                                             }
@@ -210,6 +211,7 @@
                                                 font-weight: 700;
                                                 color: #ffffff;
                                                 -moz-appearance: textfield;
+                                                appearance: textfield;
                                                 padding: 0;
                                                 outline: none;
                                             }
@@ -329,8 +331,6 @@
 
                                                                 <% if (cartItems !=null && !cartItems.isEmpty()) { %>
                                                                     <div class="cart-layout">
-
-                                                                        <!-- Left: Cart Items List -->
                                                                         <div class="cart-table-card">
                                                                             <div class="cart-header-row">
                                                                                 <span class="cart-items-count">Cart
@@ -350,8 +350,6 @@
                                                                             <% for (CartItem item : cartItems) { Product
                                                                                 p=item.getProduct(); %>
                                                                                 <div class="cart-item-row">
-
-                                                                                    <!-- Thumbnail -->
                                                                                     <div class="cart-item-thumb">
                                                                                         <% String cImg=(p !=null) ?
                                                                                             p.getImageUrl() : null; if
@@ -372,8 +370,6 @@
                                                                                                     alt="Product Thumbnail">
                                                                                                 <% } %>
                                                                                     </div>
-
-                                                                                    <!-- Product Info -->
                                                                                     <div class="cart-item-info">
                                                                                         <div class="cart-item-category">
                                                                                             <%= p !=null ?
@@ -392,8 +388,6 @@
                                                                                                 : "" %>
                                                                                         </div>
                                                                                     </div>
-
-                                                                                    <!-- Quantity Stepper Form -->
                                                                                     <div>
                                                                                         <form
                                                                                             action="<%= request.getContextPath() %>/cart/update"
@@ -415,14 +409,10 @@
                                                                                                 class="cart-qty-btn cart-qty-plus">+</button>
                                                                                         </form>
                                                                                     </div>
-
-                                                                                    <!-- Subtotal -->
                                                                                     <div class="cart-item-total-price">
                                                                                         <%= currencyFormat.format(item.getItemTotal())
                                                                                             %>
                                                                                     </div>
-
-                                                                                    <!-- Remove Button -->
                                                                                     <div>
                                                                                         <form
                                                                                             action="<%= request.getContextPath() %>/cart/remove"
@@ -442,8 +432,6 @@
                                                                                 </div>
                                                                                 <% } %>
                                                                         </div>
-
-                                                                        <!-- Right: Order Summary -->
                                                                         <div class="summary-card">
                                                                             <h2 class="summary-card-title">Order Summary
                                                                             </h2>
@@ -503,8 +491,6 @@
                                                                         </div>
                                                                     </div>
                                                                     <% } else { %>
-
-                                                                        <!-- Empty Cart -->
                                                                         <div class="empty-cart-card">
                                                                             <span class="material-symbols-outlined"
                                                                                 style="font-size: 4.5rem; color: var(--color-outline); margin-bottom: 1.2rem;">shopping_bag</span>
@@ -531,7 +517,6 @@
                                             <%@ include file="/includes/footer.jspf" %>
 
                                                 <script>
-                                                    // Live quantity update on click
                                                     document.addEventListener('DOMContentLoaded', function () {
                                                         document.querySelectorAll('.cart-qty-form').forEach(function (form) {
                                                             const minusBtn = form.querySelector('.cart-qty-minus');

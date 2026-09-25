@@ -139,6 +139,7 @@
             font-weight: 700;
             color: #ffffff;
             -moz-appearance: textfield;
+            appearance: textfield;
             padding: 0;
             pointer-events: none;
         }
@@ -164,6 +165,15 @@
 
         .review-card:last-child {
             border-bottom: none;
+        }
+
+        .review-star {
+            font-size: 1rem;
+            color: #4b5563;
+        }
+
+        .review-star.filled {
+            color: #FFC107;
         }
     </style>
 </head>
@@ -267,7 +277,6 @@
         </div>
     </div>
 
-    <!-- Customer Reviews Section in Dark Glass Card -->
     <section class="reviews-section">
         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2.5rem; flex-wrap: wrap; gap: 1rem;">
             <div>
@@ -320,7 +329,7 @@
                     </div>
                     <div style="margin-bottom: 0.5rem; display: flex; gap: 2px;">
                         <% for (int i = 1; i <= 5; i++) { %>
-                            <span class="material-symbols-outlined" style="font-size: 1rem; color: <%= i <= r.getRating() ? "#FFC107" : "#4b5563" %>;">star</span>
+                            <span class="material-symbols-outlined review-star <%= i <= r.getRating() ? "filled" : "" %>">star</span>
                         <% } %>
                     </div>
                     <p style="font-size: 0.92rem; color: var(--text); line-height: 1.6;"><%= r.getComment() %></p>
