@@ -7,10 +7,10 @@
        ========================================================================== */
 
     /* Background colors */
-    --bg: #08090E;                                     /* Page background: near-black with very slight blue tint */
+    --bg: #000000;                                     /* Page background: near-black with very slight blue tint */
     --bg-alt: #0B0C12;                                 /* Section background (alternate) */
-    --surface: #1C2631;                                /* Card: background #1C2631 */
-    --border: rgba(255, 255, 255, 0.08);               /* 1px border rgba(255,255,255,0.08) */
+    --surface: rgb(19 26 38);                                /* Card: background #1C2631 */
+    --border: rgb(0 0 0 / 0.11);               /* 1px border rgba(255,255,255,0.08) */
     --surface-border: var(--border);
     --hero-glow: radial-gradient(circle at 10% 10%, rgba(58, 65, 76, 0.35) 0%, rgba(8, 9, 14, 0) 65%);
 
@@ -23,7 +23,7 @@
     --accent-green: #C8B196;                           /* Delivery & discount accent in #C8B196 */
     --accent-champagne: #C8B196;
     --accent-delivery: #C8B196;
-    --star: #FFC107;                                   /* Gold star #FFC107 */
+    --star: #d47e00;                                   /* Gold star #FFC107 */
     --price: #FFFFFF;                                  /* Pure white, bold */
     --logo: #BFD8E8;                                   /* Icy pale blue */
 
@@ -98,11 +98,11 @@
 
     --color-accent: #C8B196;
     --color-accent-soft: rgba(200, 177, 150, 0.12);
-    --color-success: #34d399;
+    --color-success: #0f481c;
     --color-success-bg: rgba(52, 211, 153, 0.12);
     --color-warning: #fbbf24;
     --color-warning-bg: rgba(251, 191, 36, 0.12);
-    --color-danger: #f87171;
+    --color-danger: #9b0606;
     --color-danger-bg: rgba(248, 113, 113, 0.12);
 }
 
@@ -534,7 +534,7 @@ hr, .divider-line {
 
 .badge-low-stock {
     background: rgba(10, 14, 20, 0.92);
-    color: #FBBF24;
+    color: #bb8904;
     border: 1px solid rgba(251, 191, 36, 0.45);
     box-shadow: none;
     backdrop-filter: blur(8px);
@@ -543,7 +543,7 @@ hr, .divider-line {
 
 .badge-out-stock {
     background: rgba(10, 14, 20, 0.92);
-    color: #F87171;
+    color: #9b0606;
     border: 1px solid rgba(248, 113, 113, 0.45);
     box-shadow: none;
     backdrop-filter: blur(8px);
@@ -616,7 +616,7 @@ textarea::placeholder {
 
 .alert-box-success {
     background-color: var(--color-success-bg);
-    color: #6ee7b7;
+    color: #057c31;
     border: 1px solid rgba(52, 211, 153, 0.22);
 }
 

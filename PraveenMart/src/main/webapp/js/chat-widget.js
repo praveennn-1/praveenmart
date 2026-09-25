@@ -37,12 +37,12 @@
     };
 
     const QUICK_CHIPS = [
-        '🔥 Popular Electronics',
-        '👕 Fashion Collection',
-        '📦 How to track order?',
-        '💳 Payment methods',
-        '🔄 Return & Refund policy',
-        '💼 How to sell on PraveenMart?'
+        'Popular Electronics',
+        'Fashion Collection',
+        'How to track order?',
+        'Payment methods',
+        'Return & Refund policy',
+        'How to sell on PraveenMart?'
     ];
 
     let messages = [];
