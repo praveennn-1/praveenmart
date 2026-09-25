@@ -10,6 +10,7 @@ target/
 *.env
 *.env.*
 *.example
+!.env.example
 config.properties
 *.pem
 *.key
