@@ -5,15 +5,15 @@
             <!-- Col 1: Brand & Bio -->
             <div>
                 <div class="brand-logo" style="margin-bottom: 1.2rem;">
-                    <span>PraveenMart</span>
+                    <span>PRAVEENMART</span>
                 </div>
                 <p style="color: var(--color-on-surface-variant); font-size: 0.92rem; max-width: 360px; line-height: 1.65; margin-bottom: 1.5rem;">
-                    Your trusted modern destination for high-quality electronics, trending fashion, kitchen essentials, and daily lifestyle accessories.
+                    Your trusted developer-grade marketplace for high-performance electronics, curated fashion, home essentials, and lifestyle tech.
                 </p>
                 <div style="display: flex; align-items: center; gap: 0.75rem;">
-                    <span class="badge-tag" style="background: rgba(255,255,255,0.06); color: #ffffff; border: 1px solid rgba(255,255,255,0.12);">
-                        <span class="material-symbols-outlined" style="font-size: 0.85rem; color: #C8B196;">verified</span>
-                        <span>100% Genuine Products</span>
+                    <span class="badge-tag badge-in-stock">
+                        <span class="material-symbols-outlined" style="font-size: 0.85rem;">verified</span>
+                        <span>100% Genuine Verified</span>
                     </span>
                 </div>
             </div>
@@ -50,10 +50,10 @@
                 </p>
                 <form action="#" method="post" onsubmit="event.preventDefault(); alert('Thank you for subscribing to PraveenMart updates!');" style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
                     <div style="flex: 1; min-width: 180px; position: relative;">
-                        <input type="email" placeholder="Enter your email" required
-                               style="width: 100%; padding: 0.65rem 1rem; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.14); border-radius: var(--radius-pill); color: #ffffff; font-size: 0.88rem; outline: none;">
+                        <input type="email" placeholder="user@domain.com" required
+                               style="width: 100%; padding: 0.6rem 1rem; background: #050505; border: 1px solid #27272A; border-radius: var(--radius-sm); color: #ffffff; font-family: var(--font-mono); font-size: 0.85rem; outline: none;">
                     </div>
-                    <button type="submit" class="btn btn-primary btn-pill" style="padding: 0.65rem 1.3rem; font-size: 0.86rem;">
+                    <button type="submit" class="btn btn-primary" style="padding: 0.6rem 1.2rem; font-size: 0.85rem;">
                         <span>Subscribe</span>
                     </button>
                 </form>

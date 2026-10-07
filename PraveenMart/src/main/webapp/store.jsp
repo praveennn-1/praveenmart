@@ -27,33 +27,32 @@
     <title>PraveenMart - Premium Marketplace</title>
     <link rel="stylesheet" href="<%= request.getContextPath() %>/css/theme.css?v=5.8">
     <style>
-        /* Hero & Catalog Controls */
+        /* Hero & Catalog Controls (OpenCode Theme) */
         .store-hero {
             padding: 4.5rem 0 3rem;
             text-align: center;
-            background: var(--hero-glow), var(--bg);
-            border-bottom: 1px solid var(--divider);
+            background: var(--hero-glow), #000000;
+            border-bottom: 1px solid #1F1F1F;
         }
 
         .store-title {
             font-family: var(--font-heading);
-            font-size: clamp(2.2rem, 5vw, 3.8rem);
+            font-size: clamp(2.4rem, 5vw, 3.8rem);
             font-weight: 700;
-            letter-spacing: 0.01em;
-            text-transform: uppercase;
+            letter-spacing: -0.03em;
             line-height: 1.1;
-            color: var(--heading);
-            background: var(--heading-gradient);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #FFFFFF;
+            background: none;
+            -webkit-text-fill-color: initial;
             max-width: 900px;
-            margin: 0 auto 1.2rem;
+            margin: 0 auto 0.8rem;
         }
 
         .store-subtitle {
+            font-family: var(--font-mono);
             font-size: 15px;
-            color: var(--text);
+            color: #A1A1AA;
+            letter-spacing: -0.01em;
             max-width: 650px;
             margin: 0 auto 2.5rem;
             line-height: 1.6;
@@ -69,17 +68,18 @@
             display: flex;
             align-items: center;
             gap: 0.75rem;
-            background: var(--pill-inactive-bg);
-            border: 1px solid var(--pill-border);
-            border-radius: var(--radius-pill);
-            padding: 0.35rem 0.45rem 0.35rem 1.25rem;
+            background: #0C0C0C;
+            border: 1px solid #27272A;
+            border-radius: var(--radius-sm);
+            padding: 0.35rem 0.45rem 0.35rem 1rem;
             box-shadow: var(--shadow-soft);
-            transition: border-color 200ms ease, background-color 200ms ease;
+            transition: all 180ms ease;
         }
 
         .store-search-bar:focus-within {
-            border-color: rgba(207, 224, 232, 0.35);
-            background: #1c202a;
+            border-color: #FFFFFF;
+            background: #050505;
+            box-shadow: 0 0 0 1px #FFFFFF;
         }
 
         .store-search-bar input {
@@ -87,13 +87,13 @@
             background: transparent;
             border: none;
             outline: none;
-            color: #ffffff;
-            font-size: 0.95rem;
-            font-family: var(--font-body);
+            color: #FFFFFF;
+            font-size: 0.9rem;
+            font-family: var(--font-mono);
         }
 
         .store-search-bar input::placeholder {
-            color: rgba(184, 190, 199, 0.38);
+            color: #52525B;
             opacity: 1;
         }
 
@@ -102,39 +102,40 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.65rem;
+            gap: 0.5rem;
             flex-wrap: wrap;
             margin-bottom: 2rem;
         }
 
         .category-pill {
-            padding: 0.55rem 1.35rem;
-            border-radius: var(--radius-pill);
-            font-size: 0.88rem;
+            padding: 0.45rem 1.1rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.82rem;
+            font-family: var(--font-mono);
             font-weight: 500;
-            background: var(--pill-inactive-bg);
-            color: var(--pill-inactive-text) !important;
-            border: 1px solid var(--pill-border);
+            background: #0C0C0C;
+            color: #A1A1AA !important;
+            border: 1px solid #222222;
             text-decoration: none;
-            transition: all 200ms ease;
+            transition: all 180ms ease;
             display: inline-flex;
             align-items: center;
             gap: 0.35rem;
         }
 
         .category-pill:hover {
-            background: #20242e;
-            color: #ffffff !important;
-            border-color: rgba(255, 255, 255, 0.14);
+            background: #18181B;
+            color: #FFFFFF !important;
+            border-color: #52525B;
             transform: translateY(-1px);
         }
 
         .category-pill.active {
-            background: var(--pill-active-bg) !important;
-            color: var(--pill-active-text) !important;
-            border-color: #8FAFC2 !important;
-            font-weight: 600;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+            background: #FFFFFF !important;
+            color: #000000 !important;
+            border-color: #FFFFFF !important;
+            font-weight: 700;
+            box-shadow: 0 2px 10px rgba(255, 255, 255, 0.15) !important;
         }
 
         /* Catalog Main Grid Area */
@@ -201,105 +202,52 @@
             }
         }
 
-        /* Product Card: Brushed Silver Platinum Metal with Micro-Texture & Holographic Shine */
+        /* Product Card: OpenCode High Contrast Obsidian Theme */
         .product-card {
             position: relative;
             overflow: hidden;
-            border-radius: 20px;
-            padding: 0.95rem;
+            border-radius: 4px;
+            padding: 0.85rem;
             display: flex;
             flex-direction: column;
             height: 480px;
             width: 100%;
-            min-width: 0; /* Allows card to shrink within 4-column grid without pushing 4th card out */
+            min-width: 0;
             box-sizing: border-box;
-            background: #3B3A38 !important;
-            background-color: #3B3A38 !important;
+            background: #000000 !important;
+            background-color: #000000 !important;
             background-image: none !important;
-            border: 1px solid rgba(255, 255, 255, 0.12) !important;
-            box-shadow:
-                inset 0 1px 1px rgba(255, 255, 255, 0.12),
-                0 14px 34px rgba(0, 0, 0, 0.42);
-            transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1),
-                        box-shadow 260ms cubic-bezier(0.16, 1, 0.3, 1),
-                        border-color 260ms ease,
-                        background 260ms ease;
+            border: 1px solid #222222 !important;
+            box-shadow: none !important;
+            transition: transform 180ms ease,
+                        border-color 180ms ease,
+                        background-color 180ms ease;
             isolation: isolate;
         }
 
-        /* Continuous subtle metallic glint along the top border */
-        .product-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 10%;
-            right: 10%;
-            height: 1.5px;
-            background: linear-gradient(90deg, transparent, #ffffff, #cbd5e1, #ffffff, transparent);
-            pointer-events: none;
-            z-index: 5;
-            transition: all 300ms ease;
-            box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
-        }
-
-        /* Holographic Metallic Shining Effect */
+        .product-card::before,
         .product-card::after {
-            content: '';
-            position: absolute;
-            top: -60%;
-            left: -80%;
-            width: 250%;
-            height: 220%;
-            background: linear-gradient(
-                115deg,
-                transparent 15%,
-                rgba(255, 255, 255, 0.04) 34%,
-                rgba(226, 232, 240, 0.28) 44%,
-                rgba(255, 255, 255, 0.68) 50%,
-                rgba(203, 213, 225, 0.32) 54%,
-                rgba(255, 255, 255, 0.04) 66%,
-                transparent 85%
-            );
-            transform: translateX(-100%) rotate(25deg);
-            transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
-            pointer-events: none;
-            z-index: 20;
-            opacity: 0;
+            display: none !important;
         }
 
         .product-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(255, 255, 255, 0.28) !important;
-            background: #464542 !important;
-            background-color: #464542 !important;
+            transform: translateY(-2px);
+            border-color: #52525B !important;
+            background: #09090B !important;
+            background-color: #09090B !important;
             background-image: none !important;
-            box-shadow:
-                inset 0 1px 1px rgba(255, 255, 255, 0.22),
-                0 22px 46px rgba(0, 0, 0, 0.55),
-                0 0 24px rgba(200, 177, 150, 0.16) !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7) !important;
         }
 
-        .product-card:hover::before {
-            left: 2%;
-            right: 2%;
-            background: linear-gradient(90deg, transparent, #ffffff, #e2e8f0, #ffffff, transparent);
-            box-shadow: 0 0 12px rgba(255, 255, 255, 0.85);
-        }
-
-        .product-card:hover::after {
-            opacity: 1;
-            transform: translateX(100%) rotate(25deg);
-        }
-
-        /* Image area: Exactly 195px height and 100% width on all cards */
+        /* Image area */
         .product-image-box {
             height: 195px;
             width: 100%;
-            background-color: #08090b;
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            background-color: #050505;
+            border: 1px solid #18181B;
             position: relative;
             overflow: hidden;
-            border-radius: 16px;
+            border-radius: 4px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -317,13 +265,13 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 16px;
+            border-radius: 4px;
             display: block;
-            transition: transform 0.45s ease;
+            transition: transform 0.35s ease;
         }
 
         .product-card:hover .product-image-box img {
-            transform: scale(1.05);
+            transform: scale(1.03);
         }
 
         .product-content {
@@ -351,16 +299,17 @@
         .card-category-pill {
             display: inline-flex;
             align-items: center;
-            padding: 0.2rem 0.55rem;
-            border-radius: 9999px;
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.14);
-            font-size: 11px;
-            font-weight: 600;
-            color: #E2E8F0;
-            letter-spacing: 0.02em;
-            text-transform: capitalize;
-            max-width: 105px;
+            padding: 2px 7px;
+            border-radius: 4px;
+            background: #000000;
+            border: 1px solid #27272A;
+            font-family: var(--font-mono, 'JetBrains Mono', monospace);
+            font-size: 10px;
+            font-weight: 500;
+            color: #A1A1AA;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+            max-width: 110px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -370,8 +319,9 @@
             display: inline-flex;
             align-items: center;
             gap: 0.25rem;
-            font-size: 12px;
-            font-weight: 700;
+            font-family: var(--font-mono, 'JetBrains Mono', monospace);
+            font-size: 11px;
+            font-weight: 600;
             color: #FFFFFF;
             line-height: 1;
             white-space: nowrap;
@@ -379,22 +329,22 @@
         }
 
         .card-rating-star {
-            color: #FFC107;
-            font-size: 0.85rem;
+            color: #FFFFFF;
+            font-size: 0.8rem;
             line-height: 1;
         }
 
         .card-rating-count {
-            font-size: 11px;
-            color: #8C96A5;
+            font-size: 10px;
+            color: #71717A;
             font-weight: 400;
         }
 
         /* 2. Title: bold, white, single-line truncated */
         .product-card-title {
-            font-family: var(--font-heading);
-            font-size: 17px;
-            font-weight: 700;
+            font-family: var(--font-heading, 'Inter', sans-serif);
+            font-size: 15px;
+            font-weight: 600;
             color: #FFFFFF;
             height: 24px;
             line-height: 24px;
@@ -406,22 +356,23 @@
             display: block;
             flex-shrink: 0;
             min-width: 0;
-            transition: color 200ms ease;
+            letter-spacing: -0.01em;
+            transition: color 150ms ease;
         }
 
         .product-card-title:hover {
-            color: var(--heading);
+            color: #D4D4D8;
         }
 
         /* 3. Price & Delivery */
         .product-card-price {
-            font-family: var(--font-heading);
-            font-size: 23px;
+            font-family: var(--font-mono, 'JetBrains Mono', monospace);
+            font-size: 20px;
             font-weight: 700;
             color: #FFFFFF;
             height: 26px;
             line-height: 26px;
-            letter-spacing: -0.01em;
+            letter-spacing: -0.02em;
             margin-bottom: 0.15rem;
             flex-shrink: 0;
             min-width: 0;
@@ -431,7 +382,8 @@
             display: flex;
             align-items: center;
             gap: 0.35rem;
-            font-size: 11px;
+            font-family: var(--font-mono, 'JetBrains Mono', monospace);
+            font-size: 10.5px;
             height: 18px;
             line-height: 18px;
             white-space: nowrap;
@@ -443,13 +395,13 @@
         }
 
         .product-mrp {
-            color: #7C8390;
+            color: #71717A;
             white-space: nowrap;
         }
 
         .product-discount {
-            color: #C8B196;
-            font-weight: 700;
+            color: #A1A1AA;
+            font-weight: 600;
             white-space: nowrap;
         }
 
@@ -457,8 +409,8 @@
             display: inline-flex;
             align-items: center;
             gap: 0.2rem;
-            color: #C8B196;
-            font-size: 11px;
+            color: #71717A;
+            font-size: 10.5px;
             font-weight: 500;
             white-space: nowrap;
         }
@@ -471,9 +423,12 @@
         }
 
         .card-options-label {
-            font-size: 12px;
-            font-weight: 600;
-            color: #FFFFFF;
+            font-family: var(--font-mono, 'JetBrains Mono', monospace);
+            font-size: 10.5px;
+            font-weight: 500;
+            color: #71717A;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
             height: 16px;
             line-height: 16px;
             margin-bottom: 0.35rem;
@@ -484,7 +439,7 @@
             display: flex;
             align-items: center;
             gap: 0.4rem;
-            height: 36px;
+            height: 34px;
             width: 100%;
             min-width: 0;
             box-sizing: border-box;
@@ -493,33 +448,36 @@
         .card-option-pill {
             flex: 1;
             min-width: 0;
-            height: 36px;
+            height: 34px;
             padding: 0;
-            border-radius: 8px;
-            background-color: #161922;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            color: #FFFFFF;
-            font-size: 12px;
-            font-weight: 700;
+            border-radius: 4px;
+            background-color: #000000;
+            border: 1px solid #27272A;
+            color: #A1A1AA;
+            font-family: var(--font-mono, 'JetBrains Mono', monospace);
+            font-size: 11px;
+            font-weight: 600;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 180ms ease;
+            transition: all 150ms ease;
             user-select: none;
             box-sizing: border-box;
         }
 
         .card-option-pill:hover {
-            border-color: rgba(255, 255, 255, 0.35);
-            background-color: #1E2330;
+            border-color: #3F3F46;
+            background-color: #0A0A0A;
+            color: #FFFFFF;
         }
 
         .card-option-pill.active {
-            background: linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 45%, #94A3B8 100%) !important;
-            color: #0F172A !important;
-            border-color: #F1F5F9 !important;
-            box-shadow: 0 2px 8px rgba(255, 255, 255, 0.25);
+            background: #FFFFFF !important;
+            color: #000000 !important;
+            border-color: #FFFFFF !important;
+            font-weight: 700;
+            box-shadow: none !important;
         }
 
         /* 5. Bottom Action Row: Wide Buy Now Button + Cart Icon Button */
@@ -528,7 +486,7 @@
             align-items: center;
             gap: 0.5rem;
             width: 100%;
-            height: 44px;
+            height: 40px;
             margin-top: auto;
             flex-shrink: 0;
             min-width: 0;
@@ -538,63 +496,67 @@
         .btn-card-buy-now {
             flex: 1;
             min-width: 0;
-            height: 44px;
-            background: linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 35%, #CBD5E1 70%, #94A3B8 100%) !important;
-            color: #0F172A !important;
-            font-weight: 700;
-            border-radius: 9999px;
+            height: 40px;
+            background: #FFFFFF !important;
+            color: #000000 !important;
+            font-family: var(--font-mono, 'JetBrains Mono', monospace);
+            font-weight: 600;
+            border-radius: 4px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
+            font-size: 13px;
             cursor: pointer;
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            transition: background 200ms ease, transform 150ms ease, box-shadow 200ms ease;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35), inset 0 1px 1px #ffffff !important;
-            letter-spacing: 0.01em;
+            border: 1px solid #FFFFFF;
+            transition: background 150ms ease, opacity 150ms ease;
+            box-shadow: none !important;
+            letter-spacing: -0.01em;
             text-decoration: none;
             white-space: nowrap;
         }
 
         .btn-card-buy-now:hover:not(:disabled) {
-            background: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 45%, #E2E8F0 100%) !important;
-            transform: translateY(-1px);
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45), 0 0 14px rgba(226, 232, 240, 0.4) !important;
+            background: #E4E4E7 !important;
+            border-color: #E4E4E7 !important;
+            transform: none;
+            box-shadow: none !important;
         }
 
         .btn-card-buy-now:active:not(:disabled) {
-            transform: translateY(0);
+            opacity: 0.9;
         }
 
         .btn-card-cart-icon {
-            width: 44px;
-            height: 44px;
-            background: linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 35%, #CBD5E1 70%, #94A3B8 100%) !important;
-            color: #0F172A !important;
-            border-radius: 14px;
+            width: 40px;
+            height: 40px;
+            background: #000000 !important;
+            color: #FFFFFF !important;
+            border-radius: 4px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            transition: background 200ms ease, transform 150ms ease, box-shadow 200ms ease;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35), inset 0 1px 1px #ffffff !important;
+            border: 1px solid #27272A;
+            transition: background 150ms ease, border-color 150ms ease;
+            box-shadow: none !important;
             flex-shrink: 0;
             padding: 0;
         }
 
         .btn-card-cart-icon:hover:not(:disabled) {
-            background: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 45%, #E2E8F0 100%) !important;
-            transform: translateY(-1px);
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45), 0 0 14px rgba(226, 232, 240, 0.4) !important;
+            background: #111111 !important;
+            border-color: #3F3F46 !important;
+            color: #FFFFFF !important;
+            transform: none;
+            box-shadow: none !important;
         }
 
         .btn-card-cart-icon:active:not(:disabled) {
-            transform: translateY(0);
+            opacity: 0.9;
         }
 
         .btn-card-cart-icon .material-symbols-outlined {
-            font-size: 1.25rem;
+            font-size: 1.15rem;
         }
 
         /* Floating Toast for AJAX feedback */
@@ -602,15 +564,17 @@
             position: fixed;
             bottom: 2rem;
             right: 2rem;
-            background: #1C2631;
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: #09090B;
+            border: 1px solid #27272A;
             color: #FFFFFF;
-            padding: 0.9rem 1.4rem;
-            border-radius: 14px;
+            padding: 0.75rem 1.25rem;
+            border-radius: 4px;
+            font-family: var(--font-mono, 'JetBrains Mono', monospace);
+            font-size: 13px;
             display: flex;
             align-items: center;
             gap: 0.75rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
             z-index: 9999;
             transform: translateY(100px);
             opacity: 0;
@@ -655,7 +619,7 @@
                 <% if (!"all".equalsIgnoreCase(selectedCategory)) { %>
                     <input type="hidden" name="category" value="<%= selectedCategory %>">
                 <% } %>
-                <button type="submit" class="btn btn-primary btn-pill" style="padding: 0.45rem 1.15rem; font-size: 0.82rem;">
+                <button type="submit" class="btn btn-primary" style="padding: 0.45rem 1.15rem; font-size: 0.82rem; border-radius: 4px;">
                     <span>Find</span>
                 </button>
             </form>
@@ -750,19 +714,19 @@
                                             pImg = request.getContextPath() + pImg;
                                         }
                                 %>
-                                    <img src="<%= pImg %>" alt="<%= p.getName() %>" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1544816155-12df9643f363?w=600&auto=format&fit=crop&q=80'">
+                                    <img src="<%= pImg %>" alt="<%= p.getName() %>" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22600%22%20height%3D%22600%22%20viewBox%3D%220%200%20600%20600%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23080808%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20fill%3D%22%2371717A%22%20font-family%3D%22monospace%22%20font-size%3D%2218%22%20text-anchor%3D%22middle%22%20dominant-baseline%3D%22middle%22%3E%5B%20IMAGE%20UNAVAILABLE%20%5D%3C%2Ftext%3E%3C%2Fsvg%3E'">
                                 <% } else { %>
-                                    <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?w=600&auto=format&fit=crop&q=80" alt="Product Image">
+                                    <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22600%22%20height%3D%22600%22%20viewBox%3D%220%200%20600%20600%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23080808%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20fill%3D%22%2371717A%22%20font-family%3D%22monospace%22%20font-size%3D%2218%22%20text-anchor%3D%22middle%22%20dominant-baseline%3D%22middle%22%3E%5B%20IMAGE%20UNAVAILABLE%20%5D%3C%2Ftext%3E%3C%2Fsvg%3E" alt="Product Image">
                                 <% } %>
                             </a>
 
-                            <div style="position: absolute; top: 12px; right: 12px; z-index: 5;">
+                            <div style="position: absolute; top: 10px; right: 10px; z-index: 5;">
                                 <% if (p.getStockQty() > 10) { %>
-                                    <span class="badge-tag badge-in-stock" style="padding: 0.35rem 0.75rem; font-size: 0.72rem; font-weight: 700; border-radius: var(--radius-pill); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); background: rgba(10, 14, 20, 0.92); border: 1px solid rgba(200, 177, 150, 0.45); color: #C8B196; box-shadow: none; display: inline-flex; align-items: center; gap: 5px;"><span style="width: 5px; height: 5px; border-radius: 50%; background: #C8B196; box-shadow: 0 0 6px #C8B196; flex-shrink: 0;"></span>In Stock</span>
+                                    <span class="badge-tag" style="padding: 2px 8px; font-family: var(--font-mono); font-size: 0.68rem; font-weight: 600; border-radius: 4px; background: #000000; border: 1px solid #27272A; color: #FFFFFF; display: inline-flex; align-items: center; gap: 4px;"><span style="width: 4px; height: 4px; border-radius: 50%; background: #22C55E; flex-shrink: 0;"></span>In Stock</span>
                                 <% } else if (p.getStockQty() > 0) { %>
-                                    <span class="badge-tag badge-low-stock" style="padding: 0.35rem 0.75rem; font-size: 0.72rem; font-weight: 700; border-radius: var(--radius-pill); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); background: rgba(10, 14, 20, 0.92); border: 1px solid rgba(251, 191, 36, 0.45); color: #fbbf24; box-shadow: none; display: inline-flex; align-items: center; gap: 5px;"><span style="width: 5px; height: 5px; border-radius: 50%; background: #fbbf24; box-shadow: 0 0 6px #fbbf24; flex-shrink: 0;"></span>Only <%= p.getStockQty() %> Left</span>
+                                    <span class="badge-tag" style="padding: 2px 8px; font-family: var(--font-mono); font-size: 0.68rem; font-weight: 600; border-radius: 4px; background: #000000; border: 1px solid #27272A; color: #F59E0B; display: inline-flex; align-items: center; gap: 4px;"><span style="width: 4px; height: 4px; border-radius: 50%; background: #F59E0B; flex-shrink: 0;"></span>Low Stock (<%= p.getStockQty() %>)</span>
                                 <% } else { %>
-                                    <span class="badge-tag badge-out-stock" style="padding: 0.35rem 0.75rem; font-size: 0.72rem; font-weight: 700; border-radius: var(--radius-pill); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); background: rgba(10, 14, 20, 0.92); border: 1px solid rgba(248, 113, 113, 0.45); color: #f87171; box-shadow: none; display: inline-flex; align-items: center; gap: 5px;"><span style="width: 5px; height: 5px; border-radius: 50%; background: #f87171; box-shadow: 0 0 6px #f87171; flex-shrink: 0;"></span>Sold Out</span>
+                                    <span class="badge-tag" style="padding: 2px 8px; font-family: var(--font-mono); font-size: 0.68rem; font-weight: 600; border-radius: 4px; background: #000000; border: 1px solid #27272A; color: #71717A; display: inline-flex; align-items: center; gap: 4px;">Sold Out</span>
                                 <% } %>
                             </div>
                         </div>
@@ -864,7 +828,7 @@
                     <span class="material-symbols-outlined" style="font-size: 4rem; color: var(--color-on-surface-muted); margin-bottom: 1rem;">search_off</span>
                     <h3 style="margin-bottom: 0.5rem; color: #ffffff;">No products found</h3>
                     <p style="color: var(--color-on-surface-variant); margin-bottom: 1.5rem;">Try adjusting your search query or selecting a different category pill.</p>
-                    <a href="<%= request.getContextPath() %>/products" class="btn btn-primary btn-pill">Clear All Filters</a>
+                    <a href="<%= request.getContextPath() %>/products" class="btn btn-primary" style="border-radius: 4px;">Clear All Filters</a>
                 </div>
             <% } %>
         </div>

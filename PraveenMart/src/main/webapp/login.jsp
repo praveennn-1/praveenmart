@@ -15,8 +15,8 @@
             margin: 0;
             padding: 0;
             min-height: 100vh;
-            background-color: #08090C;
-            font-family: var(--font-body, 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif);
+            background-color: #000000;
+            font-family: var(--font-body);
             color: #E2E8F0;
             overflow-x: hidden;
         }
@@ -37,7 +37,7 @@
             justify-content: center;
             align-items: center;
             padding: 3.5rem 3rem;
-            background-color: #08090C;
+            background-color: #000000;
             position: relative;
             z-index: 10;
         }
@@ -57,12 +57,11 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            font-family: var(--font-heading, 'Manrope', sans-serif);
-            font-size: 1.45rem;
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
             font-weight: 700;
-            color: var(--logo, #CFE0E8);
-            letter-spacing: 0.02em;
-            text-transform: uppercase;
+            color: #FFFFFF;
+            letter-spacing: -0.02em;
             text-decoration: none;
             transition: color 200ms ease;
         }
@@ -131,39 +130,39 @@
         input[type="text"].form-input-field,
         input[type="email"].form-input-field {
             width: 100%;
-            height: 48px;
-            background: #111319;
-            border: 1px solid rgba(255, 255, 255, 0.10);
-            border-radius: 10px;
+            height: 44px;
+            background: #050505;
+            border: 1px solid #27272A;
+            border-radius: var(--radius-sm, 6px);
             padding: 0 1rem 0 2.85rem !important;
             color: #FFFFFF;
-            font-size: 0.92rem;
-            font-family: inherit;
+            font-size: 0.88rem;
+            font-family: var(--font-mono, monospace);
             outline: none;
             box-sizing: border-box;
-            transition: border-color 200ms ease, box-shadow 200ms ease, background 200ms ease;
+            transition: all 180ms ease;
         }
 
         input[type="password"].form-input-field {
             width: 100%;
-            height: 48px;
-            background: #111319;
-            border: 1px solid rgba(255, 255, 255, 0.10);
-            border-radius: 10px;
+            height: 44px;
+            background: #050505;
+            border: 1px solid #27272A;
+            border-radius: var(--radius-sm, 6px);
             padding: 0 2.85rem 0 2.85rem !important;
             color: #FFFFFF;
-            font-size: 0.92rem;
-            font-family: inherit;
+            font-size: 0.88rem;
+            font-family: var(--font-mono, monospace);
             outline: none;
             box-sizing: border-box;
-            transition: border-color 200ms ease, box-shadow 200ms ease, background 200ms ease;
+            transition: all 180ms ease;
             opacity: 1;
         }
 
         .form-input-field:focus {
-            border-color: rgba(200, 177, 150, 0.65);
-            background: #13161F;
-            box-shadow: 0 0 0 3px rgba(200, 177, 150, 0.12);
+            border-color: #FFFFFF !important;
+            background: #0A0A0A !important;
+            box-shadow: 0 0 0 1px #FFFFFF !important;
         }
 
         .form-input-field::placeholder {
@@ -268,46 +267,44 @@
             height: 15px;
         }
 
-        /* Submit Button: Ice Blue Gradient */
+        /* Submit Button: OpenCode High-Contrast White */
         .auth-submit-btn {
             width: 100%;
-            height: 48px;
-            background: var(--btn-bg, linear-gradient(135deg, #D3E2EA 0%, #8FAFC2 100%));
-            border: none;
-            border-radius: var(--radius-pill, 9999px);
-            color: var(--btn-text, #0B0C12) !important;
-            font-family: inherit;
-            font-size: 0.95rem;
-            font-weight: 700;
+            height: 44px;
+            background: #FFFFFF !important;
+            border: 1px solid #FFFFFF !important;
+            border-radius: var(--radius-sm, 6px);
+            color: #000000 !important;
+            font-family: var(--font-mono, monospace);
+            font-size: 0.9rem;
+            font-weight: 600;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
-            transition: all 200ms cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 4px 14px rgba(143, 175, 194, 0.30);
+            transition: all 180ms ease;
+            box-shadow: none !important;
         }
 
         .auth-submit-btn span {
-            color: var(--btn-text, #0B0C12) !important;
+            color: #000000 !important;
         }
 
         .auth-submit-btn .material-symbols-outlined {
-            color: var(--btn-text, #0B0C12) !important;
+            color: #000000 !important;
             font-size: 1.15rem;
             font-weight: 700;
         }
 
         .auth-submit-btn:hover {
-            background: var(--btn-hover, linear-gradient(135deg, #E2EDF4 0%, #A2C1D2 100%));
-            color: #0B0C12 !important;
+            background: #E4E4E7 !important;
+            border-color: #E4E4E7 !important;
             transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(143, 175, 194, 0.45);
         }
 
         .auth-submit-btn:active {
             transform: translateY(0);
-            box-shadow: 0 2px 8px rgba(143, 175, 194, 0.25);
         }
 
         /* Footer Link */
@@ -431,7 +428,7 @@
         <div class="auth-form-inner">
             <div class="auth-brand-wrapper">
                 <a href="<%= request.getContextPath() %>/" class="auth-brand">
-                    <span>PraveenMart</span>
+                    <span>PRAVEENMART</span>
                 </a>
             </div>
 

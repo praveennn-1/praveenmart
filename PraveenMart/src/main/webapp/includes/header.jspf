@@ -18,7 +18,7 @@
             <div class="nav-left">
                 <!-- Brand Logo (Pure Typography Wordmark) -->
                 <a href="<%= (sessionUser != null && "ADMIN".equalsIgnoreCase(sessionUser.getRole())) ? request.getContextPath() + "/admin/dashboard" : request.getContextPath() + "/products" %>" class="brand-logo">
-                    <span>PraveenMart</span>
+                    <span>PRAVEENMART</span>
                 </a>
             </div>
 

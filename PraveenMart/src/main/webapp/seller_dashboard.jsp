@@ -40,6 +40,10 @@
     <title>Seller Hub - PraveenMart</title>
     <link rel="stylesheet" href="<%= request.getContextPath() %>/css/theme.css?v=5.6">
     <style>
+        body {
+            background-color: #000000;
+        }
+
         .seller-main {
             padding: 3rem 0 5rem 0;
         }
@@ -47,7 +51,7 @@
         .seller-header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
             margin-bottom: 2.5rem;
             flex-wrap: wrap;
             gap: 1rem;
@@ -56,86 +60,84 @@
         /* Stats Grid */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 2.5rem;
         }
 
         .stat-card {
-            background-color: var(--surface);
-            border: 1px solid var(--surface-border);
-            border-radius: 16px;
-            padding: 1.75rem;
-            box-shadow: var(--shadow-soft);
+            background-color: #050505;
+            border: 1px solid #222222;
+            border-radius: 6px;
+            padding: 1.5rem;
         }
 
         .stat-label {
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: var(--muted);
+            font-family: var(--font-mono, 'JetBrains Mono', monospace);
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #71717A;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 0.5rem;
+            letter-spacing: 0.04em;
+            margin-bottom: 0.4rem;
         }
 
         .stat-val {
-            font-family: var(--font-heading);
-            font-size: 2.2rem;
+            font-family: var(--font-mono, 'JetBrains Mono', monospace);
+            font-size: 1.8rem;
             font-weight: 700;
-            color: var(--price);
+            color: #FFFFFF;
         }
 
         /* Tabs */
         .hub-tabs {
             display: flex;
-            gap: 0.75rem;
+            gap: 0.5rem;
             margin-bottom: 2rem;
-            border-bottom: 1px solid var(--divider);
+            border-bottom: 1px solid #1E1E22;
             padding-bottom: 0.75rem;
             flex-wrap: wrap;
         }
 
         .hub-tab-btn {
-            background: var(--pill-inactive-bg);
-            border: 1px solid var(--pill-border);
-            font-size: 0.92rem;
+            background: #000000;
+            border: 1px solid #27272A;
+            font-family: var(--font-mono, 'JetBrains Mono', monospace);
+            font-size: 0.82rem;
             font-weight: 500;
-            padding: 0.55rem 1.35rem;
-            color: var(--nav-link);
+            padding: 0.5rem 1.1rem;
+            color: #A1A1AA;
             cursor: pointer;
-            border-radius: var(--radius-pill);
-            transition: all 200ms ease;
+            border-radius: 4px;
+            transition: all 150ms ease;
         }
 
         .hub-tab-btn:hover {
-            background-color: #20242e;
-            border-color: rgba(255, 255, 255, 0.14);
+            border-color: #3F3F46;
             color: #FFFFFF;
         }
 
         .hub-tab-btn.active {
-            background: var(--pill-active-bg) !important;
-            color: var(--pill-active-text) !important;
-            border-color: #8FAFC2 !important;
+            background: #FFFFFF !important;
+            color: #000000 !important;
+            border-color: #FFFFFF !important;
             font-weight: 600;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25) !important;
         }
 
         .seller-card {
-            background-color: var(--surface);
-            border: 1px solid var(--surface-border);
-            border-radius: 16px;
-            padding: 2.2rem;
-            margin-bottom: 3rem;
-            box-shadow: var(--shadow-soft);
+            background-color: #050505;
+            border: 1px solid #222222;
+            border-radius: 6px;
+            padding: 1.75rem;
+            margin-bottom: 2.5rem;
         }
 
         .card-heading {
-            font-family: var(--font-heading);
-            font-size: 1.4rem;
+            font-family: var(--font-heading, 'Inter', sans-serif);
+            font-size: 1.2rem;
             font-weight: 700;
-            text-transform: uppercase;
-            color: var(--heading);
+            letter-spacing: -0.02em;
+            color: #FFFFFF;
             margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
@@ -144,8 +146,8 @@
 
         .form-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.25rem;
         }
 
         .form-col-full {
@@ -160,16 +162,17 @@
         input[type="number"].input-box,
         input[type="url"].input-box {
             width: 100%;
-            padding: 0.85rem 1rem;
-            border-radius: var(--radius-md);
-            border: 1px solid var(--color-outline-variant);
-            background-color: var(--color-surface-container-low);
-            font-family: var(--font-body);
-            font-size: 0.95rem;
-            color: var(--color-on-surface);
+            height: 42px;
+            box-sizing: border-box;
+            padding: 0 0.85rem;
+            border-radius: 4px;
+            border: 1px solid #27272A;
+            background-color: #000000;
+            font-family: var(--font-mono, 'JetBrains Mono', monospace);
+            font-size: 0.88rem;
+            color: #FFFFFF;
             outline: none;
-            transition: all 0.2s ease;
-            opacity: 1;
+            transition: border-color 150ms ease;
         }
 
         .input-box:focus,
@@ -179,57 +182,58 @@
         input[type="text"].input-box:focus,
         input[type="number"].input-box:focus,
         input[type="url"].input-box:focus {
-            border-color: rgba(255, 255, 255, 0.35);
-            background-color: rgba(255, 255, 255, 0.08);
-            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.06);
-            color: #ffffff;
+            border-color: #FFFFFF;
+            background-color: #0A0A0A;
         }
 
         select.input-box option {
-            background-color: var(--color-surface-container-low);
-            color: var(--color-on-surface);
+            background-color: #000000;
+            color: #FFFFFF;
         }
 
         .input-box::placeholder {
-            color: rgba(184, 190, 199, 0.38);
-            opacity: 1;
+            color: #52525B;
         }
 
         textarea.input-box {
             resize: vertical;
-            min-height: 90px;
+            min-height: 80px;
+            height: auto;
+            padding: 0.75rem 0.85rem;
         }
 
         /* Table */
         .table-wrap {
             overflow-x: auto;
-            background-color: var(--color-surface-card);
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--color-outline-variant);
+            background-color: #050505;
+            border-radius: 6px;
+            border: 1px solid #222222;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
             text-align: left;
-            font-size: 0.92rem;
+            font-size: 0.88rem;
         }
 
         th {
-            background-color: var(--color-surface-container-low);
-            color: var(--color-on-surface-variant);
-            font-size: 0.8rem;
-            font-weight: 700;
+            background-color: #0A0A0A;
+            color: #71717A;
+            font-family: var(--font-mono, 'JetBrains Mono', monospace);
+            font-size: 0.75rem;
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            padding: 1.1rem 1.25rem;
-            border-bottom: 1px solid var(--color-outline-variant);
+            letter-spacing: 0.04em;
+            padding: 0.95rem 1.15rem;
+            border-bottom: 1px solid #1E1E22;
         }
 
         td {
-            padding: 1.1rem 1.25rem;
-            border-bottom: 1px solid var(--color-outline-variant);
+            padding: 0.95rem 1.15rem;
+            border-bottom: 1px solid #1E1E22;
             vertical-align: middle;
+            color: #E4E4E7;
         }
 
         tr:last-child td {
@@ -237,16 +241,16 @@
         }
 
         tr:hover td {
-            background-color: var(--color-surface-container-low);
+            background-color: #0A0A0A;
         }
 
         .tbl-prod-img {
-            width: 52px;
-            height: 52px;
-            border-radius: var(--radius-sm);
+            width: 44px;
+            height: 44px;
+            border-radius: 4px;
             object-fit: cover;
-            background-color: var(--color-surface-container);
-            border: 1px solid var(--color-outline-variant);
+            background-color: #000000;
+            border: 1px solid #27272A;
         }
 
         /* Modal Styles */
@@ -258,8 +262,8 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(4px);
+            background-color: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(2px);
             align-items: center;
             justify-content: center;
         }
@@ -269,16 +273,15 @@
         }
 
         .modal-content {
-            background-color: #14161f;
-            border-radius: var(--radius-xl);
-            padding: 2.5rem;
+            background-color: #050505;
+            border-radius: 6px;
+            padding: 2rem;
             width: 100%;
-            max-width: 620px;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
-            border: 1px solid var(--color-outline);
+            max-width: 600px;
+            border: 1px solid #222222;
             max-height: 90vh;
             overflow-y: auto;
-            color: #ffffff;
+            color: #FFFFFF;
         }
     </style>
 </head>

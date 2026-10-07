@@ -28,33 +28,35 @@
     <link rel="stylesheet" href="<%= request.getContextPath() %>/css/theme.css?v=5.8">
     <style>
         body {
-            background-color: var(--bg);
+            background-color: #000000;
         }
 
         .checkout-wrapper {
-            padding: 3.5rem 0 6rem;
+            padding: 3rem 0 6rem;
             position: relative;
         }
 
         .checkout-page-title {
-            font-family: var(--font-heading);
-            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-family: var(--font-heading, 'Inter', sans-serif);
+            font-size: 2.2rem;
             font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.01em;
-            line-height: 1.1;
-            color: var(--heading);
-            background: var(--heading-gradient);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 2rem;
+            letter-spacing: -0.03em;
+            line-height: 1.15;
+            color: #FFFFFF;
+            margin-bottom: 0.5rem;
+        }
+
+        .checkout-page-subtitle {
+            font-family: var(--font-mono, 'JetBrains Mono', monospace);
+            font-size: 0.85rem;
+            color: #888888;
+            margin-bottom: 2.5rem;
         }
 
         .checkout-layout {
             display: grid;
-            grid-template-columns: 1fr 390px;
-            gap: 2.5rem;
+            grid-template-columns: 1fr 380px;
+            gap: 2rem;
             align-items: start;
         }
 
@@ -65,114 +67,111 @@
         }
 
         .checkout-section {
-            background-color: var(--surface);
-            border: 1px solid var(--surface-border);
-            border-radius: 16px;
-            padding: 2.2rem;
-            margin-bottom: 2rem;
-            box-shadow: var(--shadow-soft);
+            background-color: #050505;
+            border: 1px solid #222222;
+            border-radius: 6px;
+            padding: 1.75rem;
+            margin-bottom: 1.5rem;
         }
 
         .checkout-section-title {
-            font-family: var(--font-heading);
-            font-size: 1.25rem;
+            font-family: var(--font-heading, 'Inter', sans-serif);
+            font-size: 1.15rem;
             font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.01em;
+            letter-spacing: -0.02em;
             line-height: 1.1;
-            margin-bottom: 1.75rem;
+            margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
             gap: 0.65rem;
-            color: var(--heading);
+            color: #FFFFFF;
             padding-bottom: 0.75rem;
-            border-bottom: 1px solid var(--divider);
+            border-bottom: 1px solid #1E1E22;
         }
 
         .checkout-input {
             width: 100%;
-            background: var(--color-surface-container-low);
-            border: 1px solid var(--color-outline-variant);
-            border-radius: var(--radius-md);
-            padding: 0.85rem 1rem;
-            color: var(--color-on-surface);
-            font-family: var(--font-body);
-            font-size: 14px;
+            height: 42px;
+            background: #000000;
+            border: 1px solid #27272A;
+            border-radius: 4px;
+            padding: 0 0.85rem;
+            color: #FFFFFF;
+            font-family: var(--font-mono, 'JetBrains Mono', monospace);
+            font-size: 0.88rem;
             outline: none;
-            transition: all 200ms ease;
-            opacity: 1;
+            transition: border-color 150ms ease, background 150ms ease;
+            box-sizing: border-box;
         }
 
         .checkout-input:focus {
-            border-color: rgba(255, 255, 255, 0.35);
-            background: rgba(255, 255, 255, 0.08);
-            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.06);
-            color: #ffffff;
+            border-color: #FFFFFF;
+            background: #0A0A0A;
         }
 
         .checkout-input::placeholder {
-            color: rgba(184, 190, 199, 0.38);
-            opacity: 1;
+            color: #52525B;
         }
 
         /* Payment Methods */
         .payment-method-card {
-            border: 1px solid var(--surface-border);
-            border-radius: 12px;
-            padding: 1.1rem 1.35rem;
-            margin-bottom: 0.9rem;
+            border: 1px solid #27272A;
+            border-radius: 4px;
+            padding: 0.95rem 1.15rem;
+            margin-bottom: 0.75rem;
             cursor: pointer;
-            transition: all 200ms ease;
+            transition: all 150ms ease;
             display: flex;
             align-items: center;
-            gap: 1rem;
-            background-color: var(--pill-inactive-bg);
+            gap: 0.85rem;
+            background-color: #000000;
             user-select: none;
         }
 
         .payment-method-card:hover {
-            background-color: #1e222d;
-            border-color: rgba(255, 255, 255, 0.14);
-            transform: translateY(-1px);
+            background-color: #0A0A0A;
+            border-color: #3F3F46;
         }
 
         .payment-method-card input[type="radio"] {
-            accent-color: var(--btn-bg);
-            width: 18px;
-            height: 18px;
+            accent-color: #FFFFFF;
+            width: 16px;
+            height: 16px;
             cursor: pointer;
         }
 
         .payment-method-card:has(input[type="radio"]:checked) {
-            border-color: var(--btn-bg);
-            background: #1c202a;
-            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
+            border-color: #FFFFFF;
+            background: #0C0C0C;
         }
 
         .payment-method-label {
             flex: 1;
-            font-size: 14px;
-            color: #ffffff;
+            font-family: var(--font-mono, 'JetBrains Mono', monospace);
+            font-size: 0.85rem;
+            color: #FFFFFF;
             cursor: pointer;
+        }
+
+        .payment-method-label span {
+            color: #71717A;
+            font-size: 0.78rem;
         }
 
         /* Summary Card */
         .summary-card {
-            background-color: var(--surface);
-            border: 1px solid var(--surface-border);
-            border-radius: 16px;
-            padding: 2.2rem;
-            box-shadow: var(--shadow-soft);
+            background-color: #050505;
+            border: 1px solid #222222;
+            border-radius: 6px;
+            padding: 1.75rem;
         }
 
         .summary-card-title {
-            font-family: var(--font-heading);
-            font-size: 1.25rem;
+            font-family: var(--font-heading, 'Inter', sans-serif);
+            font-size: 1.15rem;
             font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.01em;
-            line-height: 1.1;
-            color: var(--heading);
+            letter-spacing: -0.02em;
+            color: #FFFFFF;
             margin-bottom: 1.5rem;
         }
 
@@ -180,28 +179,29 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 0.9rem;
-            font-size: 14px;
-            padding-bottom: 0.8rem;
-            border-bottom: 1px solid var(--divider);
+            margin-bottom: 0.75rem;
+            font-family: var(--font-mono, 'JetBrains Mono', monospace);
+            font-size: 0.82rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid #1E1E22;
         }
 
         .summary-calc-row {
             display: flex;
             justify-content: space-between;
             margin-bottom: 0.75rem;
-            font-size: 14px;
-            color: var(--text);
+            font-family: var(--font-mono, 'JetBrains Mono', monospace);
+            font-size: 0.82rem;
+            color: #A1A1AA;
         }
 
         .summary-calc-row.total {
-            font-family: var(--font-heading);
-            font-size: 1.35rem;
+            font-size: 1.15rem;
             font-weight: 700;
-            color: var(--price);
-            border-top: 1px solid var(--divider);
-            padding-top: 1.25rem;
-            margin-top: 1.25rem;
+            color: #FFFFFF;
+            border-top: 1px solid #1E1E22;
+            padding-top: 1rem;
+            margin-top: 1rem;
         }
     </style>
 </head>
@@ -312,19 +312,19 @@
                     <% } %>
                 </div>
 
-                <div style="border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 1.2rem;">
+                <div style="border-top: 1px solid #1E1E22; padding-top: 1.2rem;">
                     <div class="summary-calc-row">
                         <span>Subtotal</span>
-                        <span style="font-weight: 700; color: #ffffff;"><%= currencyFormat.format(subtotal) %></span>
+                        <span style="font-weight: 700; color: #FFFFFF;"><%= currencyFormat.format(subtotal) %></span>
                     </div>
 
                     <div class="summary-calc-row">
                         <span>Shipping</span>
                         <span style="font-weight: 700;">
                             <% if (shipping.compareTo(BigDecimal.ZERO) == 0) { %>
-                                <span style="color: #C8B196;">FREE</span>
+                                <span style="color: #A1A1AA;">FREE</span>
                             <% } else { %>
-                                <span style="color: #ffffff;"><%= currencyFormat.format(shipping) %></span>
+                                <span style="color: #FFFFFF;"><%= currencyFormat.format(shipping) %></span>
                             <% } %>
                         </span>
                     </div>
@@ -335,8 +335,8 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary btn-pill" style="width: 100%; padding: 1rem; font-size: 1rem; margin-top: 1.8rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
-                    <span class="material-symbols-outlined" style="font-size: 1.2rem;">verified_user</span>
+                <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.85rem; font-size: 0.92rem; margin-top: 1.5rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; border-radius: 4px; font-family: var(--font-mono); font-weight: 600;">
+                    <span class="material-symbols-outlined" style="font-size: 1.1rem;">verified_user</span>
                     <span>Confirm & Place Order</span>
                 </button>
             </div>

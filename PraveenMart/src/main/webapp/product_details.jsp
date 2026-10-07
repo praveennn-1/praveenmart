@@ -40,30 +40,29 @@
     <link rel="stylesheet" href="<%= request.getContextPath() %>/css/theme.css?v=5.8">
     <style>
         .details-wrapper {
-            padding: 3.5rem 0 6rem;
+            padding: 3rem 0 6rem;
         }
 
         .product-overview-grid {
             display: grid;
-            grid-template-columns: 1.1fr 1fr;
-            gap: 4rem;
-            margin-bottom: 4.5rem;
+            grid-template-columns: 1fr 1fr;
+            gap: 3.5rem;
+            margin-bottom: 4rem;
         }
 
         @media (max-width: 900px) {
             .product-overview-grid {
                 grid-template-columns: 1fr;
-                gap: 2.5rem;
+                gap: 2rem;
             }
         }
 
         .details-image-box {
-            background-color: var(--surface);
-            border: 1px solid var(--surface-border);
-            border-radius: 16px;
+            background-color: #050505;
+            border: 1px solid #222222;
+            border-radius: 6px;
             overflow: hidden;
-            height: 520px;
-            box-shadow: var(--shadow-md);
+            height: 500px;
             position: relative;
         }
 
@@ -71,11 +70,11 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.4s ease;
+            transition: transform 0.3s ease;
         }
 
         .details-image-box:hover img {
-            transform: scale(1.03);
+            transform: scale(1.02);
         }
 
         .details-info {
@@ -85,11 +84,12 @@
         }
 
         .details-price {
-            font-size: 2.4rem;
+            font-family: var(--font-mono, 'JetBrains Mono', monospace);
+            font-size: 2.2rem;
             font-weight: 700;
-            color: var(--price);
-            margin: 1.2rem 0 1.5rem;
-            letter-spacing: -0.01em;
+            color: #FFFFFF;
+            margin: 1rem 0 1.5rem;
+            letter-spacing: -0.02em;
         }
 
         .qty-picker {
@@ -102,32 +102,33 @@
         .card-qty-stepper {
             display: inline-flex;
             align-items: center;
-            border: 1px solid var(--surface-border);
-            border-radius: var(--radius-pill);
-            background: var(--pill-inactive-bg);
+            border: 1px solid #27272A;
+            border-radius: 4px;
+            background: #050505;
             overflow: hidden;
-            height: 44px;
+            height: 42px;
         }
 
         .card-qty-stepper .qty-btn {
             background: transparent;
             border: none;
-            width: 40px;
+            width: 38px;
             height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #ffffff;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #FFFFFF;
             cursor: pointer;
             transition: background-color 0.15s ease;
             user-select: none;
             padding: 0;
+            font-family: var(--font-mono);
         }
 
         .card-qty-stepper .qty-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
+            background: #18181B;
         }
 
         .card-qty-stepper .qty-input-field {
@@ -135,9 +136,10 @@
             border: none;
             background: transparent;
             text-align: center;
-            font-size: 1.05rem;
-            font-weight: 700;
-            color: #ffffff;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #FFFFFF;
+            font-family: var(--font-mono, 'JetBrains Mono', monospace);
             -moz-appearance: textfield;
             appearance: textfield;
             padding: 0;
@@ -151,16 +153,15 @@
         }
 
         .reviews-section {
-            background-color: var(--surface);
-            border: 1px solid var(--surface-border);
-            border-radius: 16px;
-            padding: 2.8rem;
-            box-shadow: var(--shadow-soft);
+            background-color: #050505;
+            border: 1px solid #222222;
+            border-radius: 6px;
+            padding: 2.5rem;
         }
 
         .review-card {
-            padding: 1.4rem 0;
-            border-bottom: 1px solid var(--divider);
+            padding: 1.25rem 0;
+            border-bottom: 1px solid #1E1E22;
         }
 
         .review-card:last-child {
@@ -169,11 +170,11 @@
 
         .review-star {
             font-size: 1rem;
-            color: #4b5563;
+            color: #3F3F46;
         }
 
         .review-star.filled {
-            color: #FFC107;
+            color: #FFFFFF;
         }
     </style>
 </head>
@@ -183,10 +184,10 @@
 
 <div class="container details-wrapper">
 
-    <div style="margin-bottom: 2rem; font-size: 0.9rem; color: var(--color-on-surface-muted);">
-        <a href="<%= request.getContextPath() %>/products" style="color: var(--color-on-surface-variant);">Collection</a> /
-        <a href="<%= request.getContextPath() %>/products?category=<%= product.getCategory() %>" style="color: var(--color-on-surface-variant);"><%= product.getCategory() %></a> /
-        <span style="color: #ffffff; font-weight: 600;"><%= product.getName() %></span>
+    <div style="margin-bottom: 2rem; font-size: 0.82rem; font-family: var(--font-mono); color: #71717A;">
+        <a href="<%= request.getContextPath() %>/products" style="color: #A1A1AA; text-decoration: none;">collection</a> /
+        <a href="<%= request.getContextPath() %>/products?category=<%= product.getCategory() %>" style="color: #A1A1AA; text-decoration: none;"><%= product.getCategory().toLowerCase() %></a> /
+        <span style="color: #FFFFFF;"><%= product.getName() %></span>
     </div>
 
     <% if (msgSuccess != null) { %>
@@ -208,36 +209,36 @@
                         dImg = request.getContextPath() + dImg;
                     }
             %>
-                <img src="<%= dImg %>" alt="<%= product.getName() %>" onerror="this.src='https://images.unsplash.com/photo-1544816155-12df9643f363?w=800&auto=format&fit=crop&q=80'">
+                <img src="<%= dImg %>" alt="<%= product.getName() %>" onerror="this.onerror=null;this.src='data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22800%22%20height%3D%22800%22%20viewBox%3D%220%200%20800%20800%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23080808%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20fill%3D%22%2371717A%22%20font-family%3D%22monospace%22%20font-size%3D%2222%22%20text-anchor%3D%22middle%22%20dominant-baseline%3D%22middle%22%3E%5B%20IMAGE%20UNAVAILABLE%20%5D%3C%2Ftext%3E%3C%2Fsvg%3E'">
             <% } else { %>
-                <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?w=800&auto=format&fit=crop&q=80" alt="Product Image">
+                <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22800%22%20height%3D%22800%22%20viewBox%3D%220%200%20800%20800%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23080808%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20fill%3D%22%2371717A%22%20font-family%3D%22monospace%22%20font-size%3D%2222%22%20text-anchor%3D%22middle%22%20dominant-baseline%3D%22middle%22%3E%5B%20IMAGE%20UNAVAILABLE%20%5D%3C%2Ftext%3E%3C%2Fsvg%3E" alt="Product Image">
             <% } %>
         </div>
 
         <div class="details-info">
-            <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 0.8rem;">
-                <span class="badge-tag badge-primary"><%= product.getCategory() %></span>
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1rem;">
+                <span class="badge-tag" style="background: #0C0C0C; border: 1px solid #27272A; color: #D4D4D8; font-family: var(--font-mono); font-size: 0.72rem; padding: 2px 8px; border-radius: 4px;"><%= product.getCategory() %></span>
                 <% if (product.getStockQty() > 10) { %>
-                    <span class="badge-tag badge-in-stock">In Stock (<%= product.getStockQty() %> Available)</span>
+                    <span class="badge-tag" style="background: #0C0C0C; border: 1px solid #27272A; color: #A1A1AA; font-family: var(--font-mono); font-size: 0.72rem; padding: 2px 8px; border-radius: 4px;">In Stock (<%= product.getStockQty() %>)</span>
                 <% } else if (product.getStockQty() > 0) { %>
-                    <span class="badge-tag badge-low-stock">Low Stock (Only <%= product.getStockQty() %> Left)</span>
+                    <span class="badge-tag" style="background: #0C0C0C; border: 1px solid #27272A; color: #FFFFFF; font-family: var(--font-mono); font-size: 0.72rem; padding: 2px 8px; border-radius: 4px;">Low Stock (<%= product.getStockQty() %> left)</span>
                 <% } else { %>
-                    <span class="badge-tag badge-out-stock">Sold Out</span>
+                    <span class="badge-tag" style="background: #18181B; border: 1px solid #27272A; color: #71717A; font-family: var(--font-mono); font-size: 0.72rem; padding: 2px 8px; border-radius: 4px;">Out of Stock</span>
                 <% } %>
             </div>
 
-            <h1 style="font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 800; text-transform: uppercase; margin-bottom: 0.6rem; line-height: 1.15;">
+            <h1 style="font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 700; letter-spacing: -0.03em; margin-bottom: 0.6rem; line-height: 1.15; color: #FFFFFF;">
                 <%= product.getName() %>
             </h1>
 
-            <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1.2rem;">
-                <span style="background-color: rgba(255,255,255,0.08); color: #ffffff; font-size: 0.82rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 6px; display: inline-flex; align-items: center; gap: 0.25rem; border: 1px solid rgba(255,255,255,0.12);">
-                    <%= String.format(Locale.US, "%.1f", displayRating) %> <span style="color: #FFC107;">★</span>
+            <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1.2rem; font-family: var(--font-mono); font-size: 0.82rem;">
+                <span style="background-color: #0C0C0C; color: #FFFFFF; font-size: 0.78rem; font-weight: 600; padding: 2px 8px; border-radius: 4px; display: inline-flex; align-items: center; gap: 0.25rem; border: 1px solid #27272A;">
+                    <%= String.format(Locale.US, "%.1f", displayRating) %> ★
                 </span>
-                <span style="color: var(--color-on-surface-variant); font-size: 0.9rem;">(<%= displayReviewCount %> reviews)</span>
+                <span style="color: #71717A;">(<%= displayReviewCount %> reviews)</span>
                 <% if (product.getSellerName() != null) { %>
-                    <span style="color: var(--color-outline-variant);">•</span>
-                    <span style="font-size: 0.88rem; color: var(--color-on-surface-variant);">Crafted by: <strong><%= product.getSellerName() %></strong></span>
+                    <span style="color: #3F3F46;">•</span>
+                    <span style="color: #71717A;">seller: <strong style="color: #D4D4D8;"><%= product.getSellerName() %></strong></span>
                 <% } %>
             </div>
 
@@ -245,7 +246,7 @@
                 <%= currencyFormat.format(product.getPrice()) %>
             </div>
 
-            <p style="font-size: 1.05rem; color: var(--color-on-surface-variant); line-height: 1.7; margin-bottom: 2.2rem;">
+            <p style="font-size: 0.95rem; color: #A1A1AA; line-height: 1.6; margin-bottom: 2rem;">
                 <%= product.getDescription() != null ? product.getDescription() : "High-grade handcrafted item designed for modern spaces." %>
             </p>
 
@@ -254,7 +255,7 @@
                     <input type="hidden" name="productId" value="<%= product.getId() %>">
 
                     <div class="qty-picker">
-                        <label class="form-label" style="margin-bottom: 0; font-weight: 700;" for="quantity">Quantity:</label>
+                        <label class="form-label" style="margin-bottom: 0; font-family: var(--font-mono); font-size: 0.8rem; color: #A1A1AA;" for="quantity">Quantity:</label>
                         <div class="card-qty-stepper">
                             <button type="button" class="qty-btn qty-btn-minus" aria-label="Decrease quantity">−</button>
                             <input type="number" id="quantity" name="quantity" class="qty-input-field" value="1" min="1" max="<%= product.getStockQty() %>" readonly>
@@ -263,14 +264,14 @@
                     </div>
 
                     <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                        <button type="submit" class="btn btn-primary btn-pill btn-add-cart" style="padding: 0.95rem 2.5rem; font-size: 1rem; flex: 1;">
-                            <span class="material-symbols-outlined">shopping_bag</span>
+                        <button type="submit" class="btn btn-primary btn-add-cart" style="padding: 0.85rem 2.2rem; font-size: 0.9rem; flex: 1; border-radius: 4px; font-family: var(--font-mono);">
+                            <span class="material-symbols-outlined" style="font-size: 1.15rem;">shopping_bag</span>
                             <span>Add to Cart</span>
                         </button>
                     </div>
                 </form>
             <% } else { %>
-                <button class="btn btn-secondary btn-pill" disabled style="padding: 0.95rem 2rem; font-size: 1rem; opacity: 0.5; cursor: not-allowed;">
+                <button class="btn btn-secondary" disabled style="padding: 0.85rem 2rem; font-size: 0.9rem; opacity: 0.5; cursor: not-allowed; border-radius: 4px; font-family: var(--font-mono);">
                     <span>Sold Out</span>
                 </button>
             <% } %>
@@ -278,24 +279,24 @@
     </div>
 
     <section class="reviews-section">
-        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2.5rem; flex-wrap: wrap; gap: 1rem;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; border-bottom: 1px solid #1E1E22; padding-bottom: 1.5rem;">
             <div>
-                <h3 style="font-size: 1.6rem; text-transform: uppercase; margin-bottom: 0.3rem;">Customer Reviews</h3>
-                <p style="color: var(--text); font-size: 0.92rem;">
-                    Average rating: <strong><%= String.format(Locale.US, "%.1f", displayRating) %>/5</strong> based on <%= displayReviewCount %> buyer reviews.
+                <h3 style="font-size: 1.3rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.3rem; color: #FFFFFF;">Customer Reviews</h3>
+                <p style="color: #71717A; font-family: var(--font-mono); font-size: 0.82rem;">
+                    Rating: <strong style="color: #FFFFFF;"><%= String.format(Locale.US, "%.1f", displayRating) %>/5</strong> based on <%= displayReviewCount %> verified reviews.
                 </p>
             </div>
         </div>
 
         <% if (sessionUser != null) { %>
-            <div style="background-color: var(--pill-inactive-bg); border: 1px solid var(--surface-border); border-radius: 12px; padding: 1.75rem; margin-bottom: 2.5rem;">
-                <h4 style="margin-bottom: 1.2rem; font-size: 1.1rem; text-transform: uppercase;">Write a Review</h4>
+            <div style="background-color: #0A0A0A; border: 1px solid #27272A; border-radius: 6px; padding: 1.5rem; margin-bottom: 2.5rem;">
+                <h4 style="margin-bottom: 1rem; font-size: 0.95rem; font-weight: 600; color: #FFFFFF; font-family: var(--font-mono);">Leave a Review</h4>
                 <form action="<%= request.getContextPath() %>/reviews/add" method="post">
                     <input type="hidden" name="productId" value="<%= product.getId() %>">
 
                     <div style="margin-bottom: 1rem;">
-                        <label class="form-label" for="rating" style="color: var(--text); font-size: 0.88rem; margin-bottom: 0.4rem; display: block;">Rating (1 to 5 Stars)</label>
-                        <select name="rating" id="rating" class="form-input-field" style="background: var(--bg); border: 1px solid var(--surface-border); border-radius: 10px; padding: 0.65rem 1rem; color: #ffffff;" required>
+                        <label class="form-label" for="rating" style="color: #A1A1AA; font-size: 0.78rem; font-family: var(--font-mono); margin-bottom: 0.4rem; display: block;">Rating</label>
+                        <select name="rating" id="rating" class="form-input-field" style="background: #000000; border: 1px solid #27272A; border-radius: 4px; padding: 0.6rem 0.85rem; color: #FFFFFF; font-family: var(--font-mono); font-size: 0.85rem;" required>
                             <option value="5">★★★★★ - Excellent (5 Stars)</option>
                             <option value="4">★★★★☆ - Very Good (4 Stars)</option>
                             <option value="3">★★★☆☆ - Average (3 Stars)</option>
@@ -305,18 +306,18 @@
                     </div>
 
                     <div style="margin-bottom: 1.2rem;">
-                        <label class="form-label" for="comment" style="color: var(--text); font-size: 0.88rem; margin-bottom: 0.4rem; display: block;">Your Feedback</label>
-                        <textarea name="comment" id="comment" rows="3" class="form-input-field" style="background: var(--bg); border: 1px solid var(--surface-border); border-radius: 10px; padding: 0.8rem; width: 100%; color: #ffffff; resize: vertical;" placeholder="Share your experience with this product..."></textarea>
+                        <label class="form-label" for="comment" style="color: #A1A1AA; font-size: 0.78rem; font-family: var(--font-mono); margin-bottom: 0.4rem; display: block;">Your Feedback</label>
+                        <textarea name="comment" id="comment" rows="3" class="form-input-field" style="background: #000000; border: 1px solid #27272A; border-radius: 4px; padding: 0.75rem; width: 100%; color: #FFFFFF; font-family: var(--font-mono); font-size: 0.85rem; resize: vertical;" placeholder="Write your review here..."></textarea>
                     </div>
 
-                    <button type="submit" class="btn btn-primary btn-pill" style="padding: 0.65rem 1.6rem;">
+                    <button type="submit" class="btn btn-primary" style="padding: 0.6rem 1.4rem; font-size: 0.82rem; border-radius: 4px; font-family: var(--font-mono);">
                         <span>Submit Review</span>
                     </button>
                 </form>
             </div>
         <% } else { %>
-            <p style="font-size: 0.92rem; color: var(--text); margin-bottom: 2rem;">
-                <a href="<%= request.getContextPath() %>/login.jsp" style="font-weight: 500; color: var(--btn-bg); text-decoration: underline;">Sign in</a> to leave a review.
+            <p style="font-size: 0.85rem; font-family: var(--font-mono); color: #71717A; margin-bottom: 2rem;">
+                <a href="<%= request.getContextPath() %>/login.jsp" style="color: #FFFFFF; text-decoration: underline;">Sign in</a> to leave a review.
             </p>
         <% } %>
 

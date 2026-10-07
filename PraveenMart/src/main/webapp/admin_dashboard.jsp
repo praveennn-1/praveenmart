@@ -41,6 +41,10 @@
     <title>Admin Control Center - PraveenMart</title>
     <link rel="stylesheet" href="<%= request.getContextPath() %>/css/theme.css?v=5.6">
     <style>
+        body {
+            background-color: #000000;
+        }
+
         .admin-main {
             padding: 3rem 0 5rem 0;
         }
@@ -48,7 +52,7 @@
         .admin-header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
             margin-bottom: 2.5rem;
             flex-wrap: wrap;
             gap: 1rem;
@@ -57,106 +61,107 @@
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
+            gap: 1.25rem;
             margin-bottom: 2.5rem;
         }
 
         .stat-card {
-            background-color: var(--surface);
-            border: 1px solid var(--surface-border);
-            border-radius: 16px;
+            background-color: #050505;
+            border: 1px solid #222222;
+            border-radius: 6px;
             padding: 1.5rem;
-            box-shadow: var(--shadow-soft);
         }
 
         .stat-label {
-            font-size: 0.78rem;
-            font-weight: 700;
-            color: var(--muted);
+            font-family: var(--font-mono, 'JetBrains Mono', monospace);
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #71717A;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.04em;
             margin-bottom: 0.4rem;
         }
 
         .stat-val {
-            font-family: var(--font-heading);
-            font-size: 2.2rem;
+            font-family: var(--font-mono, 'JetBrains Mono', monospace);
+            font-size: 1.8rem;
             font-weight: 700;
-            color: var(--price);
+            color: #FFFFFF;
         }
 
         .admin-tabs {
             display: flex;
-            gap: 0.75rem;
+            gap: 0.5rem;
             margin-bottom: 2rem;
-            border-bottom: 1px solid var(--divider);
+            border-bottom: 1px solid #1E1E22;
             padding-bottom: 0.75rem;
             flex-wrap: wrap;
         }
 
         .admin-tab-btn {
-            background: var(--pill-inactive-bg);
-            border: 1px solid var(--pill-border);
-            font-size: 0.92rem;
+            background: #000000;
+            border: 1px solid #27272A;
+            font-family: var(--font-mono, 'JetBrains Mono', monospace);
+            font-size: 0.82rem;
             font-weight: 500;
-            padding: 0.55rem 1.35rem;
-            color: var(--nav-link);
+            padding: 0.5rem 1.1rem;
+            color: #A1A1AA;
             cursor: pointer;
-            border-radius: var(--radius-pill);
-            transition: all 200ms ease;
+            border-radius: 4px;
+            transition: all 150ms ease;
         }
 
         .admin-tab-btn:hover {
-            color: #ffffff;
-            background: #20242e;
-            border-color: rgba(255, 255, 255, 0.14);
+            color: #FFFFFF;
+            border-color: #3F3F46;
         }
 
         .admin-tab-btn.active {
-            background: var(--pill-active-bg) !important;
-            color: var(--pill-active-text) !important;
-            border-color: #8FAFC2 !important;
+            background: #FFFFFF !important;
+            color: #000000 !important;
+            border-color: #FFFFFF !important;
             font-weight: 600;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25) !important;
         }
 
         .admin-card {
-            background-color: var(--surface);
-            border: 1px solid var(--surface-border);
-            border-radius: 16px;
-            padding: 2rem;
-            box-shadow: var(--shadow-soft);
+            background-color: #050505;
+            border: 1px solid #222222;
+            border-radius: 6px;
+            padding: 1.75rem;
             margin-bottom: 2.5rem;
         }
 
         .table-wrap {
             overflow-x: auto;
-            border-radius: var(--radius-md);
-            border: 1px solid var(--color-outline-variant);
+            border-radius: 6px;
+            border: 1px solid #222222;
+            background-color: #050505;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
             text-align: left;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
         }
 
         th {
-            background-color: var(--color-surface-container-low);
-            color: var(--color-on-surface-variant);
-            font-size: 0.8rem;
-            font-weight: 700;
+            background-color: #0A0A0A;
+            color: #71717A;
+            font-family: var(--font-mono, 'JetBrains Mono', monospace);
+            font-size: 0.75rem;
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            padding: 1rem 1.2rem;
-            border-bottom: 1px solid var(--color-outline-variant);
+            letter-spacing: 0.04em;
+            padding: 0.95rem 1.15rem;
+            border-bottom: 1px solid #1E1E22;
         }
 
         td {
-            padding: 1rem 1.2rem;
-            border-bottom: 1px solid var(--color-outline-variant);
+            padding: 0.95rem 1.15rem;
+            border-bottom: 1px solid #1E1E22;
             vertical-align: middle;
+            color: #E4E4E7;
         }
 
         tr:last-child td {
@@ -164,7 +169,7 @@
         }
 
         tr:hover td {
-            background-color: var(--color-surface-container-low);
+            background-color: #0A0A0A;
         }
     </style>
 </head>
@@ -175,11 +180,11 @@
 <main class="container admin-main">
     <div class="admin-header">
         <div>
-            <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.3rem;">
-                <span class="badge-tag" style="background-color: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3);">Administrator Access</span>
+            <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.5rem;">
+                <span class="badge-tag" style="background-color: #0C0C0C; color: #FFFFFF; border: 1px solid #27272A; font-family: var(--font-mono); font-size: 0.72rem; padding: 2px 8px; border-radius: 4px;">System Admin</span>
             </div>
-            <h1 class="font-headline" style="font-size: 2.2rem; margin-bottom: 0.35rem;">Platform Administration Panel</h1>
-            <p style="color: var(--color-on-surface-variant); font-size: 0.95rem;">System overview, user oversight, marketplace orders, and catalog listing moderation.</p>
+            <h1 style="font-family: var(--font-heading); font-size: 2.2rem; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 0.35rem; line-height: 1.15; color: #FFFFFF;">Admin Control Center</h1>
+            <p style="font-family: var(--font-mono); color: #888888; font-size: 0.85rem;">System overview, user oversight, marketplace orders, and catalog listing moderation.</p>
         </div>
     </div>
 
@@ -200,34 +205,34 @@
         <div class="stat-card">
             <div class="stat-label">Total Users</div>
             <div class="stat-val"><%= totalUsers %></div>
-            <div style="font-size: 0.8rem; color: var(--color-on-surface-variant); margin-top: 0.3rem;">
-                <%= totalBuyers %> Buyers · <%= totalSellers %> Sellers
+            <div style="font-family: var(--font-mono); font-size: 0.78rem; color: #71717A; margin-top: 0.3rem;">
+                <%= totalBuyers %> buyers · <%= totalSellers %> sellers
             </div>
         </div>
 
         <div class="stat-card">
             <div class="stat-label">Platform Products</div>
             <div class="stat-val"><%= totalProducts %></div>
-            <div style="font-size: 0.8rem; color: var(--color-on-surface-variant); margin-top: 0.3rem;">
-                Across all sellers
+            <div style="font-family: var(--font-mono); font-size: 0.78rem; color: #71717A; margin-top: 0.3rem;">
+                across all sellers
             </div>
         </div>
 
         <div class="stat-card">
             <div class="stat-label">Total Orders</div>
             <div class="stat-val"><%= totalOrders %></div>
-            <div style="font-size: 0.8rem; color: var(--color-on-surface-variant); margin-top: 0.3rem;">
-                Completed & Processing
+            <div style="font-family: var(--font-mono); font-size: 0.78rem; color: #71717A; margin-top: 0.3rem;">
+                completed & processing
             </div>
         </div>
 
         <div class="stat-card">
-            <div class="stat-label">Gross Merchandise Value</div>
-            <div class="stat-val" style="color: #b06000; font-size: 1.8rem;">
+            <div class="stat-label">Gross Value</div>
+            <div class="stat-val" style="color: #FFFFFF;">
                 <%= currencyFormat.format(totalRevenue) %>
             </div>
-            <div style="font-size: 0.8rem; color: var(--color-on-surface-variant); margin-top: 0.3rem;">
-                Platform total sales
+            <div style="font-family: var(--font-mono); font-size: 0.78rem; color: #71717A; margin-top: 0.3rem;">
+                platform total sales
             </div>
         </div>
     </div>

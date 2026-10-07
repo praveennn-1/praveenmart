@@ -17,31 +17,34 @@
     <title>My Orders - PraveenMart</title>
     <link rel="stylesheet" href="<%= request.getContextPath() %>/css/theme.css?v=5.6">
     <style>
+        body {
+            background-color: #000000;
+        }
+
         .orders-wrapper {
-            padding: 3.5rem 0 6rem;
+            padding: 3rem 0 6rem;
         }
 
         .order-card {
-            background-color: var(--surface);
-            border: 1px solid var(--surface-border);
-            border-radius: 16px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: var(--shadow-soft);
-            transition: border-color 0.2s ease;
+            background-color: #050505;
+            border: 1px solid #222222;
+            border-radius: 6px;
+            padding: 1.75rem;
+            margin-bottom: 1.5rem;
+            transition: border-color 150ms ease;
         }
 
         .order-card:hover {
-            border-color: rgba(255, 255, 255, 0.14);
+            border-color: #3F3F46;
         }
 
         .order-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding-bottom: 1.2rem;
-            border-bottom: 1px solid var(--divider);
-            margin-bottom: 1.4rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #1E1E22;
+            margin-bottom: 1.25rem;
             flex-wrap: wrap;
             gap: 1rem;
         }
@@ -50,8 +53,8 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 1rem 0;
-            border-bottom: 1px solid var(--divider);
+            padding: 0.85rem 0;
+            border-bottom: 1px solid #1E1E22;
         }
 
         .order-item-mini-row:last-child {
@@ -64,13 +67,13 @@
 <%@ include file="/includes/header.jspf" %>
 
 <main class="container orders-wrapper">
-    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2.5rem; flex-wrap: wrap; gap: 1rem;">
+    <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 2.5rem; flex-wrap: wrap; gap: 1rem;">
         <div>
-            <h1 style="font-size: 2.4rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.4rem; line-height: 1.1;">Order History</h1>
-            <p style="color: var(--text); font-size: 0.95rem;">Review and track your recent orders and delivery progress.</p>
+            <h1 style="font-family: var(--font-heading); font-size: 2.2rem; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 0.35rem; line-height: 1.15; color: #FFFFFF;">Order History</h1>
+            <p style="font-family: var(--font-mono); color: #888888; font-size: 0.85rem;">Review and track your recent orders and delivery progress.</p>
         </div>
-        <a href="<%= request.getContextPath() %>/products" class="btn btn-secondary btn-pill">
-            <span class="material-symbols-outlined">storefront</span>
+        <a href="<%= request.getContextPath() %>/products" class="btn btn-secondary" style="border-radius: 4px; font-family: var(--font-mono); font-size: 0.85rem; padding: 0.6rem 1.25rem;">
+            <span class="material-symbols-outlined" style="font-size: 1rem;">storefront</span>
             <span>Browse Products</span>
         </a>
     </div>
@@ -80,26 +83,26 @@
             <div class="order-card">
                 <div class="order-header">
                     <div>
-                        <span style="font-size: 1.2rem; font-weight: 700; color: var(--price);">#ORD-<%= o.getId() %></span>
-                        <span style="color: var(--muted); font-size: 0.88rem; margin-left: 0.8rem;">
+                        <span style="font-family: var(--font-mono); font-size: 1rem; font-weight: 700; color: #FFFFFF;">#ORD-<%= o.getId() %></span>
+                        <span style="font-family: var(--font-mono); color: #71717A; font-size: 0.8rem; margin-left: 0.8rem;">
                             Placed on <%= o.getCreatedAt() != null ? o.getCreatedAt().toLocalDate() : "" %>
                         </span>
                     </div>
 
                     <div style="display: flex; align-items: center; gap: 1.2rem;">
                         <% if ("DELIVERED".equalsIgnoreCase(o.getStatus())) { %>
-                            <span class="badge-tag badge-in-stock">Delivered</span>
+                            <span class="badge-tag" style="background: #0C0C0C; border: 1px solid #27272A; color: #FFFFFF; font-family: var(--font-mono); font-size: 0.72rem; padding: 2px 8px; border-radius: 4px;">Delivered</span>
                         <% } else if ("SHIPPED".equalsIgnoreCase(o.getStatus())) { %>
-                            <span class="badge-tag badge-tertiary">Shipped</span>
+                            <span class="badge-tag" style="background: #0C0C0C; border: 1px solid #27272A; color: #A1A1AA; font-family: var(--font-mono); font-size: 0.72rem; padding: 2px 8px; border-radius: 4px;">Shipped</span>
                         <% } else if ("CONFIRMED".equalsIgnoreCase(o.getStatus())) { %>
-                            <span class="badge-tag badge-primary">Confirmed</span>
+                            <span class="badge-tag" style="background: #0C0C0C; border: 1px solid #27272A; color: #D4D4D8; font-family: var(--font-mono); font-size: 0.72rem; padding: 2px 8px; border-radius: 4px;">Confirmed</span>
                         <% } else if ("CANCELLED".equalsIgnoreCase(o.getStatus())) { %>
-                            <span class="badge-tag badge-out-stock">Cancelled</span>
+                            <span class="badge-tag" style="background: #18181B; border: 1px solid #27272A; color: #71717A; font-family: var(--font-mono); font-size: 0.72rem; padding: 2px 8px; border-radius: 4px;">Cancelled</span>
                         <% } else { %>
-                            <span class="badge-tag badge-low-stock"><%= o.getStatus() %></span>
+                            <span class="badge-tag" style="background: #0C0C0C; border: 1px solid #27272A; color: #A1A1AA; font-family: var(--font-mono); font-size: 0.72rem; padding: 2px 8px; border-radius: 4px;"><%= o.getStatus() %></span>
                         <% } %>
 
-                        <span style="font-size: 1.35rem; font-weight: 700; color: var(--price);">
+                        <span style="font-family: var(--font-mono); font-size: 1.15rem; font-weight: 700; color: #FFFFFF;">
                             <%= currencyFormat.format(o.getTotalAmount()) %>
                         </span>
                     </div>
@@ -109,25 +112,25 @@
                     <% if (o.getItems() != null && !o.getItems().isEmpty()) { %>
                         <% for (OrderItem item : o.getItems()) { %>
                             <div class="order-item-mini-row">
-                                <div style="display: flex; align-items: center; gap: 1.2rem;">
-                                    <div style="width: 58px; height: 58px; border-radius: 10px; overflow: hidden; background: var(--bg); border: 1px solid var(--surface-border);">
+                                <div style="display: flex; align-items: center; gap: 1rem;">
+                                    <div style="width: 52px; height: 52px; border-radius: 4px; overflow: hidden; background: #000000; border: 1px solid #27272A;">
                                         <% if (item.getProductImageUrl() != null && !item.getProductImageUrl().isBlank()) { %>
                                             <img src="<%= item.getProductImageUrl() %>" alt="<%= item.getProductName() %>" style="width: 100%; height: 100%; object-fit: cover;">
                                         <% } else { %>
-                                            <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?w=300&auto=format&fit=crop&q=80" alt="Item" style="width: 100%; height: 100%; object-fit: cover;">
+                                            <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22300%22%20height%3D%22300%22%20viewBox%3D%220%200%20300%20300%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23080808%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20fill%3D%22%2371717A%22%20font-family%3D%22monospace%22%20font-size%3D%2216%22%20text-anchor%3D%22middle%22%20dominant-baseline%3D%22middle%22%3E%5B%20ITEM%20%5D%3C%2Ftext%3E%3C%2Fsvg%3E" alt="Item" style="width: 100%; height: 100%; object-fit: cover;">
                                         <% } %>
                                     </div>
                                     <div>
-                                        <a href="<%= request.getContextPath() %>/product-details?id=<%= item.getProductId() %>" style="font-weight: 600; color: var(--heading); text-decoration: none; font-size: 1.05rem;">
+                                        <a href="<%= request.getContextPath() %>/product-details?id=<%= item.getProductId() %>" style="font-family: var(--font-heading); font-weight: 600; color: #FFFFFF; text-decoration: none; font-size: 0.95rem;">
                                             <%= item.getProductName() != null ? item.getProductName() : "Product #" + item.getProductId() %>
                                         </a>
-                                        <div style="font-size: 0.85rem; color: var(--text); margin-top: 0.2rem;">
+                                        <div style="font-family: var(--font-mono); font-size: 0.78rem; color: #71717A; margin-top: 0.2rem;">
                                             Qty: <%= item.getQuantity() %> &times; <%= currencyFormat.format(item.getUnitPrice()) %>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div style="font-weight: 700; font-size: 1.1rem; color: var(--price);">
+                                <div style="font-family: var(--font-mono); font-weight: 700; font-size: 0.95rem; color: #FFFFFF;">
                                     <%= currencyFormat.format(item.getSubtotal()) %>
                                 </div>
                             </div>
@@ -137,15 +140,15 @@
             </div>
         <% } %>
     <% } else { %>
-        <div class="order-card" style="text-align: center; padding: 5rem 1.5rem;">
-            <span class="material-symbols-outlined" style="font-size: 4rem; color: var(--muted); margin-bottom: 1rem;">receipt_long</span>
-            <h2 style="font-size: 1.8rem; text-transform: uppercase; margin-bottom: 0.5rem;">No Orders Yet</h2>
-            <p style="color: var(--text); max-width: 440px; margin: 0 auto 2.2rem; font-size: 0.95rem;">
-                You haven't placed any orders yet. Discover our curated collection and special offers.
+        <div class="order-card" style="text-align: center; padding: 4.5rem 1.5rem;">
+            <span class="material-symbols-outlined" style="font-size: 3.5rem; color: #3F3F46; margin-bottom: 1rem;">receipt_long</span>
+            <h2 style="font-size: 1.6rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.5rem; color: #FFFFFF;">No Orders Yet</h2>
+            <p style="color: #888888; font-family: var(--font-mono); max-width: 440px; margin: 0 auto 2rem; font-size: 0.88rem;">
+                You haven't placed any orders yet. Discover our curated collections.
             </p>
-            <a href="<%= request.getContextPath() %>/products" class="btn btn-primary btn-pill" style="padding: 0.85rem 2.2rem;">
+            <a href="<%= request.getContextPath() %>/products" class="btn btn-primary" style="padding: 0.75rem 2rem; font-size: 0.88rem; border-radius: 4px; font-family: var(--font-mono); font-weight: 600;">
                 <span>Explore Products</span>
-                <span class="material-symbols-outlined">arrow_forward</span>
+                <span class="material-symbols-outlined" style="font-size: 1rem;">arrow_forward</span>
             </a>
         </div>
     <% } %>

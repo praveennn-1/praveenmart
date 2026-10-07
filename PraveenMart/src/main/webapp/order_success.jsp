@@ -14,37 +14,39 @@
     <title>Order Confirmed - PraveenMart</title>
     <link rel="stylesheet" href="<%= request.getContextPath() %>/css/theme.css?v=5.6">
     <style>
+        body {
+            background-color: #000000;
+        }
+
         .success-wrapper {
             padding: 5rem 1.5rem 7rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: var(--hero-glow), var(--bg);
+            background-color: #000000;
         }
 
         .success-card {
-            background-color: var(--surface);
-            border: 1px solid var(--surface-border);
-            border-radius: 16px;
-            padding: 4rem 3rem;
-            max-width: 580px;
+            background-color: #050505;
+            border: 1px solid #222222;
+            border-radius: 6px;
+            padding: 3.5rem 2.5rem;
+            max-width: 540px;
             width: 100%;
             text-align: center;
-            box-shadow: var(--shadow-md);
         }
 
         .success-icon-box {
-            width: 88px;
-            height: 88px;
-            background-color: rgba(52, 211, 153, 0.12);
-            color: #125b40;
-            border: 1px solid rgba(52, 211, 153, 0.25);
-            border-radius: var(--radius-pill);
+            width: 64px;
+            height: 64px;
+            background-color: #0C0C0C;
+            color: #FFFFFF;
+            border: 1px solid #27272A;
+            border-radius: 4px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 1.8rem;
-            box-shadow: 0 0 30px rgba(52, 211, 153, 0.15);
+            margin: 0 auto 1.5rem;
         }
     </style>
 </head>
@@ -55,37 +57,37 @@
 <div class="success-wrapper">
     <div class="success-card">
         <div class="success-icon-box">
-            <span class="material-symbols-outlined" style="font-size: 3.2rem;">check_circle</span>
+            <span class="material-symbols-outlined" style="font-size: 2rem;">check</span>
         </div>
 
-        <h1 style="font-size: 2.2rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.8rem; line-height: 1.1;">Order Confirmed</h1>
-        <p style="color: var(--text); font-size: 1rem; line-height: 1.6; margin-bottom: 2.5rem;">
+        <h1 style="font-family: var(--font-heading); font-size: 1.8rem; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 0.5rem; line-height: 1.15; color: #FFFFFF;">Order Confirmed</h1>
+        <p style="font-family: var(--font-mono); color: #888888; font-size: 0.85rem; line-height: 1.6; margin-bottom: 2rem;">
             Thank you for your order with PraveenMart. Your items have been confirmed and scheduled for prompt dispatch.
         </p>
 
         <% if (order != null) { %>
-            <div style="background-color: var(--pill-inactive-bg); border: 1px solid var(--surface-border); border-radius: 12px; padding: 1.5rem; margin-bottom: 2.5rem; text-align: left;">
-                <div style="display: flex; justify-content: space-between; margin-bottom: 0.7rem; font-size: 0.95rem;">
-                    <span style="color: var(--muted);">Order Reference:</span>
-                    <span style="font-weight: 700; color: var(--price);">#ORD-<%= order.getId() %></span>
+            <div style="background-color: #000000; border: 1px solid #27272A; border-radius: 4px; padding: 1.25rem; margin-bottom: 2rem; text-align: left; font-family: var(--font-mono); font-size: 0.82rem;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.6rem;">
+                    <span style="color: #71717A;">Order Reference:</span>
+                    <span style="font-weight: 700; color: #FFFFFF;">#ORD-<%= order.getId() %></span>
                 </div>
-                <div style="display: flex; justify-content: space-between; margin-bottom: 0.7rem; font-size: 0.95rem;">
-                    <span style="color: var(--muted);">Total Paid:</span>
-                    <span style="font-weight: 700; color: var(--price); font-size: 1.15rem;"><%= currencyFormat.format(order.getTotalAmount()) %></span>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.6rem;">
+                    <span style="color: #71717A;">Total Paid:</span>
+                    <span style="font-weight: 700; color: #FFFFFF;"><%= currencyFormat.format(order.getTotalAmount()) %></span>
                 </div>
-                <div style="display: flex; justify-content: space-between; font-size: 0.95rem;">
-                    <span style="color: var(--color-on-surface-variant);">Current Status:</span>
-                    <span class="badge-tag badge-in-stock"><%= order.getStatus() %></span>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="color: #71717A;">Current Status:</span>
+                    <span class="badge-tag" style="background: #0C0C0C; border: 1px solid #27272A; color: #FFFFFF; font-family: var(--font-mono); font-size: 0.72rem; padding: 2px 8px; border-radius: 4px;"><%= order.getStatus() %></span>
                 </div>
             </div>
         <% } %>
 
-        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-            <a href="<%= request.getContextPath() %>/orders" class="btn btn-primary btn-pill" style="padding: 0.85rem 2rem;">
-                <span class="material-symbols-outlined">receipt_long</span>
+        <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
+            <a href="<%= request.getContextPath() %>/orders" class="btn btn-primary" style="padding: 0.75rem 1.6rem; font-size: 0.85rem; border-radius: 4px; font-family: var(--font-mono); font-weight: 600;">
+                <span class="material-symbols-outlined" style="font-size: 1rem;">receipt_long</span>
                 <span>View Order History</span>
             </a>
-            <a href="<%= request.getContextPath() %>/products" class="btn btn-secondary btn-pill" style="padding: 0.85rem 2rem;">
+            <a href="<%= request.getContextPath() %>/products" class="btn btn-secondary" style="padding: 0.75rem 1.6rem; font-size: 0.85rem; border-radius: 4px; font-family: var(--font-mono);">
                 <span>Continue Shopping</span>
             </a>
         </div>
