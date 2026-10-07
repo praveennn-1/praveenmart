@@ -196,10 +196,11 @@
     background: #000000;
 }
 
+.pm-message-row,
 .pm-chat-msg {
     display: flex;
     flex-direction: column;
-    max-width: 85%;
+    max-width: 90%;
     animation: pmMsgIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
@@ -208,14 +209,17 @@
     to { opacity: 1; transform: translateY(0); }
 }
 
+.pm-message-row.user,
 .pm-chat-msg.user {
     align-self: flex-end;
 }
 
+.pm-message-row.bot,
 .pm-chat-msg.bot {
     align-self: flex-start;
 }
 
+.pm-message-bubble,
 .pm-chat-bubble {
     padding: 10px 14px;
     font-size: 0.88rem;
@@ -224,6 +228,7 @@
     border-radius: 6px;
 }
 
+.pm-message-row.user .pm-message-bubble,
 .pm-chat-msg.user .pm-chat-bubble {
     background: #18181B;
     color: #FFFFFF;
@@ -232,12 +237,14 @@
     font-size: 0.84rem;
 }
 
+.pm-message-row.bot .pm-message-bubble,
 .pm-chat-msg.bot .pm-chat-bubble {
     background: #0C0C0C;
     color: #E4E4E7;
     border: 1px solid #1E1E1E;
 }
 
+.pm-message-time,
 .pm-chat-msg-time {
     font-family: var(--font-mono, monospace);
     font-size: 0.7rem;
@@ -245,34 +252,55 @@
     margin-top: 4px;
 }
 
+.pm-message-row.user .pm-message-time,
 .pm-chat-msg.user .pm-chat-msg-time {
     text-align: right;
 }
 
-/* Suggestion Chips */
+/* Suggestion Chips with Equal Gap */
+.pm-suggestions-container,
 .pm-chat-suggestions {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 8px;
+    gap: 8px; /* Uniform equal gap both horizontally and vertically */
+    margin-top: 10px;
+    margin-bottom: 6px;
+    width: 100%;
 }
 
+.pm-chip,
 .pm-chat-chip {
-    background: #0C0C0C;
-    border: 1px solid #222222;
+    display: inline-flex;
+    align-items: center;
+    background: #121214;
+    border: 1px solid #27272A;
     border-radius: 4px;
-    color: #A1A1AA;
+    color: #D4D4D8;
     font-family: var(--font-mono, monospace);
-    font-size: 0.76rem;
-    padding: 4px 10px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 6px 12px;
     cursor: pointer;
+    line-height: 1.35;
+    margin: 0;
     transition: all 0.15s ease;
+    white-space: nowrap;
+    user-select: none;
+    box-sizing: border-box;
 }
 
+.pm-chip:hover,
 .pm-chat-chip:hover {
-    background: #18181B;
+    background: #27272A;
     border-color: #52525B;
     color: #FFFFFF;
+    transform: translateY(-1px);
+}
+
+.pm-chip:active,
+.pm-chat-chip:active {
+    background: #09090B;
+    transform: translateY(0);
 }
 
 /* Typing Indicator */
@@ -287,6 +315,7 @@
     width: fit-content;
 }
 
+.pm-dot,
 .pm-typing-dot {
     width: 6px;
     height: 6px;
@@ -295,8 +324,11 @@
     animation: pmTyping 1.4s infinite ease-in-out;
 }
 
+.pm-dot:nth-child(1),
 .pm-typing-dot:nth-child(1) { animation-delay: 0s; }
+.pm-dot:nth-child(2),
 .pm-typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.pm-dot:nth-child(3),
 .pm-typing-dot:nth-child(3) { animation-delay: 0.4s; }
 
 @keyframes pmTyping {
