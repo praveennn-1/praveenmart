@@ -1,6 +1,6 @@
 # PraveenMart — Multi-Seller E-Commerce Marketplace
 
-**Java Servlets · JDBC · Apache Tomcat 9 · Anna University R2025**  
+**Java Servlets · JDBC · Apache Tomcat 9
 **Builder**: Solo Developer  
 **Status**: Active Checkpoint Progress — **Week 9: AI Chatbot Integration Complete**
 
