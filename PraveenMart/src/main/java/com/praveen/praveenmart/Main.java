@@ -19,12 +19,15 @@ public class Main {
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) throws Exception {
+        // Direct System.err output to System.out so IntelliJ console displays Tomcat log lines in normal text instead of red
+        System.setErr(System.out);
+
         // Route java.util.logging (Tomcat logs) through SLF4J / Logback
         SLF4JBridgeHandler.removeHandlersForRootLogger();
         SLF4JBridgeHandler.install();
 
-        // Skip TLD scanning in JARs to eliminate TldScanner log noise
-        System.setProperty("tomcat.util.scan.StandardJarScanFilter.jarsToSkip", "*.jar");
+        // Scan JSTL taglib JARs so JSP tag libraries resolve cleanly
+        System.setProperty("tomcat.util.scan.StandardJarScanFilter.jarsToScan", "jstl*.jar,taglibs*.jar");
 
         // Resolve webapp directory dynamically
         File webappDir = new File("PraveenMart/src/main/webapp");
@@ -44,10 +47,22 @@ public class Main {
         StandardContext ctx = (StandardContext) tomcat.addWebapp("", webappDir.getAbsolutePath());
         ctx.setParentClassLoader(Main.class.getClassLoader());
 
-        // Resolve compiled target classes directory dynamically
+        // Resolve compiled target classes directory dynamically (supports Maven target and IntelliJ out directories)
         File additionWebInfClasses = new File("PraveenMart/target/classes");
         if (!additionWebInfClasses.exists()) {
             additionWebInfClasses = new File("target/classes");
+        }
+        if (!additionWebInfClasses.exists()) {
+            additionWebInfClasses = new File("out/production/PraveenMart");
+        }
+        if (!additionWebInfClasses.exists()) {
+            try {
+                File codeSource = new File(Main.class.getProtectionDomain().getCodeSource().getLocation().toURI());
+                if (codeSource.isDirectory()) {
+                    additionWebInfClasses = codeSource;
+                }
+            } catch (Exception ignored) {
+            }
         }
         if (additionWebInfClasses.exists()) {
             WebResourceRoot resources = new StandardRoot(ctx);

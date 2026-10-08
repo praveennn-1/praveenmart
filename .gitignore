@@ -23,5 +23,7 @@ praveenmart.trace.db
 .DS_Store
 *.swp
 
-# Tomcat cargo installations
+# Tomcat cargo & temp installations
 cargo/
+tomcat.*/
+.smarttomcat/
