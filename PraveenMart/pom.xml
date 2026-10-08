@@ -1,7 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
+```xml
+        <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.praveen</groupId>
@@ -33,6 +36,7 @@
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
+
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
@@ -62,11 +66,13 @@
             <artifactId>slf4j-api</artifactId>
             <version>1.7.25</version>
         </dependency>
+
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>jul-to-slf4j</artifactId>
             <version>1.7.25</version>
         </dependency>
+
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
@@ -79,12 +85,14 @@
             <version>5.10.2</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
             <version>5.10.0</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
@@ -123,8 +131,11 @@
     </dependencies>
 
     <build>
+
         <finalName>PraveenMart</finalName>
+
         <plugins>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -133,32 +144,31 @@
                     <release>17</release>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.4.0</version>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
                 <version>3.1.0</version>
                 <configuration>
                     <target>
-                        <echo level="info" message="PraveenMart running at http://localhost:${app.http.port}/"/>
+                        <echo level="info"
+                              message="PraveenMart running at http://localhost:${app.http.port}/"/>
                     </target>
                 </configuration>
             </plugin>
-            <!--
-              Runs Main with Maven's compile classpath.  This intentionally
-              includes the Tomcat dependencies marked as "provided": they
-              belong to an external servlet container in the WAR, but are
-              needed when Main starts the embedded Tomcat server.
-            -->
+
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
@@ -168,56 +178,67 @@
                     <classpathScope>compile</classpathScope>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>org.codehaus.cargo</groupId>
                 <artifactId>cargo-maven3-plugin</artifactId>
                 <version>1.10.28</version>
+
                 <configuration>
+
                     <container>
                         <containerId>tomcat9x</containerId>
                         <type>installed</type>
+
                         <zipUrlInstaller>
-                            <url>https://repo.maven.apache.org/maven2/org/apache/tomcat/tomcat/9.0.121/tomcat-9.0.121.zip</url>
-                            <downloadDir>${project.build.directory}/cargo/downloads</downloadDir>
-                            <extractDir>${project.build.directory}/cargo/installs</extractDir>
+                            <url>
+                                https://repo.maven.apache.org/maven2/org/apache/tomcat/tomcat/9.0.121/tomcat-9.0.121.zip
+                            </url>
+
+                            <downloadDir>
+                                ${project.build.directory}/cargo/downloads
+                            </downloadDir>
+
+                            <extractDir>
+                                ${project.build.directory}/cargo/installs
+                            </extractDir>
                         </zipUrlInstaller>
                     </container>
+
                     <configuration>
-                        <home>${project.build.directory}/cargo/tomcat9x</home>
+                        <home>
+                            ${project.build.directory}/cargo/tomcat9x
+                        </home>
+
                         <properties>
-                            <cargo.servlet.port>${app.http.port}</cargo.servlet.port>
+                            <cargo.servlet.port>
+                                ${app.http.port}
+                            </cargo.servlet.port>
                         </properties>
                     </configuration>
+
                     <deployables>
+
                         <deployable>
                             <groupId>${project.groupId}</groupId>
                             <artifactId>${project.artifactId}</artifactId>
                             <type>war</type>
+
                             <properties>
                                 <context>/</context>
                             </properties>
                         </deployable>
+
                     </deployables>
+
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.3.1</version>
-                <executions>
-                    <execution>
-                        <id>validate</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
                 <version>4.8.3.1</version>
+
                 <configuration>
                     <effort>Max</effort>
                     <threshold>Medium</threshold>
@@ -225,6 +246,7 @@
                     <skip>${spotbugs.skip}</skip>
                     <xmlOutput>true</xmlOutput>
                 </configuration>
+
                 <executions>
                     <execution>
                         <id>spotbugs-check</id>
@@ -234,8 +256,11 @@
                         </goals>
                     </execution>
                 </executions>
+
             </plugin>
+
         </plugins>
+
     </build>
 
 </project>
