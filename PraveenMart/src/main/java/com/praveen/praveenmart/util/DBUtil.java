@@ -96,12 +96,6 @@ public class DBUtil {
                 } else {
                     logger.info("Database schema and products already up to date.");
                 }
-                // Always run user MERGE statements so pre-seeded accounts are created if missing.
-                // MERGE is idempotent — existing rows are untouched, missing ones are inserted.
-                try {
-                    executeSqlScript(conn, "seed_users.sql");
-                    logger.info("Pre-seeded users ensured.");
-                } catch (Exception ignored) {}
                 // Ensure optional migration tables such as wishlist_items exist
                 try {
                     executeSqlScript(conn, "db/migrations/V4__add_wishlist_table.sql");

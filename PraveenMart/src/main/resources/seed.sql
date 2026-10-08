@@ -2,14 +2,6 @@ MERGE INTO users (name, email, password_hash, role) KEY(email)
 VALUES
     ('Admin User', 'admin@praveenmart.com', '$2a$10$71gV/GvK/cPjp9JSspIF..MGh8ONmLjGn4YL.T44bRxG7rMvBVsT.', 'ADMIN');
 
-MERGE INTO users (name, email, password_hash, role) KEY(email)
-VALUES
-    ('Test Buyer', 'buyer@test.com', '$2a$12$oGwHr7Vp5cKWfL3avAbz0OwmF6OUdoFMfWtip4ftkMaxG2OPVg1da', 'CUSTOMER');
-
-MERGE INTO users (name, email, password_hash, role) KEY(email)
-VALUES
-    ('Test Seller', 'seller@test.com', '$2a$12$2BcN/Yp/LsnCQWQZeMxc0.TXwWTV4y.N9YV6fTySu.Ie/DM7zHv2i', 'SELLER');
-
 INSERT INTO products (seller_id, name, description, price, stock_qty, category, image_url)
 VALUES
     -- ==================== ELECTRONICS ====================
