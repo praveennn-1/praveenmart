@@ -1,0 +1,87 @@
+@startuml PraveenMart_ER_Diagram
+!theme plain
+hide circle
+skinparam linetype ortho
+
+entity "users" as users {
+  * id : BIGINT <<PK>>
+  --
+  * name : VARCHAR(100)
+  * email : VARCHAR(255) <<UNIQUE>>
+  * password_hash : VARCHAR(255)
+  * role : ENUM('BUYER','SELLER','ADMIN')
+  * created_at : TIMESTAMP
+}
+
+entity "products" as products {
+  * id : BIGINT <<PK>>
+  --
+  * seller_id : BIGINT <<FK>>
+  * name : VARCHAR(200)
+  description : VARCHAR(2000)
+  * price : DECIMAL(10,2)
+  * stock_qty : INT
+  * category : VARCHAR(100)
+  image_url : VARCHAR(500)
+  * created_at : TIMESTAMP
+}
+
+entity "orders" as orders {
+  * id : BIGINT <<PK>>
+  --
+  * buyer_id : BIGINT <<FK>>
+  * status : ENUM('PENDING','CONFIRMED','SHIPPED','DELIVERED','CANCELLED')
+  * total_amount : DECIMAL(10,2)
+  * created_at : TIMESTAMP
+}
+
+entity "order_items" as order_items {
+  * id : BIGINT <<PK>>
+  --
+  * order_id : BIGINT <<FK>>
+  * product_id : BIGINT <<FK>>
+  * quantity : INT
+  * unit_price : DECIMAL(10,2)
+  * created_at : TIMESTAMP
+}
+
+entity "cart_items" as cart_items {
+  * id : BIGINT <<PK>>
+  --
+  * user_id : BIGINT <<FK>>
+  * product_id : BIGINT <<FK>>
+  * quantity : INT
+  * created_at : TIMESTAMP
+}
+
+entity "wishlist_items" as wishlist_items {
+  * id : BIGINT <<PK>>
+  --
+  * user_id : BIGINT <<FK>>
+  * product_id : BIGINT <<FK>>
+  * created_at : TIMESTAMP
+}
+
+entity "reviews" as reviews {
+  * id : BIGINT <<PK>>
+  --
+  * product_id : BIGINT <<FK>>
+  * user_id : BIGINT <<FK>>
+  * rating : INT (1..5)
+  comment : VARCHAR(2000)
+  * created_at : TIMESTAMP
+}
+
+users ||--o{ products : "lists (1:N)"
+users ||--o{ orders : "places (1:N)"
+users ||--o{ cart_items : "adds to cart (1:N)"
+users ||--o{ wishlist_items : "saves in wishlist (1:N)"
+users ||--o{ reviews : "writes (1:N)"
+
+orders ||--|{ order_items : "contains (1:N)"
+products ||--o{ order_items : "ordered in (1:N)"
+products ||--o{ cart_items : "in cart (1:N)"
+products ||--o{ wishlist_items : "in wishlist (1:N)"
+products ||--o{ reviews : "reviewed (1:N)"
+
+@enduml
