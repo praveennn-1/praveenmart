@@ -1,0 +1,27 @@
+# Compiled class files & build artifacts
+target/
+*.war
+*.jar
+*.class
+
+# Environment & Secret Credentials (Section 9 & 18)
+.env
+config.properties
+*.key
+*.pem
+
+# Database data files
+*.mv.db
+*.trace.db
+praveenmart.mv.db
+praveenmart.trace.db
+
+# IDE & Editor files
+.idea/
+*.iml
+.vscode/
+.DS_Store
+*.swp
+
+# Tomcat cargo installations
+cargo/
