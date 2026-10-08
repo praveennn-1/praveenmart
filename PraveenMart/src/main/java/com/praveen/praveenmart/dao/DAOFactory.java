@@ -12,6 +12,7 @@ public class DAOFactory {
     private static final OrderDAO orderDAO = new OrderDAOImpl();
     private static final CartDAO cartDAO = new CartDAOImpl();
     private static final ReviewDAO reviewDAO = new ReviewDAOImpl();
+    private static final WishlistDAO wishlistDAO = new WishlistDAOImpl();
 
     private DAOFactory() {
     }
@@ -34,5 +35,9 @@ public class DAOFactory {
 
     public static ReviewDAO getReviewDAO() {
         return reviewDAO;
+    }
+
+    public static WishlistDAO getWishlistDAO() {
+        return wishlistDAO;
     }
 }

@@ -270,6 +270,14 @@
                         </button>
                     </div>
                 </form>
+                <form action="<%= request.getContextPath() %>/wishlist/add" method="post" style="margin-top: 0.75rem;">
+                    <input type="hidden" name="productId" value="<%= product.getId() %>">
+                    <input type="hidden" name="redirect" value="/product-details?id=<%= product.getId() %>">
+                    <button type="submit" class="btn btn-secondary" style="width: 100%; padding: 0.75rem 1.25rem; font-size: 0.85rem; border-radius: 4px; font-family: var(--font-mono); display: flex; align-items: center; justify-content: center; gap: 0.5rem;" title="Save to Wishlist">
+                        <span class="material-symbols-outlined" style="font-size: 1.15rem; color: #ff9800;">favorite</span>
+                        <span>Save to Wishlist (Requirement O1)</span>
+                    </button>
+                </form>
             <% } else { %>
                 <button class="btn btn-secondary" disabled style="padding: 0.85rem 2rem; font-size: 0.9rem; opacity: 0.5; cursor: not-allowed; border-radius: 4px; font-family: var(--font-mono);">
                     <span>Sold Out</span>

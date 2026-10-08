@@ -34,8 +34,11 @@
 
             <!-- Right Actions: Cart + Pill Action + Right-Corner Menu -->
             <div class="nav-actions">
-                <!-- Cart Button -->
+                <!-- Wishlist & Cart Buttons -->
                 <% if (sessionUser == null || !"ADMIN".equalsIgnoreCase(sessionUser.getRole())) { %>
+                    <a href="<%= request.getContextPath() %>/wishlist" class="nav-icon-btn" id="navWishlistBtn" title="My Wishlist">
+                        <span class="material-symbols-outlined" style="font-size: 1.25rem;">favorite</span>
+                    </a>
                     <a href="<%= request.getContextPath() %>/cart" class="nav-icon-btn" id="navCartBtn" title="Shopping Cart">
                         <span class="material-symbols-outlined" style="font-size: 1.25rem;">shopping_bag</span>
                         <span class="nav-badge-count" id="navCartBadge" <%= cartCount > 0 ? "" : "style=\"display: none;\"" %>><%= cartCount %></span>
@@ -94,6 +97,10 @@
                                 </a>
                             <% } %>
                         <% } %>
+                        <a href="<%= request.getContextPath() %>/wishlist" class="menu-dropdown-item" role="menuitem">
+                            <span class="material-symbols-outlined">favorite</span>
+                            <span>My Wishlist</span>
+                        </a>
                         <a href="<%= request.getContextPath() %>/cart" class="menu-dropdown-item" role="menuitem">
                             <span class="material-symbols-outlined">shopping_cart</span>
                             <span>Shopping Cart</span>

@@ -414,7 +414,13 @@
                                                                                         <%= currencyFormat.format(item.getItemTotal())
                                                                                             %>
                                                                                     </div>
-                                                                                    <div>
+                                                                                    <div style="display: flex; align-items: center; gap: 0.35rem;">
+                                                                                        <form action="<%= request.getContextPath() %>/wishlist/save-for-later" method="post">
+                                                                                            <input type="hidden" name="productId" value="<%= item.getProductId() %>">
+                                                                                            <button type="submit" class="cart-item-del-btn" title="Save for Later in Wishlist" style="color: #ff9800; border-color: rgba(255, 152, 0, 0.3);">
+                                                                                                <span class="material-symbols-outlined" style="font-size: 1.1rem;">bookmark</span>
+                                                                                            </button>
+                                                                                        </form>
                                                                                         <form
                                                                                             action="<%= request.getContextPath() %>/cart/remove"
                                                                                             method="post">
