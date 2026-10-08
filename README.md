@@ -7,7 +7,6 @@
 [![Tests](https://img.shields.io/badge/Tests-59%20Passing-brightgreen.svg)](https://github.com/Yeah-itsPraveen/praveenmart)
 [![License](https://img.shields.io/badge/License-Academic%20Evaluation-lightgrey.svg)](LICENSE)
 
-> **Anna University R2025, Semester 3 — Checkpoint Window: Jul 27 – Oct 10, 2026**  
 > **Builder:** Solo Developer (Praveen)  
 > **Status:** **Final Review Complete — Full Release `v1.2.0`**
 
