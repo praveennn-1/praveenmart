@@ -257,14 +257,17 @@
     text-align: right;
 }
 
-/* Suggestion Chips with Equal Gap */
+/* Suggestion Chips with Proper Gap and Margins */
 .pm-suggestions-container,
 .pm-chat-suggestions {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px; /* Uniform equal gap both horizontally and vertically */
-    margin-top: 10px;
-    margin-bottom: 6px;
+    align-items: center;
+    gap: 10px 10px;
+    row-gap: 10px;
+    column-gap: 10px;
+    margin-top: 12px;
+    margin-bottom: 8px;
     width: 100%;
 }
 
@@ -272,17 +275,17 @@
 .pm-chat-chip {
     display: inline-flex;
     align-items: center;
-    background: #121214;
-    border: 1px solid #27272A;
-    border-radius: 4px;
-    color: #D4D4D8;
-    font-family: var(--font-mono, monospace);
-    font-size: 0.78rem;
+    background: #18181B;
+    border: 1px solid #3F3F46;
+    border-radius: 6px;
+    color: #E4E4E7;
+    font-family: inherit;
+    font-size: 0.8rem;
     font-weight: 500;
-    padding: 6px 12px;
+    padding: 7px 14px;
     cursor: pointer;
     line-height: 1.35;
-    margin: 0;
+    margin: 4px 5px; /* Ensures clean horizontal and vertical separation across all browsers */
     transition: all 0.15s ease;
     white-space: nowrap;
     user-select: none;

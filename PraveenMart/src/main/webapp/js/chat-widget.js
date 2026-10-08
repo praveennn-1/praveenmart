@@ -234,6 +234,7 @@
                     const chip = document.createElement('button');
                     chip.type = 'button';
                     chip.className = 'pm-chip';
+                    chip.style.margin = '4px 5px';
                     chip.textContent = chipText;
                     chip.addEventListener('click', function () {
                         // Strip leading emoji
