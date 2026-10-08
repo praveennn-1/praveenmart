@@ -85,19 +85,20 @@
         }
 
         .auth-title {
-            font-family: var(--font-heading, 'Manrope', sans-serif);
+            font-family: var(--font-heading, 'Inter', sans-serif);
             font-size: 2rem;
             font-weight: 700;
             color: #FFFFFF;
-            letter-spacing: -0.025em;
+            letter-spacing: -0.03em;
             line-height: 1.15;
             margin: 0 0 0.5rem 0;
             text-align: center;
         }
 
         .auth-subtitle {
-            font-size: 0.92rem;
-            color: #78808F;
+            font-family: var(--font-mono, 'JetBrains Mono', monospace);
+            font-size: 0.85rem;
+            color: #888888;
             margin: 0 0 2rem 0;
             line-height: 1.5;
             font-weight: 400;
@@ -327,8 +328,9 @@
         .auth-footer-text {
             margin-top: 2.2rem;
             text-align: center;
-            font-size: 0.9rem;
-            color: #7E8694;
+            font-size: 0.85rem;
+            color: #71717A;
+            font-family: var(--font-mono, 'JetBrains Mono', monospace);
         }
 
         .auth-footer-text a {
