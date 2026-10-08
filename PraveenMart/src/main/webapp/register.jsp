@@ -21,30 +21,37 @@
             overflow-x: hidden;
         }
 
-        /* Split Screen Container */
+        /* Centered Auth Layout */
         .auth-split-layout {
             display: flex;
+            justify-content: center;
+            align-items: center;
             min-height: 100vh;
             width: 100%;
+            padding: 3rem 1.5rem;
+            background-color: #000000;
         }
 
-        /* Left Side: Form Container */
+        /* Form Card Container */
         .auth-form-side {
-            flex: 1 1 50%;
-            min-height: 100vh;
+            width: 100%;
+            max-width: 450px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 3.5rem 3rem;
-            background-color: #000000;
+            padding: 2.75rem 2.25rem;
+            background-color: #050505;
+            border: 1px solid #222222;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
             position: relative;
             z-index: 10;
         }
 
         .auth-form-inner {
             width: 100%;
-            max-width: 400px;
+            max-width: 100%;
             display: flex;
             flex-direction: column;
         }
@@ -339,72 +346,13 @@
             color: #A1A1AA;
         }
 
-        /* Right Side: Showcase Side */
-        .auth-showcase-side {
-            flex: 1 1 50%;
-            min-height: 100vh;
-            position: relative;
-            overflow: hidden;
-            background-color: #000000;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 4.5rem 4.5rem 3.5rem 4.5rem;
-            border-left: 1px solid #222222;
-        }
-
-        .showcase-header {
-            position: relative;
-            z-index: 5;
-        }
-
-        .showcase-title {
-            font-family: var(--font-heading, 'Inter', sans-serif);
-            font-size: 2.2rem;
-            font-weight: 700;
-            line-height: 1.25;
-            letter-spacing: -0.03em;
-            color: #FFFFFF;
-            margin: 0;
-            max-width: 540px;
-        }
-
-        .showcase-subtitle {
-            font-family: var(--font-mono, 'JetBrains Mono', monospace);
-            color: #888888;
-            font-size: 0.95rem;
-            font-weight: 400;
-            display: block;
-            margin-top: 0.75rem;
-            letter-spacing: -0.01em;
-        }
-
-        /* 3D Showcase Graphic */
-        .showcase-visual-wrap {
-            position: relative;
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 420px;
-        }
-
-        .showcase-svg {
-            position: relative;
-            z-index: 3;
-            width: 100%;
-            max-width: 500px;
-            height: auto;
-        }
-
         /* Mobile / Responsive View */
-        @media (max-width: 960px) {
-            .auth-showcase-side {
-                display: none;
+        @media (max-width: 640px) {
+            .auth-split-layout {
+                padding: 1.5rem 1rem !important;
             }
             .auth-form-side {
-                flex: 1 1 100%;
-                padding: 3rem 1.5rem;
+                padding: 2rem 1.25rem !important;
             }
         }
     </style>
@@ -488,66 +436,6 @@
                 Already have an account?
                 <a href="login.jsp">Sign in</a>
             </div>
-        </div>
-    </div>
-
-    <!-- Right Column: Showcase Side -->
-    <div class="auth-showcase-side">
-        <div class="showcase-header">
-            <h2 class="showcase-title">DISCOVER PREMIUM PRODUCTS.<br><span class="showcase-subtitle">SHOP WITH CONFIDENCE. DELIVERED WORLDWIDE.</span></h2>
-        </div>
-
-        <div class="showcase-visual-wrap">
-            <svg class="showcase-svg" viewBox="50 210 400 250" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <defs>
-                    <filter id="orbitGlowRegister" x="-20%" y="-20%" width="140%" height="140%">
-                        <feGaussianBlur stdDeviation="4" result="blur" />
-                        <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                    </filter>
-                    <linearGradient id="colFrontReg" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#1E222D" />
-                        <stop offset="100%" stop-color="#0E1015" />
-                    </linearGradient>
-                    <linearGradient id="colTopReg" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#2D3342" />
-                        <stop offset="100%" stop-color="#1A1E27" />
-                    </linearGradient>
-                    <linearGradient id="orbitGradReg" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#FFFFFF" />
-                        <stop offset="35%" stop-color="#E2E8F0" />
-                        <stop offset="70%" stop-color="#CBD5E1" />
-                        <stop offset="100%" stop-color="#94A3B8" />
-                    </linearGradient>
-                    <radialGradient id="baseGlowReg" cx="50%" cy="50%" r="50%">
-                        <stop offset="0%" stop-color="rgba(226, 232, 240, 0.22)" />
-                        <stop offset="100%" stop-color="transparent" />
-                    </radialGradient>
-                </defs>
-
-                <!-- Base ambient radial light -->
-                <ellipse cx="250" cy="380" rx="180" ry="60" fill="url(#baseGlowReg)" />
-
-                <!-- Back half of the orbital ring -->
-                <path d="M 80 340 A 180 55 0 0 1 420 340" stroke="rgba(226, 232, 240, 0.35)" stroke-width="2" stroke-dasharray="6 4" />
-
-                <!-- 3D Pedestal Body -->
-                <rect x="195" y="240" width="110" height="200" rx="16" fill="url(#colFrontReg)" stroke="rgba(255, 255, 255, 0.06)" stroke-width="1" />
-                <rect x="197" y="238" width="106" height="40" rx="14" fill="url(#colTopReg)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1" />
-
-                <!-- Perspective coordinate dots and wireframe on top -->
-                <circle cx="205" cy="250" r="3.5" fill="#C8B196" />
-                <circle cx="295" cy="250" r="3.5" fill="#C8B196" />
-                <circle cx="250" cy="266" r="3.5" fill="#C8B196" />
-                <circle cx="250" cy="242" r="3" fill="rgba(200, 177, 150, 0.5)" />
-                <path d="M 205 250 L 250 266 L 295 250 L 250 242 Z" stroke="rgba(200, 177, 150, 0.35)" stroke-width="1.2" stroke-dasharray="3 3" fill="none" />
-
-                <!-- Front half of the orbital ring -->
-                <g filter="url(#orbitGlowRegister)">
-                    <path d="M 420 340 A 180 55 0 0 1 80 340" stroke="url(#orbitGradReg)" stroke-width="2.5" />
-                    <!-- Arrowhead traveling on the orbit path -->
-                    <polygon points="256,395 238,386 244,395 238,404" fill="#FFFFFF" />
-                </g>
-            </svg>
         </div>
     </div>
 </div>
