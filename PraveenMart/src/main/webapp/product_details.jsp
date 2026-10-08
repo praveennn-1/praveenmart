@@ -181,14 +181,22 @@
         @media (max-width: 640px) {
             .details-wrapper {
                 padding: 1.25rem 0 3.5rem;
+                width: 100%;
+                max-width: 100%;
+                overflow-x: hidden;
+                box-sizing: border-box;
             }
             .product-overview-grid {
                 margin-bottom: 2rem;
                 gap: 1.25rem;
+                width: 100%;
+                box-sizing: border-box;
             }
             .details-image-box {
                 height: 260px;
                 border-radius: 8px;
+                width: 100%;
+                box-sizing: border-box;
             }
             .details-price {
                 font-size: 1.45rem;
@@ -196,6 +204,8 @@
             }
             .reviews-section {
                 padding: 1.15rem;
+                width: 100%;
+                box-sizing: border-box;
             }
             .card-qty-stepper {
                 height: 38px;

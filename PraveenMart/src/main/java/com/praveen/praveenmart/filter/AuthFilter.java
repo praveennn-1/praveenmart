@@ -69,6 +69,7 @@ public class AuthFilter implements Filter {
 
         if (path.startsWith("/cart") || path.startsWith("/checkout") ||
                 path.startsWith("/orders") || path.equals("/dashboard.jsp") ||
+                path.startsWith("/account") || path.startsWith("/profile") ||
                 path.startsWith("/wishlist") || path.startsWith("/api/v1/wishlist") ||
                 path.startsWith("/api/v1/cart") || path.startsWith("/api/v1/orders")) {
             if (sessionUser == null) {

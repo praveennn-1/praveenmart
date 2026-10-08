@@ -49,6 +49,21 @@ public interface UserDAO {
     boolean updateUser(User user);
 
     /**
+     * Updates the default delivery address details for a user.
+     *
+     * @param userId        the user ID
+     * @param recipientName recipient full name
+     * @param phone         contact phone number
+     * @param street        street address
+     * @param city          city
+     * @param state         state
+     * @param pincode       postal code
+     * @return true if updated successfully
+     */
+    boolean updateDefaultAddress(Long userId, String recipientName, String phone,
+                                 String street, String city, String state, String pincode);
+
+    /**
      * Deletes a user by primary key ID.
      *
      * @param id the user ID

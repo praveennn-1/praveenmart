@@ -33,6 +33,10 @@
             text-align: center;
             background: var(--hero-glow), #000000;
             border-bottom: 1px solid #1F1F1F;
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
+            box-sizing: border-box;
         }
 
         .store-title {
@@ -111,6 +115,9 @@
             gap: 0.5rem;
             flex-wrap: wrap;
             margin-bottom: 2rem;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
         }
 
         .category-pill {
@@ -602,6 +609,46 @@
 
         .badge-bounce {
             animation: badgePulse 350ms ease-out;
+        }
+
+        /* Mobile Adjustments for Store Hero & Toast */
+        @media (max-width: 600px) {
+            .store-hero {
+                padding: 1.5rem 0 1rem;
+            }
+            .store-title {
+                font-size: 1.75rem !important;
+                letter-spacing: -0.02em;
+            }
+            .store-subtitle {
+                font-size: 0.82rem;
+                margin-bottom: 1.5rem;
+                padding: 0 0.5rem;
+            }
+            .store-search-wrapper {
+                margin-bottom: 1.5rem;
+            }
+            .store-search-bar {
+                padding: 0.3rem 0.4rem 0.3rem 0.75rem;
+                gap: 0.5rem;
+            }
+            .category-pills-bar {
+                gap: 0.35rem;
+                margin-bottom: 1.25rem;
+            }
+            .category-pill {
+                padding: 0.35rem 0.75rem;
+                font-size: 0.75rem;
+            }
+            .cart-toast {
+                bottom: 1rem;
+                right: 1rem;
+                left: 1rem;
+                max-width: calc(100vw - 2rem);
+                justify-content: center;
+                font-size: 12px;
+                padding: 0.65rem 1rem;
+            }
         }
     </style>
 </head>

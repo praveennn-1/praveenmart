@@ -45,20 +45,20 @@
                     </a>
                 <% } %>
 
-                <!-- User Session / Action Pill Button -->
+                <!-- User Session / Action Pill Button (Desktop only, mobile accesses via dropdown menu) -->
                 <% if (sessionUser != null) { %>
-                    <a href="<%= request.getContextPath() %>/dashboard.jsp" class="btn btn-secondary btn-pill" style="padding: 0.45rem 1rem; font-size: 0.85rem;" title="<%= sessionUser.getEmail() %>">
+                    <a href="<%= request.getContextPath() %>/dashboard.jsp" class="btn btn-secondary btn-pill nav-user-pill nav-auth-desktop" style="padding: 0.45rem 1rem; font-size: 0.85rem;" title="<%= sessionUser.getEmail() %>">
                         <span class="material-symbols-outlined" style="font-size: 1.1rem; color: #ffffff;">account_circle</span>
                         <span><%= sessionUser.getName() %></span>
                     </a>
-                    <a href="<%= request.getContextPath() %>/logout" class="btn btn-outlined btn-pill" style="padding: 0.45rem 0.9rem; font-size: 0.82rem;">
+                    <a href="<%= request.getContextPath() %>/logout" class="btn btn-outlined btn-pill nav-signout-pill nav-auth-desktop" style="padding: 0.45rem 0.9rem; font-size: 0.82rem;">
                         <span>Sign Out</span>
                     </a>
                 <% } else { %>
-                    <a href="<%= request.getContextPath() %>/login.jsp" class="btn btn-primary btn-pill" style="padding: 0.5rem 1.35rem; font-size: 0.88rem;">
+                    <a href="<%= request.getContextPath() %>/login.jsp" class="btn btn-primary btn-pill nav-login-pill nav-auth-desktop" style="padding: 0.5rem 1.35rem; font-size: 0.88rem;">
                         <span>Sign in</span>
                     </a>
-                    <a href="<%= request.getContextPath() %>/register.jsp" class="btn btn-secondary btn-pill" style="padding: 0.5rem 1.1rem; font-size: 0.88rem;">
+                    <a href="<%= request.getContextPath() %>/register.jsp" class="btn btn-secondary btn-pill nav-register-pill nav-auth-desktop" style="padding: 0.5rem 1.1rem; font-size: 0.88rem;">
                         <span>Register</span>
                     </a>
                 <% } %>
@@ -73,6 +73,31 @@
                         </svg>
                     </button>
                     <div class="menu-dropdown-card" id="menuDropdownCard" role="menu">
+                        <% if (sessionUser != null) { %>
+                            <div class="menu-user-badge">
+                                <span class="material-symbols-outlined" style="font-size: 1.25rem; color: #10B981;">account_circle</span>
+                                <div class="menu-user-info">
+                                    <span class="menu-user-name"><%= sessionUser.getName() %></span>
+                                    <span class="menu-user-email"><%= sessionUser.getEmail() %></span>
+                                </div>
+                            </div>
+                            <div class="menu-dropdown-divider"></div>
+                            <a href="<%= request.getContextPath() %>/dashboard.jsp" class="menu-dropdown-item" role="menuitem">
+                                <span class="material-symbols-outlined">person</span>
+                                <span>My Account</span>
+                            </a>
+                        <% } else { %>
+                            <a href="<%= request.getContextPath() %>/login.jsp" class="menu-dropdown-item menu-auth-mobile" role="menuitem" style="color: #FFFFFF; font-weight: 600;">
+                                <span class="material-symbols-outlined">login</span>
+                                <span>Sign In</span>
+                            </a>
+                            <a href="<%= request.getContextPath() %>/register.jsp" class="menu-dropdown-item menu-auth-mobile" role="menuitem">
+                                <span class="material-symbols-outlined">person_add</span>
+                                <span>Create Account</span>
+                            </a>
+                            <div class="menu-dropdown-divider"></div>
+                        <% } %>
+
                         <% if (sessionUser == null || !"ADMIN".equalsIgnoreCase(sessionUser.getRole())) { %>
                             <a href="<%= request.getContextPath() %>/products" class="menu-dropdown-item" role="menuitem">
                                 <span class="material-symbols-outlined">storefront</span>
@@ -105,6 +130,38 @@
                             <span class="material-symbols-outlined">shopping_cart</span>
                             <span>Shopping Cart</span>
                         </a>
+
+                        <!-- Mobile Categories Section -->
+                        <div class="menu-dropdown-divider menu-mobile-only"></div>
+                        <div class="menu-category-header menu-mobile-only">Categories</div>
+                        <a href="<%= request.getContextPath() %>/products?category=Electronics" class="menu-dropdown-item menu-mobile-only" role="menuitem">
+                            <span class="material-symbols-outlined">devices</span>
+                            <span>Electronics</span>
+                        </a>
+                        <a href="<%= request.getContextPath() %>/products?category=Fashion%20%26%20Style" class="menu-dropdown-item menu-mobile-only" role="menuitem">
+                            <span class="material-symbols-outlined">apparel</span>
+                            <span>Fashion &amp; Style</span>
+                        </a>
+                        <a href="<%= request.getContextPath() %>/products?category=Home%20%26%20Kitchen" class="menu-dropdown-item menu-mobile-only" role="menuitem">
+                            <span class="material-symbols-outlined">home</span>
+                            <span>Home &amp; Kitchen</span>
+                        </a>
+                        <a href="<%= request.getContextPath() %>/products?category=Accessories" class="menu-dropdown-item menu-mobile-only" role="menuitem">
+                            <span class="material-symbols-outlined">watch</span>
+                            <span>Accessories</span>
+                        </a>
+                        <a href="<%= request.getContextPath() %>/products?category=Books" class="menu-dropdown-item menu-mobile-only" role="menuitem">
+                            <span class="material-symbols-outlined">menu_book</span>
+                            <span>Books</span>
+                        </a>
+
+                        <% if (sessionUser != null) { %>
+                            <div class="menu-dropdown-divider"></div>
+                            <a href="<%= request.getContextPath() %>/logout" class="menu-dropdown-item" role="menuitem" style="color: #F87171;">
+                                <span class="material-symbols-outlined" style="color: #F87171;">logout</span>
+                                <span>Sign Out</span>
+                            </a>
+                        <% } %>
                     </div>
                 </div>
             </div>

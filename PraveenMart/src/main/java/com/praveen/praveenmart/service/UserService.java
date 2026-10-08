@@ -131,7 +131,9 @@ public class UserService {
         List<User> users = userDAO.findAll();
         List<UserResponseDTO> dtos = new ArrayList<>();
         for (User u : users) {
-            dtos.add(new UserResponseDTO(u.getId(), u.getName(), u.getEmail(), u.getRole(), u.getCreatedAt()));
+            dtos.add(new UserResponseDTO(u.getId(), u.getName(), u.getEmail(), u.getRole(),
+                    u.getRecipientName(), u.getPhone(), u.getStreet(), u.getCity(), u.getState(), u.getPincode(),
+                    u.getCreatedAt()));
         }
         return dtos;
     }
@@ -171,5 +173,38 @@ public class UserService {
      */
     public int getSellersCount() {
         return userDAO.countUsersByRole("SELLER");
+    }
+
+    /**
+     * Saves or updates default delivery address details for the user in the account.
+     *
+     * @param userId        the user ID
+     * @param recipientName recipient full name
+     * @param phone         contact phone number
+     * @param street        street address
+     * @param city          city
+     * @param state         state
+     * @param pincode       postal code
+     * @return true if address was successfully saved as default in account
+     */
+    public boolean saveDefaultAddress(Long userId, String recipientName, String phone,
+                                      String street, String city, String state, String pincode) {
+        if (userId == null) {
+            return false;
+        }
+
+        String cleanName = recipientName != null ? recipientName.trim() : null;
+        String cleanPhone = phone != null ? phone.trim() : null;
+        String cleanStreet = street != null ? street.trim() : null;
+        String cleanCity = city != null ? city.trim() : null;
+        String cleanState = state != null ? state.trim() : null;
+        String cleanPincode = pincode != null ? pincode.trim() : null;
+
+        boolean updated = userDAO.updateDefaultAddress(userId, cleanName, cleanPhone,
+                cleanStreet, cleanCity, cleanState, cleanPincode);
+        if (updated) {
+            logger.info("Default delivery address successfully saved in account for userId={}", userId);
+        }
+        return updated;
     }
 }

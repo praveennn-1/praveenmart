@@ -113,6 +113,19 @@ public class DBUtil {
                 try {
                     executeSqlScript(conn, "db/migrations/V4__add_wishlist_table.sql");
                 } catch (Exception ignored) {}
+
+                // Ensure default delivery address columns exist in users table
+                try {
+                    executeSqlScript(conn, "db/migrations/V5__add_user_default_address.sql");
+                } catch (Exception ignored) {}
+                try {
+                    stmt.executeUpdate("ALTER TABLE users ADD COLUMN IF NOT EXISTS recipient_name VARCHAR(100)");
+                    stmt.executeUpdate("ALTER TABLE users ADD COLUMN IF NOT EXISTS phone VARCHAR(20)");
+                    stmt.executeUpdate("ALTER TABLE users ADD COLUMN IF NOT EXISTS street VARCHAR(255)");
+                    stmt.executeUpdate("ALTER TABLE users ADD COLUMN IF NOT EXISTS city VARCHAR(100)");
+                    stmt.executeUpdate("ALTER TABLE users ADD COLUMN IF NOT EXISTS state VARCHAR(100)");
+                    stmt.executeUpdate("ALTER TABLE users ADD COLUMN IF NOT EXISTS pincode VARCHAR(20)");
+                } catch (Exception ignored) {}
             }
         } catch (Exception e) {
             logger.error("Error during database schema and seed initialization", e);

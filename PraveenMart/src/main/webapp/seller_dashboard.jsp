@@ -283,6 +283,31 @@
             overflow-y: auto;
             color: #FFFFFF;
         }
+
+        @media (max-width: 640px) {
+            .seller-main {
+                padding: 1.25rem 0 3.5rem 0;
+                width: 100%;
+                max-width: 100%;
+                overflow-x: hidden;
+                box-sizing: border-box;
+            }
+            .seller-header h1 {
+                font-size: 1.5rem !important;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+            }
+            .stat-card {
+                padding: 1rem;
+            }
+            .modal-content {
+                padding: 1.25rem;
+                width: calc(100vw - 24px);
+                max-width: calc(100vw - 24px);
+            }
+        }
     </style>
 </head>
 <body>

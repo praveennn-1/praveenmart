@@ -65,14 +65,25 @@
         @media (max-width: 640px) {
             .orders-wrapper {
                 padding: 1.25rem 0 3.5rem;
+                width: 100%;
+                max-width: 100%;
+                overflow-x: hidden;
+                box-sizing: border-box;
             }
             .order-card {
                 padding: 1.1rem;
                 margin-bottom: 1rem;
+                width: 100%;
+                max-width: 100%;
+                box-sizing: border-box;
             }
             .order-header {
                 flex-direction: column;
                 align-items: flex-start;
+                gap: 0.65rem;
+            }
+            .order-item-mini-row {
+                flex-wrap: wrap;
                 gap: 0.65rem;
             }
         }

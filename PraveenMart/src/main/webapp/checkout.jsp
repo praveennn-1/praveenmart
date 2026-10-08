@@ -589,6 +589,10 @@
         @media (max-width: 640px) {
             .checkout-wrapper {
                 padding: 1.25rem 0 3.5rem;
+                width: 100%;
+                max-width: 100%;
+                overflow-x: hidden;
+                box-sizing: border-box;
             }
             .checkout-page-title {
                 font-size: 1.45rem;
@@ -601,6 +605,9 @@
             .checkout-section {
                 padding: 1.1rem;
                 margin-bottom: 1rem;
+                width: 100%;
+                max-width: 100%;
+                box-sizing: border-box;
             }
             .checkout-section-title {
                 font-size: 1rem;
@@ -704,42 +711,74 @@
                         <span>1. Shipping Address</span>
                     </div>
 
+                    <% 
+                        boolean hasSavedAddress = (sessionUser != null && sessionUser.hasDefaultAddress());
+                        String prefillName = (sessionUser != null && sessionUser.getRecipientName() != null && !sessionUser.getRecipientName().isBlank())
+                                ? sessionUser.getRecipientName()
+                                : (sessionUser != null && sessionUser.getName() != null ? sessionUser.getName() : "");
+                        String prefillPhone = (sessionUser != null && sessionUser.getPhone() != null) ? sessionUser.getPhone() : "";
+                        String prefillStreet = (sessionUser != null && sessionUser.getStreet() != null) ? sessionUser.getStreet() : "";
+                        String prefillCity = (sessionUser != null && sessionUser.getCity() != null) ? sessionUser.getCity() : "";
+                        String prefillState = (sessionUser != null && sessionUser.getState() != null) ? sessionUser.getState() : "";
+                        String prefillPincode = (sessionUser != null && sessionUser.getPincode() != null) ? sessionUser.getPincode() : "";
+                    %>
+
+                    <div class="address-account-sync-banner" id="addressSyncBanner" style="display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; flex-wrap: wrap; width: 100%; box-sizing: border-box; background: #0A0A0C; border: 1px solid #27272A; border-radius: 4px; padding: 0.8rem 1rem; margin-bottom: 1.25rem;">
+                        <div style="display: flex; align-items: center; gap: 0.65rem;">
+                            <span class="material-symbols-outlined" id="syncIcon" style="font-size: 1.2rem; color: <%= hasSavedAddress ? "#4ADE80" : "#A1A1AA" %>;">
+                                <%= hasSavedAddress ? "verified_user" : "bookmark_add" %>
+                            </span>
+                            <div style="font-family: var(--font-mono); font-size: 0.78rem; line-height: 1.4;">
+                                <strong id="syncTitle" style="color: #FFFFFF;"><%= hasSavedAddress ? "Default Account Address Loaded" : "Automatic Account Address Sync" %></strong>
+                                <span id="syncDesc" style="color: #888888; display: block;"><%= hasSavedAddress ? "Pre-filled from your account. Any details entered will automatically update your account default." : "Any address entered below will automatically be saved as default in your account." %></span>
+                            </div>
+                        </div>
+                        <span id="saveStatusIndicator" style="font-family: var(--font-mono); font-size: 0.72rem; color: #4ADE80; background: #0F1710; border: 1px solid #1E3A24; padding: 2px 8px; border-radius: 3px; display: none;">Saved</span>
+                    </div>
+
                     <div class="form-row-2col">
                         <div>
                             <label class="form-label" for="fullName">Recipient Full Name</label>
-                            <input type="text" id="fullName" name="fullName" class="checkout-input"
-                                   value="<%= sessionUser != null ? sessionUser.getName() : "" %>"
+                            <input type="text" id="fullName" name="fullName" class="checkout-input address-field"
+                                   value="<%= prefillName %>"
                                    placeholder="Your full name" required>
                         </div>
                         <div>
                             <label class="form-label" for="phone">Contact Phone Number</label>
-                            <input type="tel" id="phone" name="phone" class="checkout-input"
+                            <input type="tel" id="phone" name="phone" class="checkout-input address-field"
+                                   value="<%= prefillPhone %>"
                                    placeholder="+91 98765 43210" required>
                         </div>
                     </div>
 
                     <div style="margin-bottom: 1.25rem;">
                         <label class="form-label" for="street">Street Address &amp; Flat / House No.</label>
-                        <input type="text" id="street" name="street" class="checkout-input"
+                        <input type="text" id="street" name="street" class="checkout-input address-field"
+                               value="<%= prefillStreet %>"
                                placeholder="e.g. 42, Green Avenue, Anna Nagar" required>
                     </div>
 
                     <div class="form-row-3col">
                         <div>
                             <label class="form-label" for="city">City</label>
-                            <input type="text" id="city" name="city" class="checkout-input"
+                            <input type="text" id="city" name="city" class="checkout-input address-field"
+                                   value="<%= prefillCity %>"
                                    placeholder="Chennai" required>
                         </div>
                         <div>
                             <label class="form-label" for="state">State</label>
-                            <input type="text" id="state" name="state" class="checkout-input"
+                            <input type="text" id="state" name="state" class="checkout-input address-field"
+                                   value="<%= prefillState %>"
                                    placeholder="Tamil Nadu" required>
                         </div>
                         <div>
                             <label class="form-label" for="pincode">PIN Code</label>
-                            <input type="text" id="pincode" name="pincode" class="checkout-input"
+                            <input type="text" id="pincode" name="pincode" class="checkout-input address-field"
+                                   value="<%= prefillPincode %>"
                                    placeholder="600025" required>
                         </div>
+                    </div>
+                </div>              </div>
                     </div>
                 </div>
 
@@ -1213,6 +1252,73 @@ document.getElementById('checkout-form').addEventListener('submit', function(e) 
     }
     // COD requires no extra checks
 });
+
+// ── Live Auto-Save Delivery Address as Account Default ──────────────────────
+(function() {
+    var saveTimeout = null;
+    var addressFields = document.querySelectorAll('.address-field');
+    var statusBadge = document.getElementById('saveStatusIndicator');
+    var syncTitle = document.getElementById('syncTitle');
+    var syncDesc = document.getElementById('syncDesc');
+    var syncIcon = document.getElementById('syncIcon');
+
+    function syncAddress() {
+        var street = (document.getElementById('street') ? document.getElementById('street').value.trim() : '');
+        if (!street) return;
+
+        var fullName = (document.getElementById('fullName') ? document.getElementById('fullName').value.trim() : '');
+        var phone = (document.getElementById('phone') ? document.getElementById('phone').value.trim() : '');
+        var city = (document.getElementById('city') ? document.getElementById('city').value.trim() : '');
+        var state = (document.getElementById('state') ? document.getElementById('state').value.trim() : '');
+        var pincode = (document.getElementById('pincode') ? document.getElementById('pincode').value.trim() : '');
+
+        var params = new URLSearchParams();
+        params.append('fullName', fullName);
+        params.append('phone', phone);
+        params.append('street', street);
+        params.append('city', city);
+        params.append('state', state);
+        params.append('pincode', pincode);
+
+        fetch('<%= request.getContextPath() %>/checkout/save-address', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: params.toString()
+        }).then(function(res) {
+            return res.json();
+        }).then(function(data) {
+            if (data && data.success) {
+                if (statusBadge) {
+                    statusBadge.style.display = 'inline-block';
+                    statusBadge.textContent = '✓ Saved to Account';
+                    setTimeout(function() {
+                        statusBadge.style.display = 'none';
+                    }, 4000);
+                }
+                if (syncTitle) syncTitle.textContent = 'Default Account Address Loaded';
+                if (syncDesc) syncDesc.textContent = 'Address saved to your account default. Next time you checkout, it will load automatically.';
+                if (syncIcon) {
+                    syncIcon.textContent = 'verified_user';
+                    syncIcon.style.color = '#4ADE80';
+                }
+            }
+        }).catch(function(err) {
+            // Silently continue, standard form submit will also save on checkout
+        });
+    }
+
+    addressFields.forEach(function(field) {
+        field.addEventListener('blur', function() {
+            syncAddress();
+        });
+        field.addEventListener('input', function() {
+            clearTimeout(saveTimeout);
+            saveTimeout = setTimeout(syncAddress, 1800);
+        });
+    });
+})();
 </script>
 
 </body>

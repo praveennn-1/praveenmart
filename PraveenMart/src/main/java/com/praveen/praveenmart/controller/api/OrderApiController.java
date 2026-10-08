@@ -37,10 +37,12 @@ public class OrderApiController extends HttpServlet {
     private static final Logger logger = LoggerFactory.getLogger(OrderApiController.class);
     private final Gson gson = JsonUtil.getGson();
     private OrderService orderService = new OrderService();
+    private com.praveen.praveenmart.service.UserService userService = new com.praveen.praveenmart.service.UserService();
 
     @Override
     public void init() {
         this.orderService = new OrderService();
+        this.userService = new com.praveen.praveenmart.service.UserService();
     }
 
     @Override
@@ -156,6 +158,23 @@ public class OrderApiController extends HttpServlet {
                 paymentDetails.put("cardNumber", request.getParameter("cardNumber"));
                 paymentDetails.put("cvv", request.getParameter("cvv"));
                 paymentDetails.put("upiId", request.getParameter("upiId"));
+            }
+
+            String street = body.has("street") ? body.get("street").getAsString() : request.getParameter("street");
+            String city = body.has("city") ? body.get("city").getAsString() : request.getParameter("city");
+            String state = body.has("state") ? body.get("state").getAsString() : request.getParameter("state");
+            String pincode = body.has("pincode") ? body.get("pincode").getAsString() : request.getParameter("pincode");
+            String phone = body.has("phone") ? body.get("phone").getAsString() : request.getParameter("phone");
+            String recipientName = body.has("recipientName") ? body.get("recipientName").getAsString() :
+                    (body.has("fullName") ? body.get("fullName").getAsString() : request.getParameter("fullName"));
+
+            if (street != null && !street.isBlank()) {
+                userService.saveDefaultAddress(user.getId(), recipientName, phone, street, city, state, pincode);
+                if (address == null || address.isBlank()) {
+                    address = String.format("%s, %s, %s - %s", street, city, state, pincode);
+                }
+            } else if (address != null && !address.isBlank()) {
+                userService.saveDefaultAddress(user.getId(), recipientName, phone, address, null, null, null);
             }
 
             Order placedOrder = orderService.placeOrder(user.getId(), address, paymentMethod, paymentDetails);

@@ -1,12 +1,4 @@
 # PraveenMart — Multi-Seller E-Commerce Marketplace
-
-[![build-and-test](https://github.com/Yeah-itsPraveen/praveenmart/actions/workflows/build.yml/badge.svg)](https://github.com/Yeah-itsPraveen/praveenmart/actions/workflows/build.yml)
-[![Java 17](https://img.shields.io/badge/Java-17%20LTS-orange.svg)](https://openjdk.org/projects/jdk/17/)
-[![Tomcat](https://img.shields.io/badge/Tomcat-9.0.x-blue.svg)](https://tomcat.apache.org/)
-[![H2 Database](https://img.shields.io/badge/H2-2.3.x-yellow.svg)](https://h2database.com/)
-[![Tests](https://img.shields.io/badge/Tests-59%20Passing-brightgreen.svg)](https://github.com/Yeah-itsPraveen/praveenmart)
-[![License](https://img.shields.io/badge/License-Academic%20Evaluation-lightgrey.svg)](LICENSE)
-
 > **Builder:** Solo Developer (Praveen)  
 > **Status:** **Final Review Complete — Full Release `v1.2.0`**
 

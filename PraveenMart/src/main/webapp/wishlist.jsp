@@ -208,6 +208,12 @@
                 font-size: 0.75rem;
                 border-radius: 6px;
             }
+            .wishlist-wrapper {
+                width: 100%;
+                max-width: 100%;
+                overflow-x: hidden;
+                box-sizing: border-box;
+            }
             .empty-wishlist-box {
                 padding: 2.25rem 1rem;
                 border-radius: 12px;
@@ -219,12 +225,12 @@
             }
         }
 
-        @media (max-width: 360px) {
+        @media (max-width: 440px) {
             .wishlist-grid {
                 grid-template-columns: 1fr;
             }
             .wishlist-img-box {
-                height: 180px;
+                height: 190px;
             }
         }
     </style>

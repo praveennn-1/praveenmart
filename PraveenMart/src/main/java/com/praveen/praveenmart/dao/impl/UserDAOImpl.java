@@ -19,7 +19,7 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public User findById(Long id) {
-        String sql = "SELECT id, name, email, password_hash, role, created_at FROM users WHERE id = ?";
+        String sql = "SELECT id, name, email, password_hash, role, recipient_name, phone, street, city, state, pincode, created_at FROM users WHERE id = ?";
         try (Connection conn = DBUtil.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -37,7 +37,7 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public User findByEmail(String email) {
-        String sql = "SELECT id, name, email, password_hash, role, created_at FROM users WHERE LOWER(email) = LOWER(?)";
+        String sql = "SELECT id, name, email, password_hash, role, recipient_name, phone, street, city, state, pincode, created_at FROM users WHERE LOWER(email) = LOWER(?)";
         try (Connection conn = DBUtil.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -56,7 +56,7 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public List<User> findAll() {
         List<User> users = new ArrayList<>();
-        String sql = "SELECT id, name, email, password_hash, role, created_at FROM users ORDER BY id DESC";
+        String sql = "SELECT id, name, email, password_hash, role, recipient_name, phone, street, city, state, pincode, created_at FROM users ORDER BY id DESC";
 
         try (Connection conn = DBUtil.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
@@ -73,7 +73,7 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public boolean createUser(User user) {
-        String sql = "INSERT INTO users (name, email, password_hash, role) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO users (name, email, password_hash, role, recipient_name, phone, street, city, state, pincode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = DBUtil.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
@@ -81,6 +81,12 @@ public class UserDAOImpl implements UserDAO {
             stmt.setString(2, user.getEmail());
             stmt.setString(3, user.getPasswordHash());
             stmt.setString(4, user.getRole());
+            stmt.setString(5, user.getRecipientName());
+            stmt.setString(6, user.getPhone());
+            stmt.setString(7, user.getStreet());
+            stmt.setString(8, user.getCity());
+            stmt.setString(9, user.getState());
+            stmt.setString(10, user.getPincode());
 
             int affectedRows = stmt.executeUpdate();
             if (affectedRows > 0) {
@@ -99,18 +105,46 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public boolean updateUser(User user) {
-        String sql = "UPDATE users SET name = ?, email = ?, role = ? WHERE id = ?";
+        String sql = "UPDATE users SET name = ?, email = ?, role = ?, recipient_name = ?, phone = ?, street = ?, city = ?, state = ?, pincode = ? WHERE id = ?";
         try (Connection conn = DBUtil.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, user.getName());
             stmt.setString(2, user.getEmail());
             stmt.setString(3, user.getRole());
-            stmt.setLong(4, user.getId());
+            stmt.setString(4, user.getRecipientName());
+            stmt.setString(5, user.getPhone());
+            stmt.setString(6, user.getStreet());
+            stmt.setString(7, user.getCity());
+            stmt.setString(8, user.getState());
+            stmt.setString(9, user.getPincode());
+            stmt.setLong(10, user.getId());
 
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             logger.error("Error updating user id: {}", user.getId(), e);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean updateDefaultAddress(Long userId, String recipientName, String phone,
+                                         String street, String city, String state, String pincode) {
+        String sql = "UPDATE users SET recipient_name = ?, phone = ?, street = ?, city = ?, state = ?, pincode = ? WHERE id = ?";
+        try (Connection conn = DBUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, recipientName);
+            stmt.setString(2, phone);
+            stmt.setString(3, street);
+            stmt.setString(4, city);
+            stmt.setString(5, state);
+            stmt.setString(6, pincode);
+            stmt.setLong(7, userId);
+
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            logger.error("Error updating default address for user id: {}", userId, e);
         }
         return false;
     }
@@ -170,6 +204,15 @@ public class UserDAOImpl implements UserDAO {
         user.setEmail(rs.getString("email"));
         user.setPasswordHash(rs.getString("password_hash"));
         user.setRole(rs.getString("role"));
+        try {
+            user.setRecipientName(rs.getString("recipient_name"));
+            user.setPhone(rs.getString("phone"));
+            user.setStreet(rs.getString("street"));
+            user.setCity(rs.getString("city"));
+            user.setState(rs.getString("state"));
+            user.setPincode(rs.getString("pincode"));
+        } catch (SQLException ignored) {
+        }
         if (rs.getTimestamp("created_at") != null) {
             user.setCreatedAt(rs.getTimestamp("created_at").toLocalDateTime());
         }

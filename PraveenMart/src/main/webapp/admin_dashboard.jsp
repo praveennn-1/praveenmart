@@ -171,6 +171,26 @@
         tr:hover td {
             background-color: #0A0A0A;
         }
+
+        @media (max-width: 640px) {
+            .admin-main {
+                padding: 1.25rem 0 3.5rem 0;
+                width: 100%;
+                max-width: 100%;
+                overflow-x: hidden;
+                box-sizing: border-box;
+            }
+            .admin-header h1 {
+                font-size: 1.5rem !important;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+            }
+            .stat-card {
+                padding: 1rem;
+            }
+        }
     </style>
 </head>
 <body>

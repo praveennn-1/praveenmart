@@ -259,6 +259,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
             margin: 0.25rem 0 1.75rem 0;
             font-size: 0.85rem;
             color: #7E8694;

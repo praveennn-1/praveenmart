@@ -24,6 +24,8 @@
             align-items: center;
             justify-content: center;
             background-color: #000000;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .success-card {
@@ -33,6 +35,7 @@
             padding: 3.5rem 2.5rem;
             max-width: 540px;
             width: 100%;
+            box-sizing: border-box;
             text-align: center;
         }
 
@@ -47,6 +50,15 @@
             align-items: center;
             justify-content: center;
             margin: 0 auto 1.5rem;
+        }
+
+        @media (max-width: 600px) {
+            .success-wrapper {
+                padding: 2rem 1rem 4rem;
+            }
+            .success-card {
+                padding: 2rem 1.25rem;
+            }
         }
     </style>
 </head>

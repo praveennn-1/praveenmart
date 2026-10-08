@@ -75,4 +75,21 @@ public class UserServiceTest {
         assertTrue(registered);
         assertEquals("BUYER", captor.getValue().getRole());
     }
+
+    @Test
+    public void testSaveDefaultAddressSuccess() {
+        when(userDAO.updateDefaultAddress(10L, "John Doe", "9876543210", "123 Elm St", "Springfield", "IL", "62701"))
+                .thenReturn(true);
+
+        boolean result = userService.saveDefaultAddress(10L, "John Doe", "9876543210", "123 Elm St", "Springfield", "IL", "62701");
+        assertTrue(result);
+        verify(userDAO).updateDefaultAddress(10L, "John Doe", "9876543210", "123 Elm St", "Springfield", "IL", "62701");
+    }
+
+    @Test
+    public void testSaveDefaultAddressNullUserIdReturnsFalse() {
+        boolean result = userService.saveDefaultAddress(null, "John", "123", "St", "City", "State", "00000");
+        assertFalse(result);
+        verify(userDAO, never()).updateDefaultAddress(any(), any(), any(), any(), any(), any(), any());
+    }
 }

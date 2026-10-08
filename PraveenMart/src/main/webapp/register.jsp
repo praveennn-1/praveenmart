@@ -272,6 +272,8 @@
             display: flex;
             justify-content: flex-end;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
             margin: 0.2rem 0 1.5rem 0;
             font-size: 0.8rem;
             color: #A1A1AA;

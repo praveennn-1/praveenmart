@@ -282,12 +282,14 @@
     font-family: inherit;
     font-size: 0.8rem;
     font-weight: 500;
-    padding: 7px 14px;
+    padding: 7px 12px;
     cursor: pointer;
     line-height: 1.35;
-    margin: 4px 5px; /* Ensures clean horizontal and vertical separation across all browsers */
+    margin: 3px 4px;
     transition: all 0.15s ease;
-    white-space: nowrap;
+    white-space: normal;
+    word-break: break-word;
+    max-width: 100%;
     user-select: none;
     box-sizing: border-box;
 }
@@ -368,14 +370,20 @@
     box-shadow: 0 0 0 1px #FFFFFF;
 }
 
-.pm-chat-input {
+.pm-chat-input,
+.pm-chat-input:focus,
+.pm-chat-input:active,
+.pm-chat-input:invalid {
     flex: 1;
-    background: transparent;
-    border: none;
-    outline: none;
-    color: #FFFFFF;
-    font-family: var(--font-mono, monospace);
-    font-size: 0.86rem;
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    color: #FFFFFF !important;
+    font-family: var(--font-mono, monospace) !important;
+    font-size: 0.86rem !important;
+    padding: 6px 0 !important;
 }
 
 .pm-chat-input::placeholder {
@@ -412,4 +420,46 @@
     font-size: 0.7rem;
     color: #52525B;
     padding: 0 4px;
+}
+
+/* 6. Mobile Responsiveness & Overflow Prevention */
+@media (max-width: 600px) {
+    .pm-chat-launcher {
+        bottom: 16px;
+        right: 16px;
+        padding: 6px 10px 6px 8px;
+        gap: 6px;
+    }
+
+    .pm-chat-launcher-label {
+        font-size: 0.78rem;
+    }
+
+    .pm-chat-panel {
+        bottom: 68px;
+        right: 12px;
+        left: 12px;
+        width: auto !important;
+        max-width: calc(100vw - 24px) !important;
+        height: calc(100vh - 84px) !important;
+        max-height: calc(100vh - 84px) !important;
+        border-radius: 8px;
+    }
+
+    .pm-chat-header {
+        padding: 10px 12px;
+    }
+
+    .pm-chat-body {
+        padding: 12px;
+    }
+
+    .pm-chat-footer {
+        padding: 10px 12px;
+    }
+
+    .pm-chip, .pm-chat-chip {
+        font-size: 0.75rem;
+        padding: 6px 10px;
+    }
 }

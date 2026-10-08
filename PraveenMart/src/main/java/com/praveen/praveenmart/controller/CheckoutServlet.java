@@ -6,6 +6,7 @@ import com.praveen.praveenmart.model.Order;
 import com.praveen.praveenmart.model.User;
 import com.praveen.praveenmart.service.CartService;
 import com.praveen.praveenmart.service.OrderService;
+import com.praveen.praveenmart.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,17 +20,19 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 
-@WebServlet(name = "CheckoutServlet", urlPatterns = {"/checkout", "/checkout/place-order"})
+@WebServlet(name = "CheckoutServlet", urlPatterns = {"/checkout", "/checkout/place-order", "/checkout/save-address"})
 public class CheckoutServlet extends HttpServlet {
 
     private static final Logger logger = LoggerFactory.getLogger(CheckoutServlet.class);
     private CartService cartService;
     private OrderService orderService;
+    private UserService userService;
 
     @Override
     public void init() {
         this.cartService = new CartService();
         this.orderService = new OrderService();
+        this.userService = new UserService();
     }
 
     @Override
@@ -40,6 +43,16 @@ public class CheckoutServlet extends HttpServlet {
         if (user == null) {
             response.sendRedirect(request.getContextPath() + "/login.jsp?redirect=/checkout");
             return;
+        }
+
+        // Fetch fresh user record from database so any default address details are up to date
+        User freshUser = userService.findById(user.getId());
+        if (freshUser != null) {
+            user = freshUser;
+            HttpSession session = request.getSession(false);
+            if (session != null) {
+                session.setAttribute("user", user);
+            }
         }
 
         List<CartItem> cartItems = cartService.getCartItems(user.getId());
@@ -70,12 +83,40 @@ public class CheckoutServlet extends HttpServlet {
             return;
         }
 
+        String path = request.getServletPath();
+        String fullName = request.getParameter("fullName");
+        String phone = request.getParameter("phone");
         String street = request.getParameter("street");
         String city = request.getParameter("city");
         String state = request.getParameter("state");
         String pincode = request.getParameter("pincode");
-        String paymentMethod = request.getParameter("paymentMethod");
 
+        // When an address is entered for delivery, save that whole address details default in the account
+        if (street != null && !street.trim().isEmpty()) {
+            boolean saved = userService.saveDefaultAddress(user.getId(), fullName, phone, street, city, state, pincode);
+            if (saved) {
+                user.setRecipientName(fullName != null ? fullName.trim() : null);
+                user.setPhone(phone != null ? phone.trim() : null);
+                user.setStreet(street != null ? street.trim() : null);
+                user.setCity(city != null ? city.trim() : null);
+                user.setState(state != null ? state.trim() : null);
+                user.setPincode(pincode != null ? pincode.trim() : null);
+                HttpSession session = request.getSession(false);
+                if (session != null) {
+                    session.setAttribute("user", user);
+                }
+            }
+        }
+
+        // Dedicated AJAX endpoint to save default address directly
+        if ("/checkout/save-address".equals(path)) {
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write("{\"success\":true,\"message\":\"Default address saved in account.\"}");
+            return;
+        }
+
+        String paymentMethod = request.getParameter("paymentMethod");
         String fullAddress = String.format("%s, %s, %s - %s", street, city, state, pincode);
 
         java.util.Map<String, String> paymentDetails = new java.util.HashMap<>();

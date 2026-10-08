@@ -50,4 +50,32 @@ public class UserDAOTest extends BaseDAOTest {
         int count = userDAO.countUsers();
         assertTrue(count >= 3);
     }
+
+    @Test
+    public void testUpdateAndFindDefaultAddress() {
+        User newUser = new User();
+        newUser.setName("Address User");
+        newUser.setEmail("address_user_" + System.currentTimeMillis() + "@test.com");
+        newUser.setPasswordHash("$2a$10$8K1p/a0dL1LXMIgoEDFrwOdMQiP8eB3fO8Xo9J5LhQp0u81yWz47.");
+        newUser.setRole("BUYER");
+
+        boolean created = userDAO.createUser(newUser);
+        assertTrue(created);
+        assertNotNull(newUser.getId());
+
+        boolean updated = userDAO.updateDefaultAddress(newUser.getId(), "Recipient Name", "+91 9988776655",
+                "123 Market Street", "Chennai", "Tamil Nadu", "600001");
+        assertTrue(updated);
+
+        User retrieved = userDAO.findById(newUser.getId());
+        assertNotNull(retrieved);
+        assertEquals("Recipient Name", retrieved.getRecipientName());
+        assertEquals("+91 9988776655", retrieved.getPhone());
+        assertEquals("123 Market Street", retrieved.getStreet());
+        assertEquals("Chennai", retrieved.getCity());
+        assertEquals("Tamil Nadu", retrieved.getState());
+        assertEquals("600001", retrieved.getPincode());
+        assertTrue(retrieved.hasDefaultAddress());
+        assertEquals("123 Market Street, Chennai, Tamil Nadu - 600001", retrieved.getFormattedAddress());
+    }
 }
