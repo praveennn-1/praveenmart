@@ -96,6 +96,10 @@ public class DBUtil {
                 } else {
                     logger.info("Database schema and products already up to date.");
                 }
+                // Ensure optional migration tables such as wishlist_items exist
+                try {
+                    executeSqlScript(conn, "db/migrations/V4__add_wishlist_table.sql");
+                } catch (Exception ignored) {}
             }
         } catch (Exception e) {
             logger.error("Error during database schema and seed initialization", e);
