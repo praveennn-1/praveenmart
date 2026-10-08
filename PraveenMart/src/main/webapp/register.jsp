@@ -58,19 +58,30 @@
 
         .auth-brand-wrapper {
             margin-bottom: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            width: 100%;
         }
 
         .auth-brand {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 0.5rem;
             font-family: var(--font-mono, 'JetBrains Mono', monospace);
-            font-size: 1.15rem;
+            font-size: 1.25rem;
             font-weight: 800;
             color: #FFFFFF;
-            letter-spacing: -0.03em;
-            text-transform: lowercase;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
             text-decoration: none;
+            transition: color 200ms ease;
+        }
+
+        .auth-brand:hover {
+            color: #FFFFFF;
         }
 
         .auth-brand .brand-badge {
@@ -94,6 +105,7 @@
             letter-spacing: -0.03em;
             line-height: 1.15;
             margin: 0 0 0.5rem 0;
+            text-align: center;
         }
 
         .auth-subtitle {
@@ -102,6 +114,7 @@
             color: #888888;
             margin: 0 0 2rem 0;
             line-height: 1.5;
+            text-align: center;
         }
 
         /* Form Controls */

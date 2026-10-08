@@ -57,18 +57,25 @@
         }
 
         .auth-brand-wrapper {
-            margin-bottom: 2.2rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            width: 100%;
         }
 
         .auth-brand {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 0.5rem;
-            font-family: var(--font-mono);
+            font-family: var(--font-mono, 'JetBrains Mono', monospace);
             font-size: 1.25rem;
-            font-weight: 700;
+            font-weight: 800;
             color: #FFFFFF;
-            letter-spacing: -0.02em;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
             text-decoration: none;
             transition: color 200ms ease;
         }
@@ -79,20 +86,22 @@
 
         .auth-title {
             font-family: var(--font-heading, 'Manrope', sans-serif);
-            font-size: 2.25rem;
+            font-size: 2rem;
             font-weight: 700;
             color: #FFFFFF;
             letter-spacing: -0.025em;
             line-height: 1.15;
             margin: 0 0 0.5rem 0;
+            text-align: center;
         }
 
         .auth-subtitle {
-            font-size: 0.95rem;
+            font-size: 0.92rem;
             color: #78808F;
-            margin: 0 0 2.25rem 0;
+            margin: 0 0 2rem 0;
             line-height: 1.5;
             font-weight: 400;
+            text-align: center;
         }
 
         /* Form Controls */
