@@ -25,7 +25,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PraveenMart - Premium Marketplace</title>
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/theme.css?v=5.8">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/theme.css?v=5.9">
     <style>
         /* Hero & Catalog Controls (OpenCode Theme) */
         .store-hero {
@@ -82,18 +82,24 @@
             box-shadow: 0 0 0 1px #FFFFFF;
         }
 
-        .store-search-bar input {
+        .store-search-bar input,
+        .store-search-bar input:focus,
+        .store-search-bar input:active {
             flex: 1;
-            background: transparent;
-            border: none;
-            outline: none;
-            color: #FFFFFF;
-            font-size: 0.9rem;
-            font-family: var(--font-mono);
+            background: transparent !important;
+            background-color: transparent !important;
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+            color: #FFFFFF !important;
+            font-size: 0.9rem !important;
+            font-family: var(--font-mono) !important;
+            padding: 0.35rem 0.25rem !important;
+            height: auto !important;
         }
 
         .store-search-bar input::placeholder {
-            color: #52525B;
+            color: #52525B !important;
             opacity: 1;
         }
 
@@ -615,7 +621,7 @@
         <div class="store-search-wrapper">
             <form action="<%= request.getContextPath() %>/products" method="get" class="store-search-bar">
                 <span class="material-symbols-outlined" style="color: var(--color-on-surface-muted);">search</span>
-                <input type="text" name="q" placeholder="Search products, brands, categories..." value="<%= searchQuery %>" autocomplete="off">
+                <input type="text" name="q" placeholder="Search products, brands, categories..." value="<%= searchQuery %>" autocomplete="off" style="border: none !important; outline: none !important; box-shadow: none !important; background: transparent !important;">
                 <% if (!"all".equalsIgnoreCase(selectedCategory)) { %>
                     <input type="hidden" name="category" value="<%= selectedCategory %>">
                 <% } %>

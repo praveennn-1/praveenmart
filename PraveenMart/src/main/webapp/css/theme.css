@@ -541,6 +541,20 @@ input[type="password"]:focus, input[type="tel"]:focus, input[type="number"]:focu
     box-shadow: 0 0 0 1px #FFFFFF !important;
 }
 
+/* Embedded search bar inputs should never have inner borders or box-shadows */
+.store-search-bar input,
+.store-search-bar input:focus,
+.store-search-bar input:active,
+.search-bar input,
+.search-bar input:focus,
+.search-bar input:active {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
 ::placeholder,
 .form-input-field::placeholder, 
 .checkout-input::placeholder,
