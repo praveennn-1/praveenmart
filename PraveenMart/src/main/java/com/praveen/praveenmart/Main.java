@@ -19,9 +19,6 @@ public class Main {
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) throws Exception {
-        // Direct System.err output to System.out so IntelliJ console displays Tomcat log lines in normal text instead of red
-        System.setErr(System.out);
-
         // Route java.util.logging (Tomcat logs) through SLF4J / Logback
         SLF4JBridgeHandler.removeHandlersForRootLogger();
         SLF4JBridgeHandler.install();
