@@ -10,6 +10,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * JDBC implementation of {@link ProductDAO} for product catalog persistence.
+ */
 public class ProductDAOImpl implements ProductDAO {
 
     private static final Logger logger = LoggerFactory.getLogger(ProductDAOImpl.class);

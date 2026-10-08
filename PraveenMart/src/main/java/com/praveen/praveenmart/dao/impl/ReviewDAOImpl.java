@@ -10,6 +10,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * JDBC implementation of {@link ReviewDAO} for product review and star rating persistence.
+ */
 public class ReviewDAOImpl implements ReviewDAO {
 
     private static final Logger logger = LoggerFactory.getLogger(ReviewDAOImpl.class);

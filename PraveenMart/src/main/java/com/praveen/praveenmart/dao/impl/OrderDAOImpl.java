@@ -12,6 +12,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * JDBC implementation of {@link OrderDAO} supporting transactional order management.
+ */
 public class OrderDAOImpl implements OrderDAO {
 
     private static final Logger logger = LoggerFactory.getLogger(OrderDAOImpl.class);

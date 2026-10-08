@@ -140,24 +140,58 @@ public class OrderService {
         }
     }
 
+    /**
+     * Finds an order by ID.
+     *
+     * @param orderId the order ID
+     * @return Order entity or null
+     */
     public Order getOrderById(Long orderId) {
         return orderDAO.findById(orderId);
     }
 
+    /**
+     * Retrieves all orders placed by a specific buyer.
+     *
+     * @param buyerId the buyer ID
+     * @return list of orders
+     */
     public List<Order> getBuyerOrders(Long buyerId) {
-        if (buyerId == null) return List.of();
+        if (buyerId == null) {
+            return List.of();
+        }
         return orderDAO.findByBuyerId(buyerId);
     }
 
+    /**
+     * Retrieves all orders across the entire platform.
+     *
+     * @return list of all orders
+     */
     public List<Order> getAllOrders() {
         return orderDAO.findAll();
     }
 
+    /**
+     * Retrieves incoming order line items for products belonging to a seller.
+     *
+     * @param sellerId the seller ID
+     * @return list of order items
+     */
     public List<OrderItem> getSellerIncomingOrders(Long sellerId) {
-        if (sellerId == null) return List.of();
+        if (sellerId == null) {
+            return List.of();
+        }
         return orderDAO.findItemsBySellerId(sellerId);
     }
 
+    /**
+     * Updates an order's status along the fulfillment lifecycle (Requirement O2).
+     *
+     * @param orderId   the order ID
+     * @param newStatus the target status ('PENDING', 'CONFIRMED', 'SHIPPED', 'DELIVERED', 'CANCELLED')
+     * @return true if updated successfully
+     */
     public boolean updateOrderStatus(Long orderId, String newStatus) {
         if (orderId == null || newStatus == null || newStatus.isBlank()) {
             throw new ValidationException("Order ID and status are required.");
@@ -180,21 +214,47 @@ public class OrderService {
         return updated;
     }
 
+    /**
+     * Returns total platform order count.
+     *
+     * @return total order count
+     */
     public int getTotalOrdersCount() {
         return orderDAO.countOrders();
     }
 
+    /**
+     * Returns order count for a specific seller.
+     *
+     * @param sellerId the seller ID
+     * @return seller order count
+     */
     public int getSellerOrdersCount(Long sellerId) {
-        if (sellerId == null) return 0;
+        if (sellerId == null) {
+            return 0;
+        }
         return orderDAO.countOrdersBySeller(sellerId);
     }
 
+    /**
+     * Computes the total platform revenue across all confirmed/delivered orders.
+     *
+     * @return total platform revenue
+     */
     public BigDecimal getTotalPlatformRevenue() {
         return orderDAO.calculateTotalRevenue();
     }
 
+    /**
+     * Computes total revenue earned by a specific seller (Requirement O3).
+     *
+     * @param sellerId the seller ID
+     * @return seller revenue
+     */
     public BigDecimal getSellerRevenue(Long sellerId) {
-        if (sellerId == null) return BigDecimal.ZERO;
+        if (sellerId == null) {
+            return BigDecimal.ZERO;
+        }
         return orderDAO.calculateSellerRevenue(sellerId);
     }
 }

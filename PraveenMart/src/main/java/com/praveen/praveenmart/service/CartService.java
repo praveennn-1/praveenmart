@@ -13,20 +13,38 @@ import com.praveen.praveenmart.model.Product;
 import java.math.BigDecimal;
 import java.util.List;
 
+/**
+ * Service managing user shopping cart operations, stock validation, and total computation (Requirement F4).
+ */
 public class CartService {
 
     private final CartDAO cartDAO;
     private final ProductDAO productDAO;
 
+    /**
+     * Default constructor initializing with default DAOs.
+     */
     public CartService() {
         this(new CartDAOImpl(), new ProductDAOImpl());
     }
 
+    /**
+     * Dependency injection constructor for testing.
+     *
+     * @param cartDAO    the cart data access object
+     * @param productDAO the product data access object
+     */
     public CartService(CartDAO cartDAO, ProductDAO productDAO) {
         this.cartDAO = cartDAO;
         this.productDAO = productDAO;
     }
 
+    /**
+     * Retrieves all items currently in the user's cart.
+     *
+     * @param userId the user ID
+     * @return list of cart items
+     */
     public List<CartItem> getCartItems(Long userId) {
         if (userId == null) {
             return List.of();
@@ -34,6 +52,14 @@ public class CartService {
         return cartDAO.findByUserId(userId);
     }
 
+    /**
+     * Adds a product to the cart with inventory availability check.
+     *
+     * @param userId    the user ID
+     * @param productId the product ID
+     * @param quantity  the quantity to add
+     * @return true if added successfully
+     */
     public boolean addToCart(Long userId, Long productId, int quantity) {
         if (userId == null || productId == null) {
             throw new ValidationException("User ID and Product ID are required.");
@@ -58,6 +84,14 @@ public class CartService {
         return cartDAO.addToCart(userId, productId, quantity);
     }
 
+    /**
+     * Updates the quantity of an item in the user's cart.
+     *
+     * @param cartItemId the cart item ID
+     * @param userId     the user ID
+     * @param quantity   the new quantity
+     * @return true if updated
+     */
     public boolean updateQuantity(Long cartItemId, Long userId, int quantity) {
         if (cartItemId == null || userId == null) {
             throw new ValidationException("Cart Item ID and User ID are required.");
@@ -84,6 +118,13 @@ public class CartService {
         return cartDAO.updateQuantity(cartItemId, quantity);
     }
 
+    /**
+     * Removes an item from the cart verifying user ownership.
+     *
+     * @param cartItemId the cart item ID
+     * @param userId     the user ID
+     * @return true if removed
+     */
     public boolean removeFromCart(Long cartItemId, Long userId) {
         if (cartItemId == null || userId == null) {
             return false;
@@ -91,6 +132,12 @@ public class CartService {
         return cartDAO.removeFromCart(cartItemId, userId);
     }
 
+    /**
+     * Empties all items in the user's cart.
+     *
+     * @param userId the user ID
+     * @return true if cleared
+     */
     public boolean clearCart(Long userId) {
         if (userId == null) {
             return false;
@@ -98,6 +145,12 @@ public class CartService {
         return cartDAO.clearCart(userId);
     }
 
+    /**
+     * Calculates the subtotal price of all items in the cart.
+     *
+     * @param userId the user ID
+     * @return total monetary amount
+     */
     public BigDecimal calculateCartTotal(Long userId) {
         List<CartItem> items = getCartItems(userId);
         BigDecimal total = BigDecimal.ZERO;
@@ -107,8 +160,16 @@ public class CartService {
         return total;
     }
 
+    /**
+     * Returns total unit count across all items in user's cart.
+     *
+     * @param userId the user ID
+     * @return total unit count
+     */
     public int getCartItemCount(Long userId) {
-        if (userId == null) return 0;
+        if (userId == null) {
+            return 0;
+        }
         return cartDAO.getCartItemCount(userId);
     }
 }

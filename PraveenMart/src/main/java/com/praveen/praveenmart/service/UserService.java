@@ -13,19 +13,37 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Service managing user authentication, registration, password hashing, and user administration (Requirement F1, F7).
+ */
 public class UserService {
 
     private static final Logger logger = LoggerFactory.getLogger(UserService.class);
     private final UserDAO userDAO;
 
+    /**
+     * Default constructor initializing with {@link UserDAOImpl}.
+     */
     public UserService() {
         this(new UserDAOImpl());
     }
 
+    /**
+     * Dependency injection constructor for testing.
+     *
+     * @param userDAO the user data access object
+     */
     public UserService(UserDAO userDAO) {
         this.userDAO = userDAO;
     }
 
+    /**
+     * Authenticates a user using email and plaintext password validated against bcrypt hash.
+     *
+     * @param email    the user's email address
+     * @param password the plaintext password to verify
+     * @return authenticated User entity, or null if credentials are invalid
+     */
     public User authenticate(String email, String password) {
         if (!ValidationUtil.isValidEmail(email) || password == null || password.isBlank()) {
             return null;
@@ -45,6 +63,15 @@ public class UserService {
         return user;
     }
 
+    /**
+     * Registers a new user with bcrypt password hashing and role validation (BUYER or SELLER).
+     *
+     * @param name     the user's full name
+     * @param email    the unique email address
+     * @param password the plaintext password (min 8 chars)
+     * @param role     the intended role ('BUYER' or 'SELLER')
+     * @return true if user registration succeeded, false if email already exists
+     */
     public boolean registerUser(String name, String email, String password, String role) {
         if (!ValidationUtil.isValidName(name)) {
             throw new ValidationException("Invalid name provided.");
@@ -85,10 +112,21 @@ public class UserService {
         return created;
     }
 
+    /**
+     * Finds a user by ID.
+     *
+     * @param id the user ID
+     * @return User entity or null
+     */
     public User findById(Long id) {
         return userDAO.findById(id);
     }
 
+    /**
+     * Retrieves all users mapped to safe DTOs without sensitive password hashes (Requirement 13.4).
+     *
+     * @return list of UserResponseDTO
+     */
     public List<UserResponseDTO> getAllUsers() {
         List<User> users = userDAO.findAll();
         List<UserResponseDTO> dtos = new ArrayList<>();
@@ -98,18 +136,39 @@ public class UserService {
         return dtos;
     }
 
+    /**
+     * Deletes a user by ID.
+     *
+     * @param id the user ID
+     * @return true if deleted
+     */
     public boolean deleteUser(Long id) {
         return userDAO.deleteUser(id);
     }
 
+    /**
+     * Returns total registered user count.
+     *
+     * @return total user count
+     */
     public int getTotalUsersCount() {
         return userDAO.countUsers();
     }
 
+    /**
+     * Returns total count of buyers.
+     *
+     * @return buyer count
+     */
     public int getBuyersCount() {
         return userDAO.countUsersByRole("BUYER");
     }
 
+    /**
+     * Returns total count of sellers.
+     *
+     * @return seller count
+     */
     public int getSellersCount() {
         return userDAO.countUsersByRole("SELLER");
     }

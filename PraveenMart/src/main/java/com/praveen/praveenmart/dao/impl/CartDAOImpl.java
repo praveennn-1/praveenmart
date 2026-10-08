@@ -11,6 +11,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * JDBC implementation of {@link CartDAO} for shopping cart persistence.
+ */
 public class CartDAOImpl implements CartDAO {
 
     private static final Logger logger = LoggerFactory.getLogger(CartDAOImpl.class);
