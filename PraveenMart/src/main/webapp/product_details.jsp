@@ -37,7 +37,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= product != null ? product.getName() : "Product Details" %> - PraveenMart</title>
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/theme.css?v=5.8">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/theme.css?v=6.0">
     <style>
         .details-wrapper {
             padding: 3rem 0 6rem;
@@ -176,6 +176,38 @@
         .review-star.filled {
             color: #FFFFFF;
         }
+
+        /* Mobile Screen Responsiveness */
+        @media (max-width: 640px) {
+            .details-wrapper {
+                padding: 1.25rem 0 3.5rem;
+            }
+            .product-overview-grid {
+                margin-bottom: 2rem;
+                gap: 1.25rem;
+            }
+            .details-image-box {
+                height: 260px;
+                border-radius: 8px;
+            }
+            .details-price {
+                font-size: 1.45rem;
+                margin: 0.5rem 0 1rem;
+            }
+            .reviews-section {
+                padding: 1.15rem;
+            }
+            .card-qty-stepper {
+                height: 38px;
+            }
+            .card-qty-stepper .qty-btn {
+                width: 32px;
+            }
+            .card-qty-stepper .qty-input-field {
+                width: 36px;
+                font-size: 0.85rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -218,13 +250,6 @@
         <div class="details-info">
             <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1rem;">
                 <span class="badge-tag" style="background: #0C0C0C; border: 1px solid #27272A; color: #D4D4D8; font-family: var(--font-mono); font-size: 0.72rem; padding: 2px 8px; border-radius: 4px;"><%= product.getCategory() %></span>
-                <% if (product.getStockQty() > 10) { %>
-                    <span class="badge-tag" style="background: #0C0C0C; border: 1px solid #27272A; color: #A1A1AA; font-family: var(--font-mono); font-size: 0.72rem; padding: 2px 8px; border-radius: 4px;">In Stock (<%= product.getStockQty() %>)</span>
-                <% } else if (product.getStockQty() > 0) { %>
-                    <span class="badge-tag" style="background: #0C0C0C; border: 1px solid #27272A; color: #FFFFFF; font-family: var(--font-mono); font-size: 0.72rem; padding: 2px 8px; border-radius: 4px;">Low Stock (<%= product.getStockQty() %> left)</span>
-                <% } else { %>
-                    <span class="badge-tag" style="background: #18181B; border: 1px solid #27272A; color: #71717A; font-family: var(--font-mono); font-size: 0.72rem; padding: 2px 8px; border-radius: 4px;">Out of Stock</span>
-                <% } %>
             </div>
 
             <h1 style="font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 700; letter-spacing: -0.03em; margin-bottom: 0.6rem; line-height: 1.15; color: #FFFFFF;">

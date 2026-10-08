@@ -596,6 +596,12 @@ textarea::placeholder {
     border: 1px solid rgba(16, 185, 129, 0.25);
 }
 
+.alert-box-account-created {
+    background-color: rgba(99, 102, 241, 0.08);
+    color: #818CF8;
+    border: 1px solid rgba(99, 102, 241, 0.25);
+}
+
 .alert-box-error {
     background-color: rgba(239, 68, 68, 0.08);
     color: #F87171;
@@ -961,3 +967,74 @@ tr:last-child td {
 tr:hover td {
     background-color: rgba(255, 255, 255, 0.02);
 }
+
+/* ==========================================================================
+   GLOBAL MOBILE RESPONSIVENESS (< 640px)
+   ========================================================================== */
+@media (max-width: 640px) {
+    .container {
+        padding: 0 1rem;
+    }
+
+    .site-header {
+        height: 58px;
+    }
+
+    .brand-logo {
+        font-size: 0.98rem;
+    }
+
+    .nav-bar {
+        gap: 0.65rem;
+    }
+
+    .nav-actions {
+        gap: 0.4rem;
+    }
+
+    .nav-icon-btn {
+        width: 32px;
+        height: 32px;
+    }
+
+    .menu-toggle-btn {
+        width: 32px;
+        height: 32px;
+    }
+
+    .nav-actions .btn-pill {
+        padding: 0.35rem 0.65rem !important;
+        font-size: 0.75rem !important;
+    }
+
+    /* Form Fields & Buttons on mobile */
+    .btn {
+        padding: 0.55rem 1rem;
+        font-size: 0.82rem;
+    }
+
+    .form-input, .form-input-field, .form-select-field {
+        font-size: 16px; /* Prevents iOS auto-zoom on input focus */
+    }
+
+    .alert-box {
+        padding: 0.75rem 0.95rem;
+        font-size: 0.8rem;
+    }
+
+    .alert-box .material-symbols-outlined {
+        font-size: 1.1rem;
+    }
+
+    .footer-wrapper {
+        padding: 2.5rem 0 2rem;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+        align-items: center;
+    }
+}
+

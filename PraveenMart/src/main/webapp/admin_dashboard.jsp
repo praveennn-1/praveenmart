@@ -238,9 +238,9 @@
     </div>
 
     <div class="admin-tabs">
-        <button class="admin-tab-btn active" onclick="showAdminTab('users', this)">User Management (<%= totalUsers %>)</button>
-        <button class="admin-tab-btn" onclick="showAdminTab('orders', this)">Platform Orders (<%= totalOrders %>)</button>
-        <button class="admin-tab-btn" onclick="showAdminTab('products', this)">Catalog Moderation (<%= totalProducts %>)</button>
+        <button type="button" class="admin-tab-btn active" onclick="showAdminTab('users', this)">User Management (<%= totalUsers %>)</button>
+        <button type="button" class="admin-tab-btn" onclick="showAdminTab('orders', this)">Platform Orders (<%= totalOrders %>)</button>
+        <button type="button" class="admin-tab-btn" onclick="showAdminTab('products', this)">Catalog Moderation (<%= totalProducts %>)</button>
     </div>
 
     <div id="adm-users">

@@ -336,8 +336,8 @@
         </div>
 
         <div class="hub-tabs">
-            <button class="hub-tab-btn active" onclick="showTab('listings', this)">Product Listings (<%= totalProducts %>)</button>
-            <button class="hub-tab-btn" onclick="showTab('orders', this)">Incoming Orders (<%= incomingOrders != null ? incomingOrders.size() : 0 %>)</button>
+            <button type="button" class="hub-tab-btn active" onclick="showTab('listings', this)">Product Listings (<%= totalProducts %>)</button>
+            <button type="button" class="hub-tab-btn" onclick="showTab('orders', this)">Incoming Orders (<%= incomingOrders != null ? incomingOrders.size() : 0 %>)</button>
         </div>
 
         <div id="tab-listings">

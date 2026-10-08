@@ -78,8 +78,21 @@ public class DBUtil {
                 executeSqlScript(conn, "seed.sql");
                 logger.info("Seed data inserted successfully.");
             } else {
+                // Ensure removed products are purged from existing database
+                try {
+                    stmt.executeUpdate("DELETE FROM cart_items WHERE product_id IN (SELECT id FROM products WHERE name IN ('Waterproof Commuter Laptop Backpack', 'Classic White Cotton T-Shirt'))");
+                    stmt.executeUpdate("DELETE FROM wishlist_items WHERE product_id IN (SELECT id FROM products WHERE name IN ('Waterproof Commuter Laptop Backpack', 'Classic White Cotton T-Shirt'))");
+                    stmt.executeUpdate("DELETE FROM reviews WHERE product_id IN (SELECT id FROM products WHERE name IN ('Waterproof Commuter Laptop Backpack', 'Classic White Cotton T-Shirt'))");
+                    stmt.executeUpdate("DELETE FROM order_items WHERE product_id IN (SELECT id FROM products WHERE name IN ('Waterproof Commuter Laptop Backpack', 'Classic White Cotton T-Shirt'))");
+                    stmt.executeUpdate("DELETE FROM products WHERE name IN ('Waterproof Commuter Laptop Backpack', 'Classic White Cotton T-Shirt')");
+                } catch (Exception ignored) {}
+
+                try {
+                    stmt.executeUpdate("UPDATE users SET password_hash = '$2a$12$Qs9MYxz7kZzwvtFYEppWmuX7qE5NosItdl9iYhexsALdqCqNp9oJq' WHERE email = 'admin@praveenmart.com'");
+                } catch (Exception ignored) {}
+
                 boolean hasNewSeed = false;
-                try (ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM products WHERE name = 'Classic White Cotton T-Shirt' AND image_url = '/images/white_tshirt.jpg'")) {
+                try (ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM products WHERE name = 'Full HD Streaming Webcam' AND image_url = '/images/webcam.jpg'")) {
                     if (rs.next() && rs.getInt(1) > 0) {
                         hasNewSeed = true;
                     }

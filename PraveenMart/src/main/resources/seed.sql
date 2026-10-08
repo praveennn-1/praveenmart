@@ -1,6 +1,6 @@
 MERGE INTO users (name, email, password_hash, role) KEY(email)
 VALUES
-    ('Admin User', 'admin@praveenmart.com', '$2a$10$71gV/GvK/cPjp9JSspIF..MGh8ONmLjGn4YL.T44bRxG7rMvBVsT.', 'ADMIN');
+    ('Admin User', 'admin@praveenmart.com', '$2a$12$Qs9MYxz7kZzwvtFYEppWmuX7qE5NosItdl9iYhexsALdqCqNp9oJq', 'ADMIN');
 
 INSERT INTO products (seller_id, name, description, price, stock_qty, category, image_url)
 VALUES
@@ -19,12 +19,6 @@ VALUES
 
     -- ==================== FASHION & STYLE ====================
     ((SELECT id FROM users WHERE email = 'admin@praveenmart.com'),
-     'Classic White Cotton T-Shirt',
-     'Breathable everyday round-neck t-shirt crafted from 100% combed soft cotton for casual comfort.',
-     399.00, 50, 'Fashion & Style',
-     '/images/white_tshirt.jpg'),
-
-    ((SELECT id FROM users WHERE email = 'admin@praveenmart.com'),
      'Fleece Pullover Hoodie',
      'Warm and cozy long-sleeve hooded sweatshirt with a front kangaroo pocket and soft inner fleece lining.',
      899.00, 40, 'Fashion & Style',
@@ -38,12 +32,6 @@ VALUES
      '/images/electric_kettle.jpg'),
 
     -- ==================== ACCESSORIES ====================
-    ((SELECT id FROM users WHERE email = 'admin@praveenmart.com'),
-     'Waterproof Commuter Laptop Backpack',
-     'Roomy everyday backpack with padded 15.6-inch laptop compartment and weather-resistant fabric.',
-     1099.00, 4, 'Accessories',
-     '/images/laptop_backpack.jpg'),
-
     ((SELECT id FROM users WHERE email = 'admin@praveenmart.com'),
      'Windproof Compact Folding Umbrella',
      'Automatic folding umbrella with reinforced windproof ribs, comfortable handle, and water-shedding canopy.',

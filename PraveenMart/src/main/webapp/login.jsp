@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign In - PraveenMart</title>
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/theme.css?v=5.7">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/theme.css?v=6.0">
     <style>
         * {
             box-sizing: border-box;
@@ -379,7 +379,7 @@
             <% } %>
 
             <% if (request.getAttribute("success") != null) { %>
-                <div class="alert-box alert-box-success">
+                <div class="alert-box alert-box-account-created">
                     <span class="material-symbols-outlined">check_circle</span>
                     <span><%= request.getAttribute("success") %></span>
                 </div>

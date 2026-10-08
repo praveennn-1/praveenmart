@@ -25,11 +25,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PraveenMart - Premium Marketplace</title>
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/theme.css?v=5.9">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/theme.css?v=6.0">
     <style>
         /* Hero & Catalog Controls (OpenCode Theme) */
         .store-hero {
-            padding: 4.5rem 0 3rem;
+            padding: 2.25rem 0 1.75rem;
             text-align: center;
             background: var(--hero-glow), #000000;
             border-bottom: 1px solid #1F1F1F;
@@ -611,13 +611,6 @@
 
 <section class="store-hero">
     <div class="container">
-        <h1 class="store-title">
-            EXPLORE OUR COLLECTION
-        </h1>
-        <p class="store-subtitle">
-            Discover quality electronics, fashion essentials, home appliances, and lifestyle accessories designed for modern living.
-        </p>
-
         <div class="store-search-wrapper">
             <form action="<%= request.getContextPath() %>/products" method="get" class="store-search-bar">
                 <span class="material-symbols-outlined" style="color: var(--color-on-surface-muted);">search</span>
@@ -726,15 +719,7 @@
                                 <% } %>
                             </a>
 
-                            <div style="position: absolute; top: 10px; right: 10px; z-index: 5;">
-                                <% if (p.getStockQty() > 10) { %>
-                                    <span class="badge-tag" style="padding: 2px 8px; font-family: var(--font-mono); font-size: 0.68rem; font-weight: 600; border-radius: 4px; background: #000000; border: 1px solid #27272A; color: #FFFFFF; display: inline-flex; align-items: center; gap: 4px;"><span style="width: 4px; height: 4px; border-radius: 50%; background: #22C55E; flex-shrink: 0;"></span>In Stock</span>
-                                <% } else if (p.getStockQty() > 0) { %>
-                                    <span class="badge-tag" style="padding: 2px 8px; font-family: var(--font-mono); font-size: 0.68rem; font-weight: 600; border-radius: 4px; background: #000000; border: 1px solid #27272A; color: #F59E0B; display: inline-flex; align-items: center; gap: 4px;"><span style="width: 4px; height: 4px; border-radius: 50%; background: #F59E0B; flex-shrink: 0;"></span>Low Stock (<%= p.getStockQty() %>)</span>
-                                <% } else { %>
-                                    <span class="badge-tag" style="padding: 2px 8px; font-family: var(--font-mono); font-size: 0.68rem; font-weight: 600; border-radius: 4px; background: #000000; border: 1px solid #27272A; color: #71717A; display: inline-flex; align-items: center; gap: 4px;">Sold Out</span>
-                                <% } %>
-                            </div>
+
                         </div>
 
                         <div class="product-content">
@@ -978,8 +963,7 @@
                 })
                 .catch(function(err) {
                     console.error('Cart add error:', err);
-                    // Fallback to normal form submit if fetch fails
-                    form.submit();
+                    showToast('Could not add item to cart. Please try again.');
                 });
             });
         });

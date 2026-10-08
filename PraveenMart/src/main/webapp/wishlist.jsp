@@ -21,7 +21,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Wishlist - PraveenMart</title>
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/theme.css?v=5.8">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/theme.css?v=6.0">
     <style>
         body { background-color: #000000; }
         .wishlist-wrapper { padding: 3rem 0 6rem; position: relative; }
@@ -152,6 +152,81 @@
         }
         .alert-success { background: rgba(76, 175, 80, 0.15); border: 1px solid #4CAF50; color: #81C784; }
         .alert-danger { background: rgba(244, 67, 54, 0.15); border: 1px solid #F44336; color: #E57373; }
+
+        /* Mobile Screen Responsiveness */
+        @media (max-width: 640px) {
+            .wishlist-wrapper {
+                padding: 1.25rem 0 3.5rem;
+            }
+            .wishlist-header {
+                margin-bottom: 1.25rem;
+            }
+            .wishlist-title {
+                font-size: 1.4rem;
+                letter-spacing: -0.02em;
+            }
+            .wishlist-subtitle {
+                font-size: 0.76rem;
+                line-height: 1.4;
+            }
+            .wishlist-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 0.65rem;
+            }
+            .wishlist-card {
+                border-radius: 8px;
+            }
+            .wishlist-img-box {
+                height: 135px;
+            }
+            .wishlist-content {
+                padding: 0.65rem;
+            }
+            .wishlist-category {
+                font-size: 0.62rem;
+                margin-bottom: 0.2rem;
+            }
+            .wishlist-prod-title {
+                font-size: 0.82rem;
+                margin-bottom: 0.35rem;
+                line-height: 1.25;
+            }
+            .wishlist-price {
+                font-size: 0.95rem;
+                margin-bottom: 0.65rem;
+            }
+            .wishlist-actions {
+                gap: 0.35rem;
+            }
+            .btn-move-cart {
+                padding: 0.45rem 0.35rem;
+                font-size: 0.72rem;
+                border-radius: 6px;
+            }
+            .btn-remove-wishlist {
+                padding: 0.45rem 0.55rem;
+                font-size: 0.75rem;
+                border-radius: 6px;
+            }
+            .empty-wishlist-box {
+                padding: 2.25rem 1rem;
+                border-radius: 12px;
+                margin: 1rem auto;
+            }
+            .empty-icon {
+                font-size: 2.5rem;
+                margin-bottom: 0.65rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .wishlist-grid {
+                grid-template-columns: 1fr;
+            }
+            .wishlist-img-box {
+                height: 180px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -188,7 +263,7 @@
                     <div class="wishlist-img-box">
                         <img src="<%= request.getContextPath() %><%= p.getImageUrl() != null ? p.getImageUrl() : "/images/placeholder.jpg" %>"
                              alt="<%= p.getName() %>"
-                             onerror="this.src='<%= request.getContextPath() %>/images/laptop_backpack.jpg'">
+                             onerror="this.src='<%= request.getContextPath() %>/images/placeholder.jpg'">
                     </div>
                     <div class="wishlist-content">
                         <div class="wishlist-category"><%= p.getCategory() %></div>
@@ -199,11 +274,11 @@
                         </h3>
                         <div class="wishlist-price"><%= currencyFormat.format(p.getPrice()) %></div>
                         <div class="wishlist-actions">
-                            <form action="<%= request.getContextPath() %>/wishlist/move-to-cart" method="post" style="flex: 1; margin: 0;">
+                            <form action="<%= request.getContextPath() %>/wishlist/move-to-cart" method="post" class="wishlist-action-form" style="flex: 1; margin: 0;">
                                 <input type="hidden" name="productId" value="<%= p.getId() %>">
                                 <button type="submit" class="btn-move-cart">Move to Cart</button>
                             </form>
-                            <form action="<%= request.getContextPath() %>/wishlist/remove" method="post" style="margin: 0;">
+                            <form action="<%= request.getContextPath() %>/wishlist/remove" method="post" class="wishlist-action-form" style="margin: 0;">
                                 <input type="hidden" name="productId" value="<%= p.getId() %>">
                                 <button type="submit" class="btn-remove-wishlist" title="Remove from wishlist">✕</button>
                             </form>
@@ -215,7 +290,107 @@
     <% } %>
 </div>
 
+<div id="wishlistToast" class="cart-toast" role="status" aria-live="polite" style="position: fixed; bottom: 2rem; right: 2rem; background: #09090B; border: 1px solid #27272A; color: #FFFFFF; padding: 0.75rem 1.25rem; border-radius: 4px; font-family: var(--font-mono, 'JetBrains Mono', monospace); font-size: 13px; display: flex; align-items: center; gap: 0.75rem; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8); z-index: 9999; transform: translateY(100px); opacity: 0; transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), opacity 300ms ease; pointer-events: none;">
+    <span class="material-symbols-outlined" style="color: #2ED8A3; font-size: 1.35rem;">check_circle</span>
+    <span id="wishlistToastMsg">Action completed</span>
+</div>
+
 <%@ include file="/includes/footer.jspf" %>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const toastEl = document.getElementById('wishlistToast');
+        const toastMsg = document.getElementById('wishlistToastMsg');
+        let toastTimeout = null;
+
+        function showToast(message) {
+            if (!toastEl || !toastMsg) return;
+            toastMsg.textContent = message;
+            toastEl.style.transform = 'translateY(0)';
+            toastEl.style.opacity = '1';
+            toastEl.style.pointerEvents = 'auto';
+            if (toastTimeout) clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(function() {
+                toastEl.style.transform = 'translateY(100px)';
+                toastEl.style.opacity = '0';
+                toastEl.style.pointerEvents = 'none';
+            }, 3000);
+        }
+
+        document.querySelectorAll('.wishlist-action-form').forEach(function(form) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const card = form.closest('.wishlist-card');
+                const actionUrl = form.getAttribute('action');
+                const productId = form.querySelector('input[name="productId"]').value;
+                const submitBtn = form.querySelector('button');
+
+                if (submitBtn) submitBtn.disabled = true;
+
+                const params = new URLSearchParams();
+                params.append('productId', productId);
+                params.append('ajax', 'true');
+
+                fetch(actionUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                        'Accept': 'application/json'
+                    },
+                    body: params.toString()
+                })
+                .then(function(res) {
+                    if (res.status === 401) {
+                        window.location.href = '<%= request.getContextPath() %>/login.jsp';
+                        return null;
+                    }
+                    return res.json();
+                })
+                .then(function(data) {
+                    if (!data) return;
+
+                    if (data.success) {
+                        // Update cart badge if returned
+                        if (data.cartCount !== undefined) {
+                            const badge = document.getElementById('navCartBadge');
+                            if (badge) {
+                                badge.textContent = data.cartCount;
+                                badge.style.display = data.cartCount > 0 ? 'inline-flex' : 'none';
+                                badge.classList.remove('badge-bounce');
+                                void badge.offsetWidth;
+                                badge.classList.add('badge-bounce');
+                            }
+                        }
+
+                        // Animate card removal smoothly without page scroll jump
+                        if (card) {
+                            card.style.transition = 'all 280ms ease';
+                            card.style.opacity = '0';
+                            card.style.transform = 'scale(0.92)';
+                            setTimeout(function() {
+                                card.remove();
+                                const remaining = document.querySelectorAll('.wishlist-card');
+                                if (remaining.length === 0) {
+                                    window.location.reload();
+                                }
+                            }, 280);
+                        }
+
+                        showToast(data.message || 'Updated successfully');
+                    } else {
+                        if (submitBtn) submitBtn.disabled = false;
+                        showToast(data.message || 'Operation failed');
+                    }
+                })
+                .catch(function(err) {
+                    console.error('Wishlist action error:', err);
+                    if (submitBtn) submitBtn.disabled = false;
+                    form.submit(); // fallback to normal submit
+                });
+            });
+        });
+    });
+</script>
 
 </body>
 </html>

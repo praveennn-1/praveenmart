@@ -60,6 +60,22 @@
         .order-item-mini-row:last-child {
             border-bottom: none;
         }
+
+        /* Mobile Screen Responsiveness */
+        @media (max-width: 640px) {
+            .orders-wrapper {
+                padding: 1.25rem 0 3.5rem;
+            }
+            .order-card {
+                padding: 1.1rem;
+                margin-bottom: 1rem;
+            }
+            .order-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.65rem;
+            }
+        }
     </style>
 </head>
 <body>

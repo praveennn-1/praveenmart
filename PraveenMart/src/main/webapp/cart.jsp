@@ -30,7 +30,7 @@
                                         <meta name="viewport" content="width=device-width, initial-scale=1.0">
                                         <title>Shopping Cart - PraveenMart</title>
                                         <link rel="stylesheet"
-                                            href="<%= request.getContextPath() %>/css/theme.css?v=5.8">
+                                            href="<%= request.getContextPath() %>/css/theme.css?v=6.0">
     <style>
         body {
             background-color: #000000;
@@ -300,6 +300,62 @@
             text-align: center;
             padding: 4.5rem 2rem;
         }
+
+        /* Mobile Screen Responsiveness */
+        @media (max-width: 640px) {
+            .cart-wrapper {
+                padding: 1.25rem 0 3.5rem;
+            }
+            .cart-page-title {
+                font-size: 1.45rem;
+                letter-spacing: -0.02em;
+            }
+            .cart-page-subtitle {
+                font-size: 0.78rem;
+                margin-bottom: 1.25rem;
+            }
+            .cart-table-card {
+                padding: 1rem;
+            }
+            .cart-header-row {
+                margin-bottom: 0.85rem;
+                padding-bottom: 0.75rem;
+            }
+            .cart-item-row {
+                grid-template-columns: 56px 1fr;
+                gap: 0.75rem;
+                padding: 1rem 0;
+            }
+            .cart-item-thumb {
+                width: 56px;
+                height: 56px;
+            }
+            .cart-item-name {
+                font-size: 0.88rem;
+            }
+            .cart-item-unit-price {
+                font-size: 0.75rem;
+            }
+            .cart-qty-btn {
+                width: 28px;
+                height: 28px;
+            }
+            .cart-qty-input {
+                width: 30px;
+                height: 28px;
+                font-size: 0.78rem;
+            }
+            .summary-card {
+                padding: 1.15rem;
+            }
+            .summary-card-title {
+                font-size: 1rem;
+                margin-bottom: 1rem;
+            }
+            .empty-cart-card {
+                padding: 2.5rem 1rem;
+            }
+        }
     </style>
                                     </head>
 
@@ -415,12 +471,6 @@
                                                                                             %>
                                                                                     </div>
                                                                                     <div style="display: flex; align-items: center; gap: 0.35rem;">
-                                                                                        <form action="<%= request.getContextPath() %>/wishlist/save-for-later" method="post">
-                                                                                            <input type="hidden" name="productId" value="<%= item.getProductId() %>">
-                                                                                            <button type="submit" class="cart-item-del-btn" title="Save for Later in Wishlist" style="color: #ff9800; border-color: rgba(255, 152, 0, 0.3);">
-                                                                                                <span class="material-symbols-outlined" style="font-size: 1.1rem;">bookmark</span>
-                                                                                            </button>
-                                                                                        </form>
                                                                                         <form
                                                                                             action="<%= request.getContextPath() %>/cart/remove"
                                                                                             method="post">
@@ -535,6 +585,7 @@
                                                                 let min = parseInt(input.getAttribute('min')) || 1;
                                                                 if (val > min) {
                                                                     input.value = val - 1;
+                                                                    sessionStorage.setItem('pm_scroll_' + window.location.pathname, window.scrollY.toString());
                                                                     form.submit();
                                                                 }
                                                             });
@@ -544,6 +595,7 @@
                                                                 let max = parseInt(input.getAttribute('max')) || 999;
                                                                 if (val < max) {
                                                                     input.value = val + 1;
+                                                                    sessionStorage.setItem('pm_scroll_' + window.location.pathname, window.scrollY.toString());
                                                                     form.submit();
                                                                 }
                                                             });
