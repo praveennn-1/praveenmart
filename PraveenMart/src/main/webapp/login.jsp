@@ -334,16 +334,15 @@
         }
 
         .auth-footer-text a {
-            color: #C8B196;
+            color: #FFFFFF;
             font-weight: 600;
             text-decoration: underline;
-            text-underline-offset: 3px;
             margin-left: 0.3rem;
             transition: color 200ms ease;
         }
 
         .auth-footer-text a:hover {
-            color: #E2D4C3;
+            color: #C8B196;
         }
 
         /* Mobile / Responsive View */
