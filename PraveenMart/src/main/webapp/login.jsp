@@ -131,8 +131,8 @@
             left: 14px;
             top: 50%;
             transform: translateY(-50%);
-            color: #64748B;
-            font-size: 1.25rem;
+            color: #52525B;
+            font-size: 1.15rem;
             pointer-events: none;
             display: flex;
             align-items: center;
@@ -183,33 +183,32 @@
         }
 
         .form-input-field::placeholder {
-            color: rgba(184, 190, 199, 0.38);
+            color: #52525B;
             opacity: 1;
         }
 
         .form-select-field,
         select.form-select-field {
             width: 100%;
-            height: 48px;
-            background: #111319;
-            border: 1px solid rgba(255, 255, 255, 0.10);
-            border-radius: 10px;
-            padding: 0 2.5rem 0 2.85rem !important;
+            height: 44px;
+            background: #050505;
+            border: 1px solid #27272A;
+            border-radius: 4px;
+            padding: 0 2.5rem 0 2.75rem !important;
             color: #FFFFFF;
-            font-size: 0.92rem;
-            font-family: inherit;
+            font-size: 0.9rem;
+            font-family: var(--font-mono, 'JetBrains Mono', monospace);
             outline: none;
             box-sizing: border-box;
             appearance: none;
             -webkit-appearance: none;
             cursor: pointer;
-            transition: border-color 200ms ease, box-shadow 200ms ease, background 200ms ease;
+            transition: border-color 150ms ease, background 150ms ease;
         }
 
         .form-select-field:focus {
-            border-color: rgba(200, 177, 150, 0.65);
-            background: #13161F;
-            box-shadow: 0 0 0 3px rgba(200, 177, 150, 0.12);
+            border-color: #FFFFFF;
+            background: #0A0A0A;
         }
 
         .form-select-arrow {
@@ -217,8 +216,8 @@
             right: 14px;
             top: 50%;
             transform: translateY(-50%);
-            color: #64748B;
-            font-size: 1.3rem;
+            color: #52525B;
+            font-size: 1.2rem;
             pointer-events: none;
             display: flex;
             align-items: center;
@@ -234,14 +233,14 @@
             transform: translateY(-50%);
             background: transparent;
             border: none;
-            color: #64748B;
+            color: #52525B;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 6px;
-            border-radius: 6px;
-            transition: color 200ms ease;
+            border-radius: 4px;
+            transition: color 150ms ease;
             user-select: none;
         }
 
@@ -263,7 +262,7 @@
             gap: 0.5rem;
             margin: 0.25rem 0 1.75rem 0;
             font-size: 0.85rem;
-            color: #7E8694;
+            color: #71717A;
         }
 
         .auth-checkbox-label {
@@ -339,12 +338,13 @@
             color: #FFFFFF;
             font-weight: 600;
             text-decoration: underline;
+            text-underline-offset: 3px;
             margin-left: 0.3rem;
-            transition: color 200ms ease;
+            transition: color 150ms ease;
         }
 
         .auth-footer-text a:hover {
-            color: #C8B196;
+            color: #A1A1AA;
         }
 
         /* Mobile / Responsive View */

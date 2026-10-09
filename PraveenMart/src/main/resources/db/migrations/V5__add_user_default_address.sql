@@ -1,0 +1,7 @@
+-- V5__add_user_default_address.sql: Add default delivery address columns to users table
+ALTER TABLE users ADD COLUMN IF NOT EXISTS recipient_name VARCHAR(100);
+ALTER TABLE users ADD COLUMN IF NOT EXISTS phone VARCHAR(20);
+ALTER TABLE users ADD COLUMN IF NOT EXISTS street VARCHAR(255);
+ALTER TABLE users ADD COLUMN IF NOT EXISTS city VARCHAR(100);
+ALTER TABLE users ADD COLUMN IF NOT EXISTS state VARCHAR(100);
+ALTER TABLE users ADD COLUMN IF NOT EXISTS pincode VARCHAR(20);

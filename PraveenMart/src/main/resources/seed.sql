@@ -192,12 +192,6 @@ VALUES
      '/images/geometric_faceted_ceramic_mugs_set.jpg'),
 
     ((SELECT id FROM users WHERE email = 'admin@praveenmart.com'),
-     'Vintage Knit Open-Collar Polo Shirt (Espresso & Cream)',
-     'Retro-inspired fine knit cotton polo shirt in rich espresso brown, accented with contrast cream open-notch collar, chest welt pocket trim, and ribbed tipping cuffs.',
-     1499.00, 30, 'Fashion & Style',
-     '/images/chocolate_brown_retro_knit_polo.jpg'),
-
-    ((SELECT id FROM users WHERE email = 'admin@praveenmart.com'),
      'Minimalist Ceramic Round Dinner Plates with Glazed Rim (Set of 6)',
      'Modern stackable stoneware dining plates featuring an organic off-white matte glaze, raised anti-spill rim with hand-painted earthy rim accent, and microwave/dishwasher-safe ceramic construction.',
      1699.00, 30, 'Home & Kitchen',
@@ -214,12 +208,6 @@ VALUES
      'Flagship true wireless earbuds featuring H2 chip audio, 2x stronger Active Noise Cancellation, Adaptive Audio, Personalized Spatial Audio with dynamic head tracking, and MagSafe charging case.',
      18990.00, 15, 'Electronics',
      '/images/apple_airpods_pro_wireless_earbuds.jpg'),
-
-    ((SELECT id FROM users WHERE email = 'admin@praveenmart.com'),
-     'Designer Trio Messenger Crossbody Bag (Monogram Eclipse)',
-     'Modular 3-in-1 luxury crossbody messenger bag crafted from durable Monogram Eclipse coated canvas with black cowhide leather trim, removable front zipped pouch, and detachable coin purse.',
-     5499.00, 15, 'Accessories',
-     '/images/monogram_eclipse_trio_messenger_bag.jpg'),
 
     ((SELECT id FROM users WHERE email = 'admin@praveenmart.com'),
      'Architectural Square Polarized Sunglasses (Titanium Grey)',
@@ -252,12 +240,6 @@ VALUES
      '/images/pagani_design_black_chronograph_watch.jpg'),
 
     ((SELECT id FROM users WHERE email = 'admin@praveenmart.com'),
-     'Rongke Polo Automatic Ratchet Genuine Leather Belt',
-     'Premium men''s automatic slide ratchet dress belt crafted from genuine black full-grain leather. Features a micro-adjustable sliding track, modern matte buckle with tri-color accent striping, and no-hole custom fit.',
-     699.00, 35, 'Accessories',
-     '/images/rongke_polo_automatic_ratchet_leather_belt.jpg'),
-
-    ((SELECT id FROM users WHERE email = 'admin@praveenmart.com'),
      'Nike Free Metcon Cross-Training Workout Sneakers',
      'High-performance athletic cross-training shoes combining Nike Free forefoot flexibility with Metcon heel stability. Features breathable engineered mesh upper, plush foam cushioning, and deep tread outsole grip.',
      5999.00, 20, 'Fashion & Style',
@@ -267,10 +249,4 @@ VALUES
      'Acacia Natural Hardwood Cooking Utensil Set (10-Piece)',
      'Handcrafted 10-piece culinary cooking utensil set carved from 100% natural organic acacia wood. Includes wok turners, slotted spatulas, soup ladles, serving spoons, matching countertop storage cylinder crock, and ergonomic spoon rest.',
      1799.00, 30, 'Home & Kitchen',
-     '/images/acacia_wood_kitchen_utensils_set.jpg'),
-
-    ((SELECT id FROM users WHERE email = 'admin@praveenmart.com'),
-     'Pro Multi-Pocket Travel Laptop Backpack (Water-Resistant)',
-     'Ergonomic multi-compartment travel tech backpack crafted from durable water-repellent oxford fabric. Features padded 15.6" laptop compartment, vibrant red pull cords, breathable air-mesh shoulder straps, and quick-access organizer pockets.',
-     1699.00, 35, 'Accessories',
-     '/images/pro_travel_laptop_backpack_black.jpg');
+     '/images/acacia_wood_kitchen_utensils_set.jpg');

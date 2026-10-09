@@ -80,11 +80,16 @@ public class DBUtil {
             } else {
                 // Ensure removed products are purged from existing database
                 try {
-                    stmt.executeUpdate("DELETE FROM cart_items WHERE product_id IN (SELECT id FROM products WHERE name IN ('Waterproof Commuter Laptop Backpack', 'Classic White Cotton T-Shirt'))");
-                    stmt.executeUpdate("DELETE FROM wishlist_items WHERE product_id IN (SELECT id FROM products WHERE name IN ('Waterproof Commuter Laptop Backpack', 'Classic White Cotton T-Shirt'))");
-                    stmt.executeUpdate("DELETE FROM reviews WHERE product_id IN (SELECT id FROM products WHERE name IN ('Waterproof Commuter Laptop Backpack', 'Classic White Cotton T-Shirt'))");
-                    stmt.executeUpdate("DELETE FROM order_items WHERE product_id IN (SELECT id FROM products WHERE name IN ('Waterproof Commuter Laptop Backpack', 'Classic White Cotton T-Shirt'))");
-                    stmt.executeUpdate("DELETE FROM products WHERE name IN ('Waterproof Commuter Laptop Backpack', 'Classic White Cotton T-Shirt')");
+                    String purgedProducts = "'Waterproof Commuter Laptop Backpack', 'Classic White Cotton T-Shirt', " +
+                            "'Vintage Knit Open-Collar Polo Shirt (Espresso & Cream)', " +
+                            "'Designer Trio Messenger Crossbody Bag (Monogram Eclipse)', " +
+                            "'Rongke Polo Automatic Ratchet Genuine Leather Belt', " +
+                            "'Pro Multi-Pocket Travel Laptop Backpack (Water-Resistant)'";
+                    stmt.executeUpdate("DELETE FROM cart_items WHERE product_id IN (SELECT id FROM products WHERE name IN (" + purgedProducts + "))");
+                    stmt.executeUpdate("DELETE FROM wishlist_items WHERE product_id IN (SELECT id FROM products WHERE name IN (" + purgedProducts + "))");
+                    stmt.executeUpdate("DELETE FROM reviews WHERE product_id IN (SELECT id FROM products WHERE name IN (" + purgedProducts + "))");
+                    stmt.executeUpdate("DELETE FROM order_items WHERE product_id IN (SELECT id FROM products WHERE name IN (" + purgedProducts + "))");
+                    stmt.executeUpdate("DELETE FROM products WHERE name IN (" + purgedProducts + ")");
                 } catch (Exception ignored) {}
 
                 try {
