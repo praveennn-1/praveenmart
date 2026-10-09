@@ -9,13 +9,10 @@
 <%
     List<CartItem> cartItems = (List<CartItem>) request.getAttribute("cartItems");
     BigDecimal subtotal = (BigDecimal) request.getAttribute("subtotal");
-    BigDecimal shipping = (BigDecimal) request.getAttribute("shipping");
-    BigDecimal grandTotal = (BigDecimal) request.getAttribute("grandTotal");
-    String error = (String) request.getAttribute("error");
-
     if (subtotal == null) subtotal = BigDecimal.ZERO;
-    if (shipping == null) shipping = BigDecimal.ZERO;
-    if (grandTotal == null) grandTotal = BigDecimal.ZERO;
+    BigDecimal shipping = BigDecimal.ZERO;
+    BigDecimal grandTotal = subtotal;
+    String error = (String) request.getAttribute("error");
 
     NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("en", "IN"));
 %>

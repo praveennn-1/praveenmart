@@ -103,7 +103,7 @@ public class MockChatProvider implements ChatProvider {
         if (msg.contains("shipping") || msg.contains("delivery") || msg.contains("deliver") || msg.contains("how long")) {
             return "Here are our shipping details:\n"
                     + "• **Delivery Timeline**: 2 to 4 business days for standard delivery across metro locations.\n"
-                    + "• **Shipping Fee**: Free standard shipping on all orders above ₹999. A flat ₹49 fee applies for smaller orders.\n"
+                    + "• **Shipping Fee**: Free standard shipping on all orders!\n"
                     + "• **Live Tracking**: Real-time status updates are reflected in your **My Orders** dashboard.";
         }
 

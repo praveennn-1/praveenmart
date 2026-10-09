@@ -8,12 +8,9 @@
 <%
     List<CartItem> cartItems = (List<CartItem>) request.getAttribute("cartItems");
     BigDecimal subtotal = (BigDecimal) request.getAttribute("subtotal");
-    BigDecimal shipping = (BigDecimal) request.getAttribute("shipping");
-    BigDecimal grandTotal = (BigDecimal) request.getAttribute("grandTotal");
-
     if (subtotal == null) subtotal = BigDecimal.ZERO;
-    if (shipping == null) shipping = BigDecimal.ZERO;
-    if (grandTotal == null) grandTotal = BigDecimal.ZERO;
+    BigDecimal shipping = BigDecimal.ZERO;
+    BigDecimal grandTotal = subtotal;
 
     String cartMessage = (String) session.getAttribute("cartMessage");
     String cartError = (String) session.getAttribute("cartError");

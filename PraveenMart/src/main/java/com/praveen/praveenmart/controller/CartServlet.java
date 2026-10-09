@@ -72,10 +72,8 @@ public class CartServlet extends HttpServlet {
 
         List<CartItem> cartItems = cartService.getCartItems(user.getId());
         BigDecimal subtotal = cartService.calculateCartTotal(user.getId());
-        BigDecimal shipping = subtotal.compareTo(BigDecimal.ZERO) > 0 && subtotal.compareTo(new BigDecimal("2000")) < 0
-                ? new BigDecimal("99.00")
-                : BigDecimal.ZERO;
-        BigDecimal grandTotal = subtotal.add(shipping);
+        BigDecimal shipping = BigDecimal.ZERO;
+        BigDecimal grandTotal = subtotal;
 
         request.setAttribute("cartItems", cartItems);
         request.setAttribute("subtotal", subtotal);
