@@ -32,4 +32,14 @@
         <location>/500.jsp</location>
     </error-page>
 
+    <servlet>
+        <servlet-name>H2Console</servlet-name>
+        <servlet-class>org.h2.server.web.WebServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>~
+        <servlet-name>H2Console</servlet-name>
+        <url-pattern>/h2-console/*</url-pattern>
+    </servlet-mapping>
+
 </web-app>
