@@ -820,12 +820,8 @@
                             </div>
                         </div>
 
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.85rem;">
+                        <div style="margin-bottom: 0.85rem;">
                             <span class="panel-label" style="margin-bottom: 0;">Card Details</span>
-                            <button type="button" class="quick-fill-btn" onclick="fillTestCard()">
-                                <span class="material-symbols-outlined" style="font-size: 0.9rem;">bolt</span>
-                                Fill Test Card
-                            </button>
                         </div>
 
                         <!-- Card Number -->
@@ -1135,21 +1131,7 @@ cardCvvInput.addEventListener('input', function() {
     this.value = this.value.replace(/\D/g, '').substring(0, 3);
 });
 
-function fillTestCard() {
-    cardNumInput.value = '4532 0123 4567 8910';
-    cardNumInput.dispatchEvent(new Event('input'));
 
-    if (!cardNameInput.value) {
-        cardNameInput.value = 'Praveen Kumar';
-        cardNameInput.dispatchEvent(new Event('input'));
-    }
-
-    cardExpInput.value = '12 / 28';
-    cardExpInput.dispatchEvent(new Event('input'));
-
-    cardCvvInput.value = '789';
-    cardCvvInput.dispatchEvent(new Event('input'));
-}
 
 // ── UPI App Selection & ID Verification ──────────────────────────────────────
 var currentUserName = '<%= sessionUser != null && sessionUser.getEmail() != null ? sessionUser.getEmail().split("@")[0].replaceAll("[^a-zA-Z0-9]", "") : "buyer" %>';
@@ -1229,7 +1211,7 @@ document.getElementById('checkout-form').addEventListener('submit', function(e) 
 
         if (num.length < 16) {
             e.preventDefault();
-            alert('Please enter a full 16-digit card number. You can also click "Fill Test Card".');
+            alert('Please enter a full 16-digit card number.');
             cardNumInput.focus();
             return false;
         }
