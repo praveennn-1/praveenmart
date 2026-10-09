@@ -66,7 +66,7 @@ public class RegisterServlet extends HttpServlet {
                 return;
             }
 
-            request.setAttribute("success", "Account created successfully! Please sign in.");
+            request.setAttribute("success", "Account created successfully!");
             request.getRequestDispatcher("/login.jsp").forward(request, response);
 
         } catch (ValidationException e) {

@@ -25,7 +25,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout - PraveenMart</title>
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/theme.css?v=6.0">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/theme.css?v=6.2">
     <style>
         body {
             background-color: #000000;
@@ -454,7 +454,7 @@
         }
 
         .upi-status-msg.success {
-            color: #4ADE80;
+            color: #FFFFFF;
         }
 
         .upi-status-msg.error {
@@ -725,7 +725,7 @@
 
                     <div class="address-account-sync-banner" id="addressSyncBanner" style="display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; flex-wrap: wrap; width: 100%; box-sizing: border-box; background: #0A0A0C; border: 1px solid #27272A; border-radius: 4px; padding: 0.8rem 1rem; margin-bottom: 1.25rem;">
                         <div style="display: flex; align-items: center; gap: 0.65rem;">
-                            <span class="material-symbols-outlined" id="syncIcon" style="font-size: 1.2rem; color: <%= hasSavedAddress ? "#4ADE80" : "#A1A1AA" %>;">
+                            <span class="material-symbols-outlined" id="syncIcon" style="font-size: 1.2rem; color: <%= hasSavedAddress ? "#FFFFFF" : "#A1A1AA" %>;">
                                 <%= hasSavedAddress ? "verified_user" : "bookmark_add" %>
                             </span>
                             <div style="font-family: var(--font-mono); font-size: 0.78rem; line-height: 1.4;">
@@ -733,7 +733,7 @@
                                 <span id="syncDesc" style="color: #888888; display: block;"><%= hasSavedAddress ? "Pre-filled from your account. Any details entered will automatically update your account default." : "Any address entered below will automatically be saved as default in your account." %></span>
                             </div>
                         </div>
-                        <span id="saveStatusIndicator" style="font-family: var(--font-mono); font-size: 0.72rem; color: #4ADE80; background: #0F1710; border: 1px solid #1E3A24; padding: 2px 8px; border-radius: 3px; display: none;">Saved</span>
+                        <span id="saveStatusIndicator" style="font-family: var(--font-mono); font-size: 0.72rem; color: #FFFFFF; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.25); padding: 2px 8px; border-radius: 3px; display: none;">Saved</span>
                     </div>
 
                     <div class="form-row-2col">
@@ -922,7 +922,7 @@
 
                         <div class="qr-box" id="qr-box">
                             <div style="font-family: var(--font-mono); font-size: 0.78rem; color: #FFFFFF; margin-bottom: 0.75rem;">
-                                Scan with any UPI app to pay <strong style="color: #4ADE80;"><%= currencyFormat.format(grandTotal) %></strong>
+                                Scan with any UPI app to pay <strong style="color: #FFFFFF;"><%= currencyFormat.format(grandTotal) %></strong>
                             </div>
                             <div style="display: inline-block; padding: 10px; background: #FFFFFF; border-radius: 8px;">
                                 <svg width="140" height="140" viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
@@ -1022,7 +1022,7 @@
                         <span>Shipping</span>
                         <span style="font-weight: 700;">
                             <% if (shipping.compareTo(BigDecimal.ZERO) == 0) { %>
-                                <span style="color: #4ADE80;">FREE</span>
+                                <span style="color: #FFFFFF;">FREE</span>
                             <% } else { %>
                                 <span style="color: #FFFFFF;"><%= currencyFormat.format(shipping) %></span>
                             <% } %>
@@ -1281,7 +1281,7 @@ document.getElementById('checkout-form').addEventListener('submit', function(e) 
                 if (syncDesc) syncDesc.textContent = 'Address saved to your account default. Next time you checkout, it will load automatically.';
                 if (syncIcon) {
                     syncIcon.textContent = 'verified_user';
-                    syncIcon.style.color = '#4ADE80';
+                    syncIcon.style.color = '#FFFFFF';
                 }
             }
         }).catch(function(err) {

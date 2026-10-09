@@ -25,7 +25,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PraveenMart - Premium Marketplace</title>
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/theme.css?v=6.0">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/theme.css?v=6.3">
     <style>
         /* Hero & Catalog Controls (OpenCode Theme) */
         .store-hero {
@@ -578,27 +578,74 @@
             bottom: 2rem;
             right: 2rem;
             background: #09090B;
-            border: 1px solid #27272A;
+            border: 1px solid rgba(255, 255, 255, 0.25);
             color: #FFFFFF;
-            padding: 0.75rem 1.25rem;
-            border-radius: 4px;
+            padding: 0.85rem 1.35rem;
+            border-radius: 6px;
             font-family: var(--font-mono, 'JetBrains Mono', monospace);
-            font-size: 13px;
+            font-size: 13.5px;
+            font-weight: 500;
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+            gap: 0.85rem;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 255, 255, 0.15);
             z-index: 9999;
-            transform: translateY(100px);
+            transform: translateY(80px) scale(0.9);
             opacity: 0;
-            transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), opacity 300ms ease;
             pointer-events: none;
+            transition: transform 400ms cubic-bezier(0.16, 1, 0.3, 1), opacity 350ms ease;
         }
 
         .cart-toast.show {
-            transform: translateY(0);
+            transform: translateY(0) scale(1);
             opacity: 1;
             pointer-events: auto;
+            animation: toastPopIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
+                       toastGlowPulse 2s ease-in-out infinite alternate;
+        }
+
+        .cart-toast.show .material-symbols-outlined {
+            display: inline-block;
+            animation: iconPopScale 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+        }
+
+        @keyframes toastPopIn {
+            0% {
+                transform: translateY(60px) scale(0.85);
+                opacity: 0;
+            }
+            60% {
+                transform: translateY(-8px) scale(1.04);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes toastGlowPulse {
+            0% {
+                box-shadow: 0 16px 40px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 255, 255, 0.2);
+            }
+            100% {
+                box-shadow: 0 20px 50px rgba(0, 0, 0, 0.95), 0 0 25px rgba(255, 255, 255, 0.18), 0 0 0 1px rgba(255, 255, 255, 0.4);
+            }
+        }
+
+        @keyframes iconPopScale {
+            0% {
+                transform: scale(0) rotate(-45deg);
+                opacity: 0;
+            }
+            65% {
+                transform: scale(1.35) rotate(10deg);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
         }
 
         @keyframes badgePulse {
@@ -874,7 +921,7 @@
 </main>
 
 <div id="cartToast" class="cart-toast" role="status" aria-live="polite">
-    <span class="material-symbols-outlined" style="color: #2ED8A3; font-size: 1.35rem;">check_circle</span>
+    <span class="material-symbols-outlined" style="color: #FFFFFF; font-size: 1.35rem;">check_circle</span>
     <span id="cartToastMsg">Product added to cart!</span>
 </div>
 
@@ -1003,7 +1050,7 @@
                             }, 1200);
                         }
 
-                        showToast('Added ' + productName + ' to your cart');
+                        showToast('Product added to cart!');
                     } else {
                         showToast(data.message || 'Could not add item to cart');
                     }

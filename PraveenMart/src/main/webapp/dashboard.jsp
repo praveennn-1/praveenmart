@@ -18,7 +18,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Account Dashboard - PraveenMart</title>
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/theme.css?v=6.0">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/theme.css?v=6.2">
     <style>
         body {
             background-color: #000000;
@@ -134,9 +134,9 @@
         }
 
         .address-badge-active {
-            background: #0D1F12;
-            border: 1px solid #1E3A24;
-            color: #4ADE80;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: #FFFFFF;
         }
 
         .address-badge-empty {
@@ -266,7 +266,7 @@
         <div class="dashboard-container">
 
             <% if ("true".equals(updated)) { %>
-                <div class="alert-box alert-box-success" style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem; background: #071509; border: 1px solid #1E3A24; color: #4ADE80; padding: 0.85rem 1.25rem; border-radius: 4px; font-family: var(--font-mono); font-size: 0.82rem;">
+                <div class="alert-box alert-box-success" style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2); color: #FFFFFF; padding: 0.85rem 1.25rem; border-radius: 4px; font-family: var(--font-mono); font-size: 0.82rem;">
                     <span class="material-symbols-outlined" style="font-size: 1.2rem;">check_circle</span>
                     <span>Default delivery address updated successfully in your account!</span>
                 </div>
@@ -302,7 +302,7 @@
                     <div class="default-address-card <%= user.hasDefaultAddress() ? "highlight" : "" %>">
                         <div class="address-header">
                             <div class="address-title-group">
-                                <span class="material-symbols-outlined" style="font-size: 1.15rem; color: <%= user.hasDefaultAddress() ? "#4ADE80" : "#A1A1AA" %>;">
+                                <span class="material-symbols-outlined" style="font-size: 1.15rem; color: <%= user.hasDefaultAddress() ? "#FFFFFF" : "#A1A1AA" %>;">
                                     <%= user.hasDefaultAddress() ? "home_pin" : "location_off" %>
                                 </span>
                                 <span class="address-title">Default Delivery Address</span>
@@ -338,7 +338,7 @@
                                     <span><%= (user.getCity() != null ? user.getCity() : "") + (user.getState() != null ? ", " + user.getState() : "") + (user.getPincode() != null ? " - " + user.getPincode() : "") %></span>
                                 </div>
                                 <div style="margin-top: 0.35rem; font-size: 0.72rem; color: #71717A; display: flex; align-items: center; gap: 0.35rem;">
-                                    <span class="material-symbols-outlined" style="font-size: 0.9rem; color: #4ADE80;">verified</span>
+                                    <span class="material-symbols-outlined" style="font-size: 0.9rem; color: #FFFFFF;">verified</span>
                                     <span>Pre-fills automatically during checkout for instant 1-click orders.</span>
                                 </div>
                             </div>

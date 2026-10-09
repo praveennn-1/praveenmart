@@ -75,7 +75,7 @@
                     <div class="menu-dropdown-card" id="menuDropdownCard" role="menu">
                         <% if (sessionUser != null) { %>
                             <div class="menu-user-badge">
-                                <span class="material-symbols-outlined" style="font-size: 1.25rem; color: #10B981;">account_circle</span>
+                                <span class="material-symbols-outlined" style="font-size: 1.25rem; color: #FFFFFF;">account_circle</span>
                                 <div class="menu-user-info">
                                     <span class="menu-user-name"><%= sessionUser.getName() %></span>
                                     <span class="menu-user-email"><%= sessionUser.getEmail() %></span>

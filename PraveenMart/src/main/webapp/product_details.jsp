@@ -28,6 +28,8 @@
 
     String msgSuccess = (String) session.getAttribute("msgSuccess");
     session.removeAttribute("msgSuccess");
+    String cartMessage = (String) session.getAttribute("cartMessage");
+    session.removeAttribute("cartMessage");
 
     NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("en", "IN"));
 %>
@@ -37,7 +39,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= product != null ? product.getName() : "Product Details" %> - PraveenMart</title>
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/theme.css?v=6.0">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/theme.css?v=6.3">
     <style>
         .details-wrapper {
             padding: 3rem 0 6rem;
@@ -232,10 +234,12 @@
         <span style="color: #FFFFFF;"><%= product.getName() %></span>
     </div>
 
-    <% if (msgSuccess != null) { %>
-        <div class="alert-box alert-box-success">
+    <% if (cartMessage != null || msgSuccess != null) { 
+           String alertText = (cartMessage != null) ? cartMessage : msgSuccess;
+    %>
+        <div class="alert-box alert-box-success cart-alert-animated" style="margin-bottom: 2rem;">
             <span class="material-symbols-outlined">check_circle</span>
-            <span><%= msgSuccess %></span>
+            <span><%= alertText %></span>
         </div>
     <% } %>
 

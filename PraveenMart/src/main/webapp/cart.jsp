@@ -1,36 +1,36 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-    <%@ page import="java.util.List" %>
-        <%@ page import="java.math.BigDecimal" %>
-            <%@ page import="java.text.NumberFormat" %>
-                <%@ page import="java.util.Locale" %>
-                    <%@ page import="com.praveen.praveenmart.model.CartItem" %>
-                        <%@ page import="com.praveen.praveenmart.model.Product" %>
-                            <% List<CartItem> cartItems = (List<CartItem>) request.getAttribute("cartItems");
-                                    BigDecimal subtotal = (BigDecimal) request.getAttribute("subtotal");
-                                    BigDecimal shipping = (BigDecimal) request.getAttribute("shipping");
-                                    BigDecimal grandTotal = (BigDecimal) request.getAttribute("grandTotal");
+<%@ page import="java.util.List" %>
+<%@ page import="java.math.BigDecimal" %>
+<%@ page import="java.text.NumberFormat" %>
+<%@ page import="java.util.Locale" %>
+<%@ page import="com.praveen.praveenmart.model.CartItem" %>
+<%@ page import="com.praveen.praveenmart.model.Product" %>
+<%
+    List<CartItem> cartItems = (List<CartItem>) request.getAttribute("cartItems");
+    BigDecimal subtotal = (BigDecimal) request.getAttribute("subtotal");
+    BigDecimal shipping = (BigDecimal) request.getAttribute("shipping");
+    BigDecimal grandTotal = (BigDecimal) request.getAttribute("grandTotal");
 
-                                    if (subtotal == null) subtotal = BigDecimal.ZERO;
-                                    if (shipping == null) shipping = BigDecimal.ZERO;
-                                    if (grandTotal == null) grandTotal = BigDecimal.ZERO;
+    if (subtotal == null) subtotal = BigDecimal.ZERO;
+    if (shipping == null) shipping = BigDecimal.ZERO;
+    if (grandTotal == null) grandTotal = BigDecimal.ZERO;
 
-                                    String cartMessage = (String) session.getAttribute("cartMessage");
-                                    String cartError = (String) session.getAttribute("cartError");
-                                    session.removeAttribute("cartMessage");
-                                    session.removeAttribute("cartError");
+    String cartMessage = (String) session.getAttribute("cartMessage");
+    String cartError = (String) session.getAttribute("cartError");
+    session.removeAttribute("cartMessage");
+    session.removeAttribute("cartError");
 
-                                    NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("en",
-                                    "IN"));
-                                    %>
-                                    <!DOCTYPE html>
-                                    <html lang="en">
+    NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("en", "IN"));
+%>
+<!DOCTYPE html>
+<html lang="en">
 
                                     <head>
                                         <meta charset="UTF-8">
                                         <meta name="viewport" content="width=device-width, initial-scale=1.0">
                                         <title>Shopping Cart - PraveenMart</title>
                                         <link rel="stylesheet"
-                                            href="<%= request.getContextPath() %>/css/theme.css?v=6.0">
+                                            href="<%= request.getContextPath() %>/css/theme.css?v=6.3">
     <style>
         body {
             background-color: #000000;
@@ -39,6 +39,25 @@
         .cart-wrapper {
             padding: 3rem 0 6rem;
             position: relative;
+        }
+
+        .cart-alert-animated {
+            animation: cartAlertEntrance 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards,
+                       cartAlertPulseGlow 3s ease-in-out infinite alternate !important;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.25) !important;
+        }
+
+        .cart-alert-animated .material-symbols-outlined {
+            animation: checkIconPop 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s both !important;
+        }
+
+        @keyframes cartAlertPulseGlow {
+            0% {
+                box-shadow: 0 0 12px rgba(255, 255, 255, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.2);
+            }
+            100% {
+                box-shadow: 0 0 25px rgba(255, 255, 255, 0.18), 0 0 0 1px rgba(255, 255, 255, 0.4);
+            }
         }
 
         .cart-page-title {
@@ -379,10 +398,10 @@
                                                 <h1 class="cart-page-title">Your Shopping Cart</h1>
 
                                                 <% if (cartMessage !=null) { %>
-                                                    <div class="alert-box alert-box-success"
+                                                    <div class="alert-box alert-box-success cart-alert-animated"
                                                         style="margin-bottom: 2rem;">
                                                         <span class="material-symbols-outlined">check_circle</span>
-                                                        <span>
+                                                        <span style="font-weight: 600; letter-spacing: 0.02em;">
                                                             <%= cartMessage %>
                                                         </span>
                                                     </div>
@@ -420,24 +439,19 @@
                                                                                 p=item.getProduct(); %>
                                                                                 <div class="cart-item-row">
                                                                                     <div class="cart-item-thumb">
-                                                                                        <% String cImg=(p !=null) ?
-                                                                                            p.getImageUrl() : null; if
-                                                                                            (cImg !=null &&
-                                                                                            !cImg.isBlank()) { if
-                                                                                            (!cImg.startsWith("http://")
-                                                                                            &&
-                                                                                            !cImg.startsWith("https://"))
-                                                                                            { if (!cImg.startsWith("/"))
-                                                                                            { cImg="/" + cImg; }
-                                                                                            cImg=request.getContextPath()
-                                                                                            + cImg; } %>
-                                                                                            <img src="<%= cImg %>"
-                                                                                                alt="<%= p.getName() %>"
-                                                                                                onerror="this.onerror=null;this.src='data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22600%22%20height%3D%22600%22%20viewBox%3D%220%200%20600%20600%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23080808%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20fill%3D%22%2371717A%22%20font-family%3D%22monospace%22%20font-size%3D%2216%22%20text-anchor%3D%22middle%22%20dominant-baseline%3D%22middle%22%3E%5B%20ITEM%20%5D%3C%2Ftext%3E%3C%2Fsvg%3E'">
-                                                                                            <% } else { %>
-                                                                                                <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22600%22%20height%3D%22600%22%20viewBox%3D%220%200%20600%20600%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23080808%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20fill%3D%22%2371717A%22%20font-family%3D%22monospace%22%20font-size%3D%2216%22%20text-anchor%3D%22middle%22%20dominant-baseline%3D%22middle%22%3E%5B%20ITEM%20%5D%3C%2Ftext%3E%3C%2Fsvg%3E"
-                                                                                                    alt="Product Thumbnail">
-                                                                                                <% } %>
+                                                                                        <%
+                                                            String cImg = (p != null) ? p.getImageUrl() : null;
+                                                            if (cImg != null && !cImg.isBlank() && !cImg.startsWith("http://") && !cImg.startsWith("https://")) {
+                                                                cImg = request.getContextPath() + (cImg.startsWith("/") ? cImg : "/" + cImg);
+                                                            }
+                                                        %>
+                                                        <% if (cImg != null && !cImg.isBlank()) { %>
+                                                            <img src="<%= cImg %>" alt="<%= p.getName() %>"
+                                                                onerror="this.onerror=null;this.src='data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22600%22%20height%3D%22600%22%20viewBox%3D%220%200%20600%20600%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23080808%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20fill%3D%22%2371717A%22%20font-family%3D%22monospace%22%20font-size%3D%2216%22%20text-anchor%3D%22middle%22%20dominant-baseline%3D%22middle%22%3E%5B%20ITEM%20%5D%3C%2Ftext%3E%3C%2Fsvg%3E'">
+                                                        <% } else { %>
+                                                            <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22600%22%20height%3D%22600%22%20viewBox%3D%220%200%20600%20600%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23080808%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20fill%3D%22%2371717A%22%20font-family%3D%22monospace%22%20font-size%3D%2216%22%20text-anchor%3D%22middle%22%20dominant-baseline%3D%22middle%22%3E%5B%20ITEM%20%5D%3C%2Ftext%3E%3C%2Fsvg%3E"
+                                                                alt="Product Thumbnail">
+                                                        <% } %>
                                                                                     </div>
                                                                                     <div class="cart-item-info">
                                                                                         <div class="cart-item-category">
@@ -521,7 +535,7 @@
                                                                                         (shipping.compareTo(BigDecimal.ZERO)==0)
                                                                                         { %>
                                                                                         <span
-                                                                                            style="color: #C8B196;">FREE</span>
+                                                                                            style="color: #FFFFFF;">FREE</span>
                                                                                         <% } else { %>
                                                                                             <span
                                                                                                 style="color: #ffffff;">

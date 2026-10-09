@@ -37,8 +37,8 @@
     --logo: #FFFFFF;
 
     /* Technical Semantic Accents */
-    --accent-green: #10B981;
-    --accent-delivery: #10B981;
+    --accent-green: #FFFFFF;
+    --accent-delivery: #FFFFFF;
     --accent-champagne: #FFFFFF;
     --star: #F59E0B;
     --cyan: #38BDF8;
@@ -118,8 +118,8 @@
 
     --color-accent: #FFFFFF;
     --color-accent-soft: rgba(255, 255, 255, 0.08);
-    --color-success: #10B981;
-    --color-success-bg: rgba(16, 185, 129, 0.1);
+    --color-success: #FFFFFF;
+    --color-success-bg: rgba(255, 255, 255, 0.08);
     --color-warning: #F59E0B;
     --color-warning-bg: rgba(245, 158, 11, 0.1);
     --color-danger: #EF4444;
@@ -505,9 +505,9 @@ hr, .divider-line {
 }
 
 .badge-in-stock {
-    background: rgba(16, 185, 129, 0.08);
-    color: #34D399;
-    border: 1px solid rgba(16, 185, 129, 0.28);
+    background: rgba(255, 255, 255, 0.06);
+    color: #FFFFFF;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .badge-low-stock {
@@ -612,15 +612,54 @@ textarea::placeholder {
 }
 
 .alert-box-success {
-    background-color: rgba(16, 185, 129, 0.08);
-    color: #34D399;
-    border: 1px solid rgba(16, 185, 129, 0.25);
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #FFFFFF;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    animation: cartAlertEntrance 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.alert-box-success .material-symbols-outlined {
+    display: inline-block;
+    animation: checkIconPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.08s both;
+}
+
+@keyframes cartAlertEntrance {
+    0% {
+        opacity: 0;
+        transform: translateY(-14px) scale(0.98);
+        box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+    }
+    60% {
+        opacity: 1;
+        transform: translateY(3px) scale(1.008);
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.18), 0 0 0 1px rgba(255, 255, 255, 0.35);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        box-shadow: 0 0 12px rgba(255, 255, 255, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.2);
+    }
+}
+
+@keyframes checkIconPop {
+    0% {
+        transform: scale(0) rotate(-45deg);
+        opacity: 0;
+    }
+    65% {
+        transform: scale(1.35) rotate(10deg);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
 }
 
 .alert-box-account-created {
-    background-color: rgba(99, 102, 241, 0.08);
-    color: #818CF8;
-    border: 1px solid rgba(99, 102, 241, 0.25);
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #FFFFFF;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .alert-box-error {

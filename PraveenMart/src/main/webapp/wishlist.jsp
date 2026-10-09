@@ -21,7 +21,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Wishlist - PraveenMart</title>
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/theme.css?v=6.0">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/theme.css?v=6.2">
     <style>
         body { background-color: #000000; }
         .wishlist-wrapper { padding: 3rem 0 6rem; position: relative; }
@@ -97,7 +97,7 @@
         .wishlist-price {
             font-size: 1.25rem;
             font-weight: 700;
-            color: #4CAF50;
+            color: #FFFFFF;
             margin-bottom: 1rem;
         }
         .wishlist-actions {
@@ -150,7 +150,7 @@
             margin-bottom: 1.5rem;
             font-size: 0.95rem;
         }
-        .alert-success { background: rgba(76, 175, 80, 0.15); border: 1px solid #4CAF50; color: #81C784; }
+        .alert-success { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2); color: #FFFFFF; }
         .alert-danger { background: rgba(244, 67, 54, 0.15); border: 1px solid #F44336; color: #E57373; }
 
         /* Mobile Screen Responsiveness */
@@ -297,7 +297,7 @@
 </div>
 
 <div id="wishlistToast" class="cart-toast" role="status" aria-live="polite" style="position: fixed; bottom: 2rem; right: 2rem; background: #09090B; border: 1px solid #27272A; color: #FFFFFF; padding: 0.75rem 1.25rem; border-radius: 4px; font-family: var(--font-mono, 'JetBrains Mono', monospace); font-size: 13px; display: flex; align-items: center; gap: 0.75rem; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8); z-index: 9999; transform: translateY(100px); opacity: 0; transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), opacity 300ms ease; pointer-events: none;">
-    <span class="material-symbols-outlined" style="color: #2ED8A3; font-size: 1.35rem;">check_circle</span>
+    <span class="material-symbols-outlined" style="color: #FFFFFF; font-size: 1.35rem;">check_circle</span>
     <span id="wishlistToastMsg">Action completed</span>
 </div>
 
