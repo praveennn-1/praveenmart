@@ -59,7 +59,6 @@
         const clearBtn = document.getElementById('pmChatClearBtn');
         const form = document.getElementById('pmChatForm');
         const input = document.getElementById('pmChatInput');
-        const charCount = document.getElementById('pmChatCharCount');
         const messagesContainer = document.getElementById('pmChatBody');
 
         if (!launcher || !panel || !form || !input || !messagesContainer) {
@@ -102,15 +101,6 @@
             });
         }
 
-        // Live character counter
-        input.addEventListener('input', function () {
-            const len = input.value.length;
-            if (charCount) {
-                charCount.textContent = len + '/' + MAX_LEN;
-                charCount.style.color = len >= MAX_LEN ? '#EF4444' : '#64748B';
-            }
-        });
-
         // Form submission
         form.addEventListener('submit', function (e) {
             e.preventDefault();
@@ -123,7 +113,6 @@
             }
 
             input.value = '';
-            if (charCount) charCount.textContent = '0/' + MAX_LEN;
             sendMessage(text);
         });
 

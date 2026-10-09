@@ -413,14 +413,7 @@
     font-size: 1.05rem;
 }
 
-.pm-chat-meta-bar {
-    display: flex;
-    justify-content: space-between;
-    font-family: var(--font-mono, monospace);
-    font-size: 0.7rem;
-    color: #52525B;
-    padding: 0 4px;
-}
+
 
 /* 6. Mobile Responsiveness & Overflow Prevention */
 @media (max-width: 600px) {

@@ -1131,8 +1131,6 @@ cardCvvInput.addEventListener('input', function() {
     this.value = this.value.replace(/\D/g, '').substring(0, 3);
 });
 
-
-
 // ── UPI App Selection & ID Verification ──────────────────────────────────────
 var currentUserName = '<%= sessionUser != null && sessionUser.getEmail() != null ? sessionUser.getEmail().split("@")[0].replaceAll("[^a-zA-Z0-9]", "") : "buyer" %>';
 if (!currentUserName) currentUserName = 'buyer';
