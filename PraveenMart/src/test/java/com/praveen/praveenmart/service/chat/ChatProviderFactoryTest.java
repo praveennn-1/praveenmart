@@ -61,4 +61,13 @@ public class ChatProviderFactoryTest {
             System.out.println(">>> GEMINI LIVE RESPONSE: " + reply);
         }
     }
+
+    @Test
+    public void testHowToLoginQuery() {
+        GeminiChatProvider provider = new GeminiChatProvider();
+        String reply = provider.getReply("how to login", "Electronics");
+        assertNotNull(reply);
+        assertFalse(reply.contains("Try asking:"));
+        assertTrue(reply.toLowerCase().contains("login") || reply.toLowerCase().contains("sign in") || reply.contains("PraveenMart"));
+    }
 }

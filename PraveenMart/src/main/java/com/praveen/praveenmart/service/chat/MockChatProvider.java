@@ -146,7 +146,52 @@ public class MockChatProvider implements ChatProvider {
                     + "• **Order Inquiries**: Include your Order ID when writing to us for faster resolution.";
         }
 
-        // 15. Check dynamic context for specific keyword matches
+        // 15. Login & Authentication
+        if (msg.contains("login") || msg.contains("log in") || msg.contains("sign in") || msg.contains("signin") || msg.contains("password")) {
+            return "To log in to PraveenMart:\n"
+                    + "1. Click the **Login** link in the top navigation bar (`/login`).\n"
+                    + "2. Enter your registered email address and password.\n"
+                    + "3. Click **Sign In** to access your cart, order history, wishlist, and account settings.\n"
+                    + "If you don't have an account yet, click **Register** to create one!";
+        }
+
+        // 16. Registration & Signup
+        if (msg.contains("register") || msg.contains("sign up") || msg.contains("signup") || msg.contains("create account") || msg.contains("new account")) {
+            return "Creating a PraveenMart account is quick and free:\n"
+                    + "1. Click **Register** in the top navigation bar (`/register`).\n"
+                    + "2. Fill in your name, email address, password, and mobile number.\n"
+                    + "3. Choose your role: **Customer** to shop, or **Seller** to list your own products.\n"
+                    + "4. Click **Create Account** to get started!";
+        }
+
+        // 17. Cart & Shopping Bag
+        if (msg.contains("cart") || msg.contains("bag") || msg.contains("basket") || msg.contains("add to cart")) {
+            return "Managing your PraveenMart Cart:\n"
+                    + "• Browse any product in our store and click **Add to Cart**.\n"
+                    + "• Click the **Cart icon** in the top-right header to view your selected items, adjust quantities, or remove products.\n"
+                    + "• When you are ready, click **Proceed to Checkout** to complete your order.";
+        }
+
+        // 18. Checkout & Ordering
+        if (msg.contains("checkout") || msg.contains("how to buy") || msg.contains("place order") || msg.contains("purchase")) {
+            return "Here is how to complete checkout on PraveenMart:\n"
+                    + "1. Open your Cart and click **Proceed to Checkout** (`/checkout`).\n"
+                    + "2. Enter your delivery address (recipient name, phone, address, city, state, pincode).\n"
+                    + "3. Choose your payment method (UPI Instant Pay, Credit/Debit Card, or Cash on Delivery).\n"
+                    + "4. Review your order summary and click **Place Order**!";
+        }
+
+        // 19. Wishlist
+        if (msg.contains("wishlist") || msg.contains("favorite") || msg.contains("save for later")) {
+            return "You can save items you love to your **Wishlist** by clicking the heart icon on any product card. Access your saved items anytime from the **Wishlist** link in the navigation menu and easily move them to your cart when you are ready to buy!";
+        }
+
+        // 20. Conversational pleasantries & closings
+        if (msg.matches(".*\\b(thanks|thank you|thx|ok|okay|cool|great|awesome|bye|goodbye)\\b.*")) {
+            return "You're very welcome! If you have any other questions about PraveenMart products, orders, or accounts, just let me know. Happy shopping!";
+        }
+
+        // 21. Check dynamic context for specific keyword matches
         if (context != null && !context.isBlank()) {
             String[] keywords = msg.replaceAll("[^a-zA-Z0-9\\s]", " ").split("\\s+");
             for (String kw : keywords) {
@@ -157,12 +202,7 @@ public class MockChatProvider implements ChatProvider {
             }
         }
 
-        // Fallback response with helpful hints
-        return "I can help you with anything on PraveenMart! Try asking:\n"
-                + "• 'What products do you have in Electronics?'\n"
-                + "• 'How do I track my order?'\n"
-                + "• 'What payment methods can I use?'\n"
-                + "• 'What is your return policy?'\n"
-                + "• 'How can I become a seller?'";
+        // Conversational fallback
+        return "I'm here to help you with anything on PraveenMart! I can help you find products, log into your account, manage your cart, track shipments, check return policies, or start selling. What would you like to know?";
     }
 }

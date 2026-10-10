@@ -21,8 +21,13 @@ import java.time.Duration;
 public class GeminiChatProvider implements ChatProvider {
 
     private static final Logger logger = LoggerFactory.getLogger(GeminiChatProvider.class);
-    private static final String DEFAULT_MODEL = "gemini-3.8-flash";
-    private static final int TIMEOUT_SECONDS = 25;
+    private static final String DEFAULT_MODEL = "gemini-3.1-flash-lite";
+    private static final int TIMEOUT_SECONDS = 30;
+
+    static {
+        System.setProperty("java.net.preferIPv4Stack", "true");
+        System.setProperty("java.net.preferIPv6Addresses", "false");
+    }
 
     private final String apiKey;
     private final String model;
@@ -41,7 +46,7 @@ public class GeminiChatProvider implements ChatProvider {
      * Constructor allowing explicit API key and Gemini model specification.
      *
      * @param apiKey Google Gemini API key
-     * @param model model name (e.g., gemini-3.8-flash)
+     * @param model model name (e.g., gemini-3.1-flash-lite)
      */
     public GeminiChatProvider(String apiKey, String model) {
         this.apiKey = apiKey;
@@ -57,7 +62,9 @@ public class GeminiChatProvider implements ChatProvider {
             return DEFAULT_MODEL;
         }
         String trimmed = m.trim();
-        if ("gemini-1.5-flash".equalsIgnoreCase(trimmed) || "gemini-2.5-flash".equalsIgnoreCase(trimmed)) {
+        if ("gemini-1.5-flash".equalsIgnoreCase(trimmed)
+                || "gemini-2.5-flash".equalsIgnoreCase(trimmed)
+                || "gemini-2.5-flash-lite".equalsIgnoreCase(trimmed)) {
             return DEFAULT_MODEL;
         }
         return trimmed;
@@ -121,6 +128,26 @@ public class GeminiChatProvider implements ChatProvider {
                 if (reply != null && !reply.isBlank()) {
                     return reply.trim();
                 }
+            } else if (response.statusCode() == 429 && !"gemini-3.1-flash-lite".equalsIgnoreCase(model)) {
+                logger.warn("Quota exceeded for model {}, retrying with gemini-3.1-flash-lite", model);
+                try {
+                    String retryEndpoint = "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent?key=" + apiKey;
+                    HttpRequest retryReq = HttpRequest.newBuilder()
+                            .uri(URI.create(retryEndpoint))
+                            .header("Content-Type", "application/json")
+                            .timeout(Duration.ofSeconds(TIMEOUT_SECONDS))
+                            .POST(HttpRequest.BodyPublishers.ofString(requestJson))
+                            .build();
+                    HttpResponse<String> retryRes = httpClient.send(retryReq, HttpResponse.BodyHandlers.ofString());
+                    if (retryRes.statusCode() == 200) {
+                        String reply = parseReply(retryRes.body());
+                        if (reply != null && !reply.isBlank()) {
+                            return reply.trim();
+                        }
+                    }
+                } catch (Exception retryEx) {
+                    logger.warn("Retry with gemini-3.1-flash-lite failed: {}", retryEx.getMessage());
+                }
             } else {
                 logger.warn("Gemini API returned non-200 status code: {}. Body: {}", response.statusCode(), response.body());
             }
@@ -136,11 +163,20 @@ public class GeminiChatProvider implements ChatProvider {
     }
 
     private String buildSystemPrompt(String userMessage, String context) {
-        return "You are the AI Shopping Assistant for PraveenMart, a premier multi-seller e-commerce marketplace.\n"
-                + "STRICT GUARDRAIL RULES:\n"
-                + "1. Restrict your answers strictly to PraveenMart product domain queries, categories (Electronics, Fashion & Style, Home & Kitchen, Accessories, Books), order tracking, shipping, returns, and seller inquiries.\n"
-                + "2. If the user asks something completely outside of shopping/e-commerce (e.g. general politics, weather, math puzzles, coding unrelated to the store), politely steer them back to shopping on PraveenMart.\n"
-                + "3. Keep your answers concise, helpful, friendly, and under 3-4 short paragraphs.\n\n"
+        return "You are the AI Assistant for PraveenMart, a premier multi-seller e-commerce marketplace.\n"
+                + "YOUR ROLE:\n"
+                + "1. Converse naturally and warmly like a friendly, knowledgeable customer support and shopping companion.\n"
+                + "2. Answer ALL questions related to PraveenMart and its website, including:\n"
+                + "   - User accounts, logging in (/login), registering a new account (/register), passwords, profile settings\n"
+                + "   - Browsing, searching, and filtering products across categories (Electronics, Fashion & Style, Home & Kitchen, Accessories, Books)\n"
+                + "   - Adding items to cart (/cart), viewing cart, and completing checkout (/checkout)\n"
+                + "   - Order tracking and order statuses (/orders: PENDING -> CONFIRMED -> SHIPPED -> DELIVERED)\n"
+                + "   - Shipping details (free delivery, 2-4 business days) and returns/refunds (7-day customer-friendly policy)\n"
+                + "   - Payment methods (UPI Instant Pay, Credit/Debit Cards, Cash on Delivery)\n"
+                + "   - Wishlist (/wishlist), customer reviews and 1-5 star ratings\n"
+                + "   - Seller features: registering as a seller, accessing the Seller Hub (/seller), listing products and managing sales\n"
+                + "3. Answer the customer's question directly and conversationally with clear steps. Do NOT dump rigid lists of canned 'try asking' bullet points.\n"
+                + "4. If a user asks something completely outside of PraveenMart or shopping (e.g. general politics, weather, math puzzles), politely guide the conversation back to PraveenMart.\n\n"
                 + "STORE CONTEXT & INVENTORY:\n"
                 + (context != null ? context : "Available categories: Electronics, Fashion & Style, Home & Kitchen, Accessories, Books.") + "\n\n"
                 + "CUSTOMER QUERY:\n"
