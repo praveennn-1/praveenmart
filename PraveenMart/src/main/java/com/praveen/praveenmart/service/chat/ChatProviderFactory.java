@@ -32,14 +32,21 @@ public class ChatProviderFactory {
             return customProvider;
         }
 
-        String providerName = System.getProperty("ai.chatbot.provider", System.getenv("AI_CHATBOT_PROVIDER"));
+        String providerName = System.getProperty("ai.chatbot.provider");
+        if (providerName == null || providerName.isBlank()) {
+            providerName = System.getenv("AI_CHATBOT_PROVIDER");
+        }
+        if (providerName == null || providerName.isBlank()) {
+            providerName = com.praveen.praveenmart.util.EnvUtil.get("AI_CHATBOT_PROVIDER");
+        }
+
         if (providerName != null && "gemini".equalsIgnoreCase(providerName.trim())) {
             GeminiChatProvider gemini = new GeminiChatProvider();
             if (gemini.hasApiKey()) {
                 logger.info("Using GeminiChatProvider for AI chatbot.");
                 return gemini;
             } else {
-                logger.warn("ai.chatbot.provider is set to 'gemini' but GEMINI_API_KEY is missing. Defaulting to MockChatProvider.");
+                logger.warn("AI chatbot provider is set to 'gemini' but GEMINI_API_KEY is missing or blank. Defaulting to MockChatProvider.");
             }
         }
 

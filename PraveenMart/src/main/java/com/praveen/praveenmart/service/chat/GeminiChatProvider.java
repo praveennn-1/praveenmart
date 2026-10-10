@@ -21,8 +21,8 @@ import java.time.Duration;
 public class GeminiChatProvider implements ChatProvider {
 
     private static final Logger logger = LoggerFactory.getLogger(GeminiChatProvider.class);
-    private static final String DEFAULT_MODEL = "gemini-1.5-flash";
-    private static final int TIMEOUT_SECONDS = 5;
+    private static final String DEFAULT_MODEL = "gemini-3.8-flash";
+    private static final int TIMEOUT_SECONDS = 25;
 
     private final String apiKey;
     private final String model;
@@ -41,24 +41,38 @@ public class GeminiChatProvider implements ChatProvider {
      * Constructor allowing explicit API key and Gemini model specification.
      *
      * @param apiKey Google Gemini API key
-     * @param model model name (e.g., gemini-1.5-flash)
+     * @param model model name (e.g., gemini-3.8-flash)
      */
     public GeminiChatProvider(String apiKey, String model) {
         this.apiKey = apiKey;
-        this.model = (model != null && !model.isBlank()) ? model : DEFAULT_MODEL;
+        this.model = normalizeModel(model);
         this.httpClient = HttpClient.newBuilder()
+                .version(HttpClient.Version.HTTP_1_1)
                 .connectTimeout(Duration.ofSeconds(TIMEOUT_SECONDS))
                 .build();
     }
 
+    private static String normalizeModel(String m) {
+        if (m == null || m.isBlank()) {
+            return DEFAULT_MODEL;
+        }
+        String trimmed = m.trim();
+        if ("gemini-1.5-flash".equalsIgnoreCase(trimmed) || "gemini-2.5-flash".equalsIgnoreCase(trimmed)) {
+            return DEFAULT_MODEL;
+        }
+        return trimmed;
+    }
+
     private static String resolveApiKey() {
-        String key = System.getProperty("gemini.api.key", System.getenv("GEMINI_API_KEY"));
-        return (key != null) ? key.trim() : null;
+        String key = com.praveen.praveenmart.util.EnvUtil.get("GEMINI_API_KEY",
+                System.getProperty("gemini.api.key", System.getenv("GEMINI_API_KEY")));
+        return (key != null && !key.isBlank()) ? key.trim() : null;
     }
 
     private static String resolveModel() {
-        String m = System.getProperty("gemini.model", System.getenv("GEMINI_MODEL"));
-        return (m != null && !m.isBlank()) ? m.trim() : DEFAULT_MODEL;
+        String m = com.praveen.praveenmart.util.EnvUtil.get("GEMINI_MODEL",
+                System.getProperty("gemini.model", System.getenv("GEMINI_MODEL")));
+        return normalizeModel(m);
     }
 
     /**
@@ -148,7 +162,7 @@ public class GeminiChatProvider implements ChatProvider {
 
         JsonObject generationConfig = new JsonObject();
         generationConfig.addProperty("temperature", 0.7);
-        generationConfig.addProperty("maxOutputTokens", 350);
+        generationConfig.addProperty("maxOutputTokens", 1000);
 
         JsonObject root = new JsonObject();
         root.add("contents", contentsArray);
@@ -168,7 +182,20 @@ public class GeminiChatProvider implements ChatProvider {
                 if (content != null) {
                     JsonArray parts = content.getAsJsonArray("parts");
                     if (parts != null && parts.size() > 0) {
-                        return parts.get(0).getAsJsonObject().get("text").getAsString();
+                        StringBuilder sb = new StringBuilder();
+                        for (int i = 0; i < parts.size(); i++) {
+                            JsonObject part = parts.get(i).getAsJsonObject();
+                            if (part.has("text")) {
+                                if (part.has("thought") && part.get("thought").getAsBoolean()) {
+                                    continue;
+                                }
+                                sb.append(part.get("text").getAsString());
+                            }
+                        }
+                        String text = sb.toString().trim();
+                        if (!text.isEmpty()) {
+                            return text;
+                        }
                     }
                 }
             }

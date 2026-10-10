@@ -29,16 +29,16 @@ public class DBUtil {
             return;
         }
 
-        String jdbcUrl = System.getProperty("db.url", System.getenv("DB_URL"));
+        String jdbcUrl = EnvUtil.get("DB_URL", System.getProperty("db.url", "jdbc:h2:~/praveenmart;AUTO_SERVER=TRUE;MODE=LEGACY"));
         if (jdbcUrl == null || jdbcUrl.isBlank()) {
             jdbcUrl = "jdbc:h2:~/praveenmart;AUTO_SERVER=TRUE;MODE=LEGACY";
         }
 
-        String dbUser = System.getProperty("db.user", System.getenv("DB_USER"));
+        String dbUser = EnvUtil.get("DB_USER", System.getProperty("db.user", "sa"));
         if (dbUser == null)
             dbUser = "sa";
 
-        String dbPass = System.getProperty("db.password", System.getenv("DB_PASSWORD"));
+        String dbPass = EnvUtil.get("DB_PASSWORD", System.getProperty("db.password", ""));
         if (dbPass == null)
             dbPass = "";
 

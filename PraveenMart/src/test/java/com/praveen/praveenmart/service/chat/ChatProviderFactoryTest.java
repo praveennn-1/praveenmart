@@ -16,10 +16,19 @@ public class ChatProviderFactoryTest {
     }
 
     @Test
-    public void testGetProviderDefaultsToMockWhenUnset() {
+    public void testGetProviderDefaultsToMockWhenConfiguredAsMock() {
+        System.setProperty("ai.chatbot.provider", "mock");
         ChatProvider provider = ChatProviderFactory.getProvider();
         assertNotNull(provider);
         assertTrue(provider instanceof MockChatProvider);
+    }
+
+    @Test
+    public void testGetProviderResolvesGeminiWhenConfigured() {
+        System.setProperty("ai.chatbot.provider", "gemini");
+        ChatProvider provider = ChatProviderFactory.getProvider();
+        assertNotNull(provider);
+        assertTrue(provider instanceof GeminiChatProvider);
     }
 
     @Test
@@ -40,5 +49,16 @@ public class ChatProviderFactoryTest {
         String reply = gemini.getReply("What products do you have?", "Electronics");
         assertNotNull(reply);
         assertTrue(reply.contains("Electronics") || reply.contains("PraveenMart"));
+    }
+
+    @Test
+    public void testGeminiProviderWithEnvKey() {
+        GeminiChatProvider provider = new GeminiChatProvider();
+        if (provider.hasApiKey()) {
+            String reply = provider.getReply("Hello, who are you in 1 sentence?", "Electronics");
+            assertNotNull(reply);
+            assertFalse(reply.isBlank());
+            System.out.println(">>> GEMINI LIVE RESPONSE: " + reply);
+        }
     }
 }

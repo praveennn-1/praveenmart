@@ -108,7 +108,7 @@
 <script>
     window.contextPath = '<%= request.getContextPath() %>';
 </script>
-<script src="<%= request.getContextPath() %>/js/chat-widget.js?v=1.1"></script>
+<script src="<%= request.getContextPath() %>/js/chat-widget.js?v=1.2"></script>
 
 <!-- Global Scroll Position Preservation & Button Jump Prevention -->
 <script>

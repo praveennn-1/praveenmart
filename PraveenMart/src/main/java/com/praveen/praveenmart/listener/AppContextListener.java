@@ -17,6 +17,7 @@ public class AppContextListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
         logger.info("Initializing PraveenMart application context...");
         try {
+            com.praveen.praveenmart.util.EnvUtil.load();
             DBUtil.initDataSource();
             sce.getServletContext().setAttribute("dataSource", DBUtil.getDataSource());
             logger.info("PraveenMart application context initialized successfully.");

@@ -23,6 +23,7 @@ public class Main {
         System.setErr(System.out);
 
         // Route java.util.logging (Tomcat logs) through SLF4J / Logback
+        com.praveen.praveenmart.util.EnvUtil.load();
         SLF4JBridgeHandler.removeHandlersForRootLogger();
         SLF4JBridgeHandler.install();
 

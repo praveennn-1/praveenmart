@@ -5,7 +5,7 @@
 (function () {
     'use strict';
 
-    const STORAGE_KEY = 'pm_chat_history_v1';
+    const STORAGE_KEY = 'pm_chat_history_v2';
     const MAX_LEN = 500;
 
     // Detect context path if not set globally
@@ -28,22 +28,12 @@
     const contextPath = getContextPath();
     const chatApiUrl = contextPath + '/api/v1/chat';
 
-    // Initial greeting and quick suggestions
+    // Initial greeting
     const DEFAULT_GREETING = {
         role: 'bot',
-        text: 'Hello! 👋 I am your **PraveenMart AI Assistant**. How can I help you today? You can ask about our catalog, orders, shipping, returns, or selling on PraveenMart.',
-        time: formatTime(new Date()),
-        showChips: true
+        text: 'Hello! 👋 I am your **PraveenMart AI Assistant**. How can I help you today?',
+        time: formatTime(new Date())
     };
-
-    const QUICK_CHIPS = [
-        'Popular Electronics',
-        'Fashion Collection',
-        'How to track order?',
-        'Payment methods',
-        'Return & Refund policy',
-        'How to sell on PraveenMart?'
-    ];
 
     let messages = [];
     let isWaiting = false;
@@ -214,26 +204,6 @@
             bubble.innerHTML = formatText(msg.text);
 
             row.appendChild(bubble);
-
-            // Optional suggestion chips for greeting
-            if (msg.showChips && idx === 0) {
-                const chipsBox = document.createElement('div');
-                chipsBox.className = 'pm-suggestions-container';
-                QUICK_CHIPS.forEach(function (chipText) {
-                    const chip = document.createElement('button');
-                    chip.type = 'button';
-                    chip.className = 'pm-chip';
-                    chip.style.margin = '4px 5px';
-                    chip.textContent = chipText;
-                    chip.addEventListener('click', function () {
-                        // Strip leading emoji
-                        const cleanQuery = chipText.replace(/^[^\w\s]+\s*/, '');
-                        sendMessage(cleanQuery);
-                    });
-                    chipsBox.appendChild(chip);
-                });
-                row.appendChild(chipsBox);
-            }
 
             const timeSpan = document.createElement('div');
             timeSpan.className = 'pm-message-time';
